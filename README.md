@@ -1,57 +1,104 @@
 # From data to decision
 
-Material for a 45-minute session at the VietLeap Hackathon: how to turn economic
-data into a dashboard that helps someone decide.
+A 45-minute session for undergraduate students at the VietLeap Hackathon (UEH, November 2026): how to turn
+economic data into dashboards that help people decide, and how to use AI to build them.
 
-## The exercise (20 minutes, in pairs)
+Everything is served from `docs/` by GitHub Pages:
 
-Song Xanh is a fictional province with ten districts. It has budget for **two
-youth training centres**. Which two districts should get them?
-
-1. Download [`data/district_jobs_toy.csv`](data/district_jobs_toy.csv).
-2. Open [`prompts.md`](prompts.md) and any AI assistant you already use.
-3. Follow the four steps.
-
-| Minutes | Step | What you do |
+| Page | Link | What it is |
 |---|---|---|
-| 3 | Explore | Profile the file. Find what is wrong with it. |
-| 5 | Frame | Decide what makes a district a good choice. |
-| 8 | Build | One screen with a recommendation. |
-| 4 | Challenge | Swap with another pair. Try to break theirs. |
+| Slides | <https://sachadray.github.io/hackathon-dashboard/> | 34 slides in three parts, with speaker notes and live polls |
+| Handout | <https://sachadray.github.io/hackathon-dashboard/handout.html> | What students open for the hands-on: data, five steps, prompts to copy |
+| Prompts | <https://sachadray.github.io/hackathon-dashboard/prompts.html> | Every prompt: hands-on, staged rebuilds of both example dashboards, first Claude Code session |
+| Poll | `poll.html?p=start` and `poll.html?p=end` | What students see when they scan the QR codes |
 
-The data is synthetic and has errors planted in it on purpose.
+## The session
 
-### The columns
+| Part | Minutes | Content |
+|---|---|---|
+| Opening | 3 | Live poll: use of AI, dashboards, GitHub |
+| 1. Dashboard explainer | 12 | Why it matters, workflow and trilemma, a definition, the four questions, anatomy, two examples (Vietnam Land Brief, Viet Nam PFM benchmark), the six-part prompt, staged prompting |
+| 2. Hands-on | 18 | In pairs, 15 minutes: build a dashboard from the data behind one of the two examples |
+| 3. Uses of AI | 10 | What AI changes, GitHub and Claude Code for beginners, the hackathon checkpoints, responsible use, students' value proposition |
+| Close | 2 | Open-ended live poll: what they learned, impressions |
 
-| Column | Meaning |
+## Presenting
+
+Open the slides link in a browser.
+
+| Key | Action |
 |---|---|
-| `month` | Month, `YYYY-MM`, January 2024 to December 2025 |
-| `district` | One of ten districts |
-| `working_age_pop_thousand` | Residents aged 15 to 64, thousand |
-| `youth_unemployment_pct` | Unemployment rate, ages 15 to 24, percent |
-| `job_postings` | New job advertisements in the month |
-| `median_wage_million_vnd` | Median monthly wage, million dong |
-| `training_seats` | Places available in existing training programmes |
-| `training_applicants` | People who applied for those places |
+| → Space / ← | Next / previous slide |
+| a number, then Enter | Jump to that slide |
+| F | Full screen |
+| S | Presenter view in a new window: notes with timings, next slide, elapsed time. It stays in sync with the main window. |
+| T | Start or pause the 15-minute hands-on timer (slide 21); the current step lights up |
+| ? | Help |
 
-## What is in this repository
+Print from the browser (landscape, background graphics on) for a PDF with one slide per page.
 
-| Path | What it is |
-|---|---|
-| `data/district_jobs_toy.csv` | The toy dataset for the exercise |
-| `data/make_toy_data.py` | The script that generates it, with a fixed seed |
-| `prompts.md` | Prompts for each step, plus the brief behind a real dashboard |
-| `docs/index.html` | A reference answer to the exercise. Look at it after you have built yours. |
-| `docs/land.html` | A real example: years of convertible farmland left in each province of Viet Nam, with a map and scenario sliders |
-| `instructor/notes.md` | Run-of-show and the planted errors. Spoilers. |
+### The live polls
 
-Both dashboards are single HTML files with no dependencies. Download one and
-open it in a browser, or serve the `docs/` folder with GitHub Pages.
+Answers go through [ntfy.sh](https://ntfy.sh), a free public relay: no account, no server of our own. Students
+scan the QR code on slide 2 or 33, answer on their phone, and the slide updates within a second or two.
 
-## Data and sources
+- **Answers are deleted after 12 hours.** Press "Save answers (CSV)" on the poll slide before closing the browser.
+- **Rehearse on a separate topic** so test answers never reach the real one: add `?topic=rehearsal-anything` to
+  both the slides URL and the poll URL, for example `…/hackathon-dashboard/?topic=rehearsal-1` and
+  `…/poll.html?p=start&topic=rehearsal-1`. The QR codes always point at the real topic.
+- **The relay is public.** Anyone who knows the topic name can read or post. Answers are anonymous, every message is
+  validated before it is counted, and text is shown as plain text. Click an open answer on slide 33 to hide it on
+  your screen.
+- Students on the same Wi-Fi share one rate limit at the relay (by default a burst of 60 requests, then one every
+  five seconds). One submission is one request. If a large room submits in the same few seconds, some phones
+  wait: the page retries automatically for about 15 seconds, then asks the student to press Send again.
 
-The exercise data is invented. The province and its districts do not exist.
+## The data packs
 
-`docs/land.html` uses land-use statistics by province for 2018 to 2023 from the
-National Statistics Office of Viet Nam. The method and the exclusions are stated
-at the bottom of the page.
+`docs/data/land/` and `docs/data/pfm/`, each with a README that explains every column, plus a zip of each.
+
+- **Land** (from [sachadray/vietnam-land](https://sachadray.github.io/vietnam-land/)): GSO land use by province
+  2018–2023 and nationally 2008–2023, Natural Earth province boundaries (public domain), and published fiscal
+  figures with their sources. **Left out on purpose:** the CEIC export and the real-estate credit and Savills price
+  series derived from it, which are licensed.
+- **PFM** (from [sachadray/vietnam-pfm-benchmarking](https://sachadray.github.io/vietnam-pfm-benchmarking/)): the
+  processed tables behind the public dashboard (scores, economies, indicators, indicator values, config) and GDP per
+  capita 2025. The public dashboard already embeds the same figures.
+
+Checked: from these files alone, the land runway reproduces the brief exactly (4 / 13 / 19 / 24 provinces by
+risk tier; Quang Ninh 22 years), and recomputing the PFM scores from `indicator_values.csv` reproduces
+`scores.csv` to 1e-10 (Viet Nam −0.11, rank 99 of 169).
+
+## Rebuilding
+
+The pages are static files. Three scripts regenerate what they embed:
+
+```bash
+python build/make_data_packs.py --land ../vietnam-land --pfm ../vietnam-pfm-benchmarking   # data packs (needs both source repos)
+python build/build_site.py      # embeds data in docs/examples/ and prompts in handout.html and prompts.html
+python build/make_qr.py         # QR codes (pip install segno)
+```
+
+Prompts are written once, in `prompts/*.md`; `build_site.py` copies them into the handout and prompts pages.
+Edit the markdown, never the copy in the HTML.
+
+## Layout
+
+```
+docs/                 the published site
+  index.html          slides (styles and engine in assets/deck.css, assets/deck.js)
+  handout.html        student handout
+  prompts.html        all prompts
+  poll.html           poll form for students; ?view=results shows live results full-page
+  examples/           what 15 minutes can produce, one per track
+  data/               the two data packs and their zips
+  assets/             css, js, QR codes, screenshots
+prompts/              the prompts, in markdown (single source)
+build/                scripts that build the packs, the pages and the QR codes
+```
+
+## Publishing
+
+GitHub Pages serves this repository from the `docs/` folder: Settings → Pages → Deploy from a branch →
+`main`, `/docs`. A Pages site is public even when the repository is private, so `docs/` holds only what students
+may see.

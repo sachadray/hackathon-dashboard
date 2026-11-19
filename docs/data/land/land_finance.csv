@@ -1,0 +1,25 @@
+indicator,year,value,unit,kind,source,note
+land_revenue,2013,63.7,VND trillion,published,Vietnamese press reporting of Ministry of Finance and provincial tax-office figures,
+land_revenue_share_of_state_revenue,2013,7.8,percent,published,Vietnamese press reporting of Ministry of Finance and provincial tax-office figures,
+land_revenue,2016,123.0,VND trillion,published,"Earlier land-finance note by the author (unpublished); its own sources: MONRE land-area statistics 2023, Ministry of Finance final accounts, provincial tax offices",
+land_revenue_share_of_state_revenue,2016,12.5,percent,published,"Earlier land-finance note by the author (unpublished); its own sources: MONRE land-area statistics 2023, Ministry of Finance final accounts, provincial tax offices",
+land_revenue,2018,218.7,VND trillion,published,Vietnamese press reporting of Ministry of Finance and provincial tax-office figures,
+land_revenue_share_of_state_revenue,2018,16.58,percent,published,Vietnamese press reporting of Ministry of Finance and provincial tax-office figures,
+land_revenue,2023,209.5,VND trillion,derived,"Ministry of Finance of Viet Nam, reported via Vietnamese press (VnExpress, Tien Phong, VnEconomy, VietnamPlus)",
+land_revenue,2024,290.0,VND trillion,derived,"Earlier land-finance note by the author (unpublished); its own sources: MONRE land-area statistics 2023, Ministry of Finance final accounts, provincial tax offices",implied: 2025 was roughly double the 2024 outturn. An alternative derivation from '15% of 2024 budgeted revenue' gives 303.8
+land_revenue,2025,575.5,VND trillion,published,"Nguyen Khac Giang, 'The Perils of Vietnam's Land-led Growth', ISEAS Perspective 2026/62, ISEAS-Yusof Ishak Institute",
+land_revenue_share_of_state_revenue,2025,21.7,percent,published,"Nguyen Khac Giang, 'The Perils of Vietnam's Land-led Growth', ISEAS Perspective 2026/62, ISEAS-Yusof Ishak Institute",
+state_budget_revenue,2023,1752.5,VND trillion,published,"Ministry of Finance of Viet Nam, reported via Vietnamese press (VnExpress, Tien Phong, VnEconomy, VietnamPlus)",8.1% above estimate
+state_budget_revenue,2024,2025.4,VND trillion,published,"Ministry of Finance of Viet Nam, reported via Vietnamese press (VnExpress, Tien Phong, VnEconomy, VietnamPlus)","119.1% of plan, +15.5% on 2023"
+state_budget_revenue,2025,2650.0,VND trillion,published,"Ministry of Finance of Viet Nam, reported via Vietnamese press (VnExpress, Tien Phong, VnEconomy, VietnamPlus)",record; ISEAS share implies 2652
+gdp_nominal,2025,12847.6,VND trillion,published,"National Statistics Office of Viet Nam, socio-economic situation Q4 and full year 2025","GDP at current prices, 2025; USD 514 billion"
+gdp_real_growth,2025,8.02,percent,published,"National Statistics Office of Viet Nam, socio-economic situation Q4 and full year 2025",
+land_revenue_share_of_gdp,2025,4.48,percent,derived,"National Statistics Office of Viet Nam, socio-economic situation Q4 and full year 2025","derived: 575.5 / 12,847.6. Both figures are official and same-year"
+land_revenue_target,2025,293.0,VND trillion,published,"Ministry of Finance of Viet Nam, reported via Vietnamese press (VnExpress, Tien Phong, VnEconomy, VietnamPlus)","target derived from the published 196.4% of target; H1 alone reached 243.6 trillion, or 96% of the full-year target"
+rice_land_floor,2030,3500,thousand ha,published,"National Assembly Resolution 39/2021/QH15 (13 Nov 2021), national land use master plan 2021-2030, vision to 2045",the plan stabilises 3.5 million ha of rice cultivation land
+non_agri_land_target_original,2030,4896.48,thousand ha,published,"National Assembly Resolution 39/2021/QH15 (13 Nov 2021), national land use master plan 2021-2030, vision to 2045",
+non_agri_land_target_adjusted,2030,5840.14,thousand ha,published,"National Assembly Resolution 39/2021/QH15 (13 Nov 2021), national land use master plan 2021-2030, vision to 2045",upward revision of the 2030 non-agricultural land target
+province_land_revenue_VN-HN,2025,125.0,VND trillion,published,Vietnamese press reporting of Ministry of Finance and provincial tax-office figures,"Ha Noi. H1 alone 74 trillion, up over 600% year on year"
+province_land_revenue_VN-HP,2025,41.0,VND trillion,published,Vietnamese press reporting of Ministry of Finance and provincial tax-office figures,Hai Phong. of ~100 trillion total domestic revenue
+province_land_revenue_VN-39,2025,17.0,VND trillion,published,Vietnamese press reporting of Ministry of Finance and provincial tax-office figures,"Dong Nai. land and housing revenue ~22.8 trillion, up over 400% on 2024; 2026 target ~20 trillion"
+province_land_revenue_VN-22,2025,10.27,VND trillion,published,Vietnamese press reporting of Ministry of Finance and provincial tax-office figures,Nghe An.

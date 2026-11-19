@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Live poll</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;600&display=swap">
+<style>
+:root { --ink: #0E1B2C; --ink2: #1B2E45; --paper: #F6F4EE; --paper2: #E9E5D9; --accent: #19C39A; --accent-d: #0A6F57; --soft: #4A5568; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 17px/1.45 Inter, system-ui, -apple-system, "Segoe UI", sans-serif; }
+main { max-width: 640px; margin: 0 auto; padding: 24px 16px 48px; }
+.eyebrow { font-size: 13px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-d); margin: 0 0 6px; }
+h1 { font-family: "Space Grotesk", sans-serif; font-size: 30px; line-height: 1.1; margin: 0 0 8px; }
+.lead { color: var(--soft); margin: 0 0 20px; }
+fieldset { border: 0; margin: 0 0 22px; padding: 0; }
+legend { font-weight: 600; margin-bottom: 10px; padding: 0; }
+.opt { display: block; position: relative; margin: 0 0 8px; }
+.opt input { position: absolute; opacity: 0; }
+.opt span { display: block; padding: 13px 16px; background: #fff; border: 2px solid var(--paper2); border-radius: 12px; cursor: pointer; }
+.opt input:checked + span { border-color: var(--accent-d); background: #e3f6ef; font-weight: 600; }
+.opt input:focus-visible + span { outline: 3px solid var(--ink2); outline-offset: 2px; }
+textarea { width: 100%; min-height: 110px; font: inherit; padding: 12px 14px; border: 2px solid var(--paper2); border-radius: 12px; background: #fff; resize: vertical; }
+textarea:focus { outline: none; border-color: var(--accent-d); }
+.count { font-size: 13px; color: var(--soft); text-align: right; margin: 4px 0 0; }
+button { font: inherit; font-weight: 600; width: 100%; padding: 15px; border: 0; border-radius: 12px; background: var(--ink); color: var(--paper); cursor: pointer; }
+button:disabled { opacity: .5; }
+.msg { margin: 14px 0 0; font-weight: 600; }
+.msg.ok { color: var(--accent-d); }
+.msg.err { color: #b3261e; }
+.privacy { font-size: 13px; color: var(--soft); margin-top: 22px; }
+/* results view */
+.pr-q { margin: 0 0 22px; }
+.pr-qtext { font-weight: 600; margin: 0 0 8px; }
+.pr-row { display: grid; grid-template-columns: 1fr 1.2fr 80px; gap: 10px; align-items: center; margin: 0 0 6px; font-size: 15px; }
+.pr-bar { height: 16px; background: var(--paper2); border-radius: 4px; overflow: hidden; }
+.pr-fill { height: 100%; background: var(--accent-d); border-radius: 4px; transition: width .4s; }
+.pr-n { text-align: right; color: var(--soft); font-variant-numeric: tabular-nums; }
+.pr-col { margin: 0 0 22px; }
+.pr-card { background: #fff; border-radius: 10px; padding: 10px 14px; margin: 0 0 8px; }
+.pr-empty { color: var(--soft); }
+.n { font-family: "Space Grotesk", sans-serif; font-size: 44px; font-weight: 700; margin: 0; }
+</style>
+</head>
+<body>
+<main id="app"></main>
+<script src="assets/poll.js"></script>
+<script>
+const params = new URLSearchParams(location.search);
+const p = Poll.POLLS[params.get("p")] ? params.get("p") : "start";
+const poll = Poll.POLLS[p], app = document.getElementById("app");
+const h = (tag, attrs, text) => { const e = document.createElement(tag); for (const k in attrs || {}) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; return e; };
+document.title = poll.title + " · live poll";
+
+if (params.get("view") === "results") {
+  // presenter view: live results, no form
+  app.append(h("p", { class: "eyebrow" }, "Live results"), h("h1", {}, poll.title));
+  const n = h("p", { class: "n" }, "0"), box = h("div");
+  const lab = h("p", { class: "lead" }, "responses so far"); app.append(n, lab, box);
+  Poll.subscribe(state => {
+    const k = p === "start" ? Poll.renderStart(box, state) : Poll.renderEnd(box, state); n.textContent = k; lab.textContent = k === 1 ? "response so far" : "responses so far";
+  });
+} else {
+  app.append(h("p", { class: "eyebrow" }, "VietLeap Hackathon · live poll"), h("h1", {}, poll.title),
+    h("p", { class: "lead" }, p === "start" ? "Three quick questions. Tap one answer each." : "Two short answers, in a sentence or two."));
+  const form = h("form");
+  poll.questions.forEach(q => {
+    const fs = h("fieldset"); fs.append(h("legend", {}, q.text));
+    if (q.open) {
+      const ta = h("textarea", { name: q.id, maxlength: Poll.MAXLEN, "aria-label": q.text }), c = h("p", { class: "count" }, "0 / " + Poll.MAXLEN);
+      ta.addEventListener("input", () => c.textContent = ta.value.length + " / " + Poll.MAXLEN);
+      fs.append(ta, c);
+    } else q.options.forEach(o => {
+      const lab = h("label", { class: "opt" }), inp = h("input", { type: "radio", name: q.id, value: o });
+      lab.append(inp, h("span", {}, o)); fs.append(lab);
+    });
+    form.append(fs);
+  });
+  const btn = h("button", { type: "submit" }, "Send"), msg = h("p", { class: "msg", role: "status" });
+  form.append(btn, msg);
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    const fd = new FormData(form), a = {};
+    poll.questions.forEach(q => { const v = (fd.get(q.id) || "").toString().trim(); if (v) a[q.id] = v; });
+    if (!Object.keys(a).length) { msg.className = "msg err"; msg.textContent = "Answer at least one question first."; return; }
+    btn.disabled = true; msg.className = "msg"; msg.textContent = "Sending…";
+    const ok = await Poll.submit(p, a);
+    btn.disabled = false;
+    if (ok) { msg.className = "msg ok"; msg.textContent = "Thank you. Your answer is on the screen. You can change it and send again."; }
+    else { msg.className = "msg err"; msg.textContent = "It did not go through. Check your connection and press Send again."; }
+  });
+  app.append(form, h("p", { class: "privacy" }, "Answers are anonymous and are deleted after 12 hours. Please do not write your name or anything personal."));
+}
+</script>
+</body>
+</html>

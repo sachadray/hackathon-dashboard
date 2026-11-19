@@ -3,274 +3,646 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Song Xanh training centres</title>
-<style>
-:root {
-  --bg: #f4f3ef; --surface: #fcfcfb; --line: #e3e1da; --text: #0b0b0b; --text2: #52514e; --muted: #8a8983;
-  --s1: #2a78d6; --ctx: #a3a199; --wash: #e9f1fb;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #111110; --surface: #1a1a19; --line: #32312e; --text: #f0efec; --text2: #c3c2b7; --muted: #8f8e86;
-    --s1: #3987e5; --ctx: #6f6e68; --wash: #17283d;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #111110; --surface: #1a1a19; --line: #32312e; --text: #f0efec; --text2: #c3c2b7; --muted: #8f8e86;
-  --s1: #3987e5; --ctx: #6f6e68; --wash: #17283d;
-}
-* { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-main { max-width: 1120px; margin: 0 auto; padding: 24px 16px 48px; }
-h1 { font-size: 24px; line-height: 1.2; margin: 0 0 4px; }
-h2 { font-size: 15px; margin: 0 0 2px; }
-.sub { color: var(--text2); margin: 0; }
-.note { color: var(--muted); font-size: 13px; margin: 0 0 8px; }
-.banner { background: var(--wash); border-left: 4px solid var(--s1); border-radius: 8px; padding: 14px 18px; margin: 18px 0; font-size: 18px; line-height: 1.35; }
-.banner b { font-weight: 650; }
-.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 14px; }
-.card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
-.tile .v { font-size: 30px; font-weight: 650; line-height: 1.1; font-variant-numeric: tabular-nums; }
-.tile .l { color: var(--text2); font-size: 13px; }
-.tile .d { color: var(--muted); font-size: 13px; }
-.filters { display: flex; gap: 10px; align-items: center; margin: 0 0 12px; color: var(--text2); }
-select { font: inherit; color: var(--text); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; }
-.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.wide { grid-column: 1 / 3; }
-svg { display: block; width: 100%; height: auto; overflow: visible; }
-svg text { fill: var(--text2); font-size: 12px; }
-svg .halo { paint-order: stroke; stroke: var(--surface); stroke-width: 5px; stroke-linejoin: round; }
-svg .name { fill: var(--text); font-weight: 600; }
-.legend { display: flex; gap: 16px; font-size: 13px; color: var(--text2); margin: 4px 0 0; }
-.legend i { display: inline-block; width: 14px; height: 0; border-top: 3px solid var(--ctx); vertical-align: middle; margin-right: 6px; }
-.legend i.dot { width: 10px; height: 10px; border: 0; border-radius: 50%; background: var(--ctx); }
-.legend i.on { border-color: var(--s1); }
-.legend i.dot.on { background: var(--s1); }
-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
-th, td { text-align: right; padding: 6px 8px; border-bottom: 1px solid var(--line); }
-th:first-child, td:first-child { text-align: left; }
-th { color: var(--text2); font-weight: 600; font-size: 13px; }
-tr.pick td:first-child { font-weight: 650; }
-tr.pick td:first-child::after { content: "  ● recommended"; color: var(--s1); font-weight: 500; font-size: 12px; }
-details summary { cursor: pointer; color: var(--text2); }
-#tip { position: fixed; pointer-events: none; background: var(--text); color: var(--bg); border-radius: 6px; padding: 6px 10px; font-size: 13px; line-height: 1.35; display: none; max-width: 240px; white-space: pre-line; }
-footer { color: var(--muted); font-size: 13px; margin-top: 18px; }
-@media (max-width: 760px) { .tiles, .grid { grid-template-columns: 1fr; } .wide { grid-column: auto; } }
-</style>
+<title>From data to decision</title>
+<meta name="description" content="Turning economic data into dashboards that help people decide, with AI. VietLeap Hackathon, UEH, November 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400..700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/deck.css">
 </head>
 <body>
-<main>
-  <h1>Where should Song Xanh open two youth training centres?</h1>
-  <p class="sub">Ten districts, January 2024 to December 2025. Synthetic teaching data: the province and its districts are fictional.</p>
+<div class="viewport">
+<div class="stage">
 
-  <p class="banner" id="banner"></p>
+<!-- ============================ OPENING ============================ -->
 
-  <div class="tiles" id="tiles"></div>
+<section class="slide dark" data-nofoot>
+  <div class="cover-bars" aria-hidden="true"><i class="st" style="height:150px;--i:1"></i><i class="st" style="height:240px;--i:2"></i><i class="st" style="height:350px;--i:3"></i><i class="st" style="height:490px;--i:4"></i><i class="st" style="height:660px;--i:5"></i></div>
+  <p class="eyebrow">VietLeap Hackathon · UEH · November 2026</p>
+  <div class="fill" style="max-width:1150px">
+    <h1>From data<br>to decision</h1>
+    <p class="lead">Building dashboards that help people decide, and using AI to build them</p>
+  </div>
+  <p class="txt">Sacha Dray &nbsp;·&nbsp; <span class="link">sachadray.github.io/hackathon-dashboard</span></p>
+  <aside class="notes">
+0:00 to 1:00. Welcome. The plan for 45 minutes, in three parts: what a dashboard is and how to prompt an AI to build one; 15 minutes where you build one yourselves from real data; then what AI changes, how to set up GitHub and Claude Code for the hackathon, and what you bring that the tool does not.
+Ask everyone to take out a phone for the poll on the next slide, and one laptop per pair for the hands-on.
+Press S to open this presenter view, F for full screen.
+  </aside>
+</section>
 
-  <div class="filters"><label for="pick">District in the trend chart</label><select id="pick"></select></div>
-
-  <div class="grid">
-    <div class="card">
-      <h2>Need and opportunity</h2>
-      <p class="note">Each dot is a district, average of the last three months. Dashed lines are the medians.</p>
-      <svg id="scatter" viewBox="0 0 520 360" role="img" aria-label="Scatter of youth unemployment against job postings per 1,000 working-age residents, by district"></svg>
-      <p class="legend"><span><i class="dot on"></i>Above the median on all three criteria</span><span><i class="dot"></i>Other districts</span></p>
+<section class="slide">
+  <div class="head"><p class="eyebrow">Live poll</p><h2>Before we start: three questions</h2></div>
+  <div class="poll-grid grow">
+    <div class="poll-join">
+      <img src="assets/qr-poll-start.svg" alt="QR code for the start-of-session poll">
+      <a class="link" data-poll-url="start" href="poll.html?p=start" style="font-size:20px;word-break:break-all">poll.html?p=start</a>
+      <p class="poll-n"><b>0</b><span>answers</span></p>
+      <p class="poll-status">connecting…</p>
+      <div class="poll-tools"><button data-poll="start" data-act="csv">Save answers (CSV)</button><button data-poll="start" data-act="reset">Clear screen</button></div>
     </div>
-    <div class="card">
-      <h2>Is existing training full?</h2>
-      <p class="note">Applicants per training seat, average of the last three months. Above 1, people are turned away.</p>
-      <svg id="bars" viewBox="0 0 520 360" role="img" aria-label="Bar chart of training applicants per seat, by district"></svg>
+    <div class="pr-start" data-poll-results="start"></div>
+  </div>
+  <aside class="notes">
+1:00 to 3:00. Leave this up while people scan the code. Results appear live as answers arrive.
+Read the room from the bars: if most have never used GitHub, spend a little longer on the set-up slides in Part 3; if many use AI daily, go faster through Part 1.
+Answers are kept for 12 hours only. Press "Save answers (CSV)" at the end of the session if you want to keep them. "Clear screen" hides answers received so far, for example after a rehearsal.
+  </aside>
+</section>
+
+<section class="slide">
+  <div class="head"><p class="eyebrow">Today</p><h2>Three parts, 45 minutes</h2></div>
+  <div class="row grow agenda">
+    <div class="card st" style="--i:1"><p class="tag">Part 1</p><p class="min">12<span>min</span></p><h3>Dashboard explainer</h3><p class="txt">What a dashboard is, two real examples, and how to write a prompt that builds one.</p></div>
+    <div class="card inv st" style="--i:2"><p class="tag">Part 2</p><p class="min" style="color:var(--paper)">18<span style="color:var(--soft-d)">min</span></p><h3>Hands-on</h3><p class="txt">In pairs: build a dashboard in 15 minutes from the data behind the two examples.</p></div>
+    <div class="card st" style="--i:3"><p class="tag">Part 3</p><p class="min">10<span>min</span></p><h3>Uses of AI</h3><p class="txt">What AI changes, setting up GitHub and Claude Code, using AI responsibly, and what you bring.</p></div>
+  </div>
+  <aside class="notes">
+3:00 to 3:30. The middle part is the point: you leave with a dashboard you built. Part 1 gives you the vocabulary and the prompts; Part 3 gets you ready for the next two and a half days.
+  </aside>
+</section>
+
+<!-- ============================ PART 1 ============================ -->
+
+<section class="slide part" data-part="1">
+  <p class="eyebrow">Part 1 · 12 minutes</p>
+  <div class="fill">
+    <p class="part-num">1</p>
+    <h2 style="font-size:96px">Dashboard explainer</h2>
+  </div>
+  <div class="part-list">
+    <p>Why this matters, and the project workflow</p>
+    <p>What a dashboard is, and what it is not</p>
+    <p>Two examples, and the prompts behind them</p>
+  </div>
+  <aside class="notes">3:30. Part 1. Twelve minutes, fourteen slides: keep moving.</aside>
+</section>
+
+<section class="slide" data-part="1">
+  <div class="head"><p class="eyebrow">Why you should care</p><h2>From coursework to real work</h2></div>
+  <div class="cmp">
+    <div class="c a st" style="--i:1"><p class="tag">In class</p><p class="line">The question is given</p><p class="line">The data is clean</p><p class="line">One reader: your professor</p><p class="line">The output is a grade</p></div>
+    <div class="c b st" style="--i:3"><p class="tag">At work</p><p class="line">You find the question</p><p class="line">The data is messy</p><p class="line">Readers have two minutes</p><p class="line">The output is a decision</p></div>
+  </div>
+  <aside class="notes">
+3:30 to 4:30. Academic learning gives you concepts and methods. Employers and policymakers also look for skills: things you can show you have done. Read the two columns line by line.
+Ask: who has worked with a dataset that a teacher did not clean first?
+The hackathon is practice for the right-hand column. What you take home is something to show in an interview: a working dashboard and a pitch.
+  </aside>
+</section>
+
+<section class="slide" data-part="1">
+  <div class="head"><p class="eyebrow">Project workflow</p><h2>Start to finish, then back again</h2></div>
+  <div class="chain">
+    <div class="step st" style="--i:1"><p class="n">1</p><p class="w">Question</p></div>
+    <svg class="arrow" viewBox="0 0 40 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M2 12h34M28 4l8 8-8 8"/></svg>
+    <div class="step st" style="--i:2"><p class="n">2</p><p class="w">Data</p></div>
+    <svg class="arrow" viewBox="0 0 40 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M2 12h34M28 4l8 8-8 8"/></svg>
+    <div class="step st" style="--i:3"><p class="n">3</p><p class="w">Analysis</p></div>
+    <svg class="arrow" viewBox="0 0 40 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M2 12h34M28 4l8 8-8 8"/></svg>
+    <div class="step st" style="--i:4"><p class="n">4</p><p class="w">Dashboard</p></div>
+    <svg class="arrow" viewBox="0 0 40 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M2 12h34M28 4l8 8-8 8"/></svg>
+    <div class="step on st" style="--i:5"><p class="n">5</p><p class="w">Decision</p></div>
+  </div>
+  <div class="caps">
+    <p class="txt">Who decides what?</p>
+    <p class="txt">Find it, clean it, check it</p>
+    <p class="txt">The simplest method that answers</p>
+    <p class="txt">One screen, one message</p>
+    <p class="txt">Recommend, then listen</p>
+  </div>
+  <p class="lead">Plan for loops. Every step sends you back to an earlier one.</p>
+  <aside class="notes">
+4:30 to 5:30. The line looks tidy and never is. The data shows the question cannot be answered as asked, so you go back. The analysis turns up an outlier, so you go back to the data. The reader asks a different question once they see the dashboard, so you go back to the start.
+Budget time for at least two loops. Note where the work ends: with a decision. The dashboard is one step before it.
+  </aside>
+</section>
+
+<section class="slide" data-part="1">
+  <div class="head"><p class="eyebrow">The trilemma</p><h2>You rarely have all three at once</h2></div>
+  <div class="tri">
+    <div class="tri-host">
+      <svg viewBox="0 0 760 560" width="760" height="560" aria-label="Triangle linking question, data and method"><path d="M380 42 110 518 650 518Z" fill="none" stroke="#19C39A" stroke-width="5"/></svg>
+      <p class="node" style="left:265px;top:0">Question</p>
+      <p class="node" style="left:0;top:476px">Data</p>
+      <p class="node" style="left:530px;top:476px">Method</p>
+      <p class="txt" style="position:absolute;left:230px;top:300px;width:300px;text-align:center">Move one corner and the other two move</p>
     </div>
-    <div class="card wide">
-      <h2 id="trendTitle">Youth unemployment</h2>
-      <p class="note">Percent of the labour force aged 15 to 24, monthly.</p>
-      <svg id="trend" viewBox="0 0 1060 300" role="img" aria-label="Line chart of monthly youth unemployment for the selected district and the province average"></svg>
-      <p class="legend"><span><i class="on"></i><span id="lgName"></span></span><span><i></i>Province average</span></p>
-    </div>
-    <div class="card wide">
-      <details open>
-        <summary>All ten districts, last three months</summary>
-        <table id="tbl"></table>
-      </details>
+    <div class="col" style="gap:30px">
+      <p class="quote st" style="--i:1">A great question with no data.</p>
+      <p class="quote st" style="--i:2">Rich data with no question.</p>
+      <p class="quote st" style="--i:3">A clever method with nothing to say.</p>
+      <p class="txt">In a hackathon you start from the data: list the decisions it could inform, then pick one.</p>
     </div>
   </div>
+  <aside class="notes">
+5:30 to 6:30. A project needs the right question (a real knowledge gap), the right data and the right method. Choosing one constrains the other two, and you rarely have all three at the start.
+Example from my own work: the land brief started as a question about land revenue; the province data was annual and stopped in 2023, so the question became "how many years of farmland are left at the recent pace", which the data could answer.
+The three lines on the right are the three common ways teams get stuck.
+  </aside>
+</section>
 
-  <footer>
-    Method: a district is recommended when it sits above the provincial median on all three criteria: youth unemployment (need),
-    job postings per 1,000 working-age residents (opportunity) and applicants per training seat (demand for training).
-    Data cleaning before analysis: one duplicated row removed, one decimal-point typo corrected, one missing value left out of the average,
-    one district name harmonised. Source: synthetic data generated by <code>data/make_toy_data.py</code>.
-  </footer>
-</main>
-<div id="tip"></div>
+<section class="slide" data-part="1">
+  <div class="head"><p class="eyebrow">What is a dashboard</p><h2>A definition</h2></div>
+  <p class="defn st" style="--i:1">A dashboard is <mark>one screen</mark> that answers <mark>a recurring question</mark> for <mark>a specific reader</mark>, by comparing <mark>a few measures against a benchmark</mark>, <mark>so that they can decide</mark> what to do.</p>
+  <div class="clauses">
+    <div class="clause st" style="--i:2"><b>One screen</b><p class="small">If the reader has to scroll to get the message, it is a report.</p></div>
+    <div class="clause st" style="--i:3"><b>A recurring question</b><p class="small">The reader comes back when the data updates: monthly, yearly, during a crisis.</p></div>
+    <div class="clause st" style="--i:4"><b>A specific reader</b><p class="small">Name them: a minister, a provincial director, a fund manager.</p></div>
+    <div class="clause st" style="--i:5"><b>Against a benchmark</b><p class="small">A number alone means little. Compare it with peers, a target or the past.</p></div>
+    <div class="clause st" style="--i:6"><b>So they can decide</b><p class="small">Each element should be able to change what someone does.</p></div>
+  </div>
+  <div class="isnot st" style="--i:7"><span class="tag">It is not</span><p class="txt"><b>a report</b> (read once, top to bottom) · <b>a data dump</b> (every chart, no point of view) · <b>an infographic</b> (one fixed story, nothing to explore)</p></div>
+  <aside class="notes">
+6:30 to 7:45. Read the definition slowly, then go clause by clause.
+"One screen" is a discipline, not a pixel count: the message must be visible without scrolling, even if details sit further down.
+"Against a benchmark" is the clause students most often miss: a tax take of 12.5 percent of GDP means little until you know what the neighbours collect.
+The test for any element on the page: if it disappeared, would the reader decide differently? If not, remove it.
+  </aside>
+</section>
 
-<script>
-const DATA = /*DATA*/[{"month":"2024-01","district":"Riverside","working_age_pop_thousand":180,"youth_unemployment_pct":7.8,"job_postings":1132,"median_wage_million_vnd":9.8,"training_seats":400,"training_applicants":379},{"month":"2024-02","district":"Riverside","working_age_pop_thousand":180,"youth_unemployment_pct":7.7,"job_postings":1113,"median_wage_million_vnd":9.8,"training_seats":400,"training_applicants":410},{"month":"2024-03","district":"Riverside","working_age_pop_thousand":180,"youth_unemployment_pct":7.5,"job_postings":1010,"median_wage_million_vnd":9.7,"training_seats":400,"training_applicants":437},{"month":"2024-04","district":"Riverside","working_age_pop_thousand":180,"youth_unemployment_pct":7.4,"job_postings":1009,"median_wage_million_vnd":10.1,"training_seats":400,"training_applicants":448},{"month":"2024-05","district":"Riverside","working_age_pop_thousand":180,"youth_unemployment_pct":7.8,"job_postings":1180,"median_wage_million_vnd":10.0,"training_seats":400,"training_applicants":392},{"month":"2024-06","district":"Riverside","working_age_pop_thousand":180,"youth_unemployment_pct":7.2,"job_postings":1015,"median_wage_million_vnd":10.1,"training_seats":400,"training_applicants":455},{"month":"2024-07","district":"Riverside","working_age_pop_thousand":180,"youth_unemployment_pct":8.1,"job_postings":1093,"median_wage_million_vnd":9.7,"training_seats":400,"training_applicants":493},{"month":"2024-08","district":"Riverside","working_age_pop_thousand":180,"youth_unemployment_pct":7.2,"job_postings":1116,"median_wage_million_vnd":10.2,"training_seats":400,"training_applicants":431},{"month":"2024-09","district":"Riverside","working_age_pop_thousand":180,"youth_unemployment_pct":7.3,"job_postings":1196,"median_wage_million_vnd":10.0,"training_seats":400,"training_applicants":489},{"month":"2024-10","district":"Riverside","working_age_pop_thousand":180,"youth_unemployment_pct":7.3,"job_postings":1122,"median_wage_million_vnd":10.1,"training_seats":400,"training_applicants":448},{"month":"2024-11","district":"Riverside","working_age_pop_thousand":180,"youth_unemployment_pct":7.0,"job_postings":1167,"median_wage_million_vnd":10.1,"training_seats":400,"training_applicants":425},{"month":"2024-12","district":"Riverside","working_age_pop_thousand":180,"youth_unemployment_pct":7.5,"job_postings":1195,"median_wage_million_vnd":10.1,"training_seats":400,"training_applicants":459},{"month":"2025-01","district":"Riverside","working_age_pop_thousand":180,"youth_unemployment_pct":6.6,"job_postings":1155,"median_wage_million_vnd":10.4,"training_seats":400,"training_applicants":459},{"month":"2025-02","district":"Riverside","working_age_pop_thousand":180,"youth_unemployment_pct":7.5,"job_postings":1117,"median_wage_million_vnd":10.3,"training_seats":400,"training_applicants":456},{"month":"2025-03","district":"Riverside","working_age_pop_thousand":180,"youth_unemployment_pct":7.2,"job_postings":1194,"median_wage_million_vnd":10.4,"training_seats":400,"training_applicants":513},{"month":"2025-04","district":"Riverside","working_age_pop_thousand":180,"youth_unemployment_pct":7.3,"job_postings":1143,"median_wage_million_vnd":10.3,"training_seats":400,"training_applicants":440},{"month":"2025-05","district":"Riverside","working_age_pop_thousand":180,"youth_unemployment_pct":7.0,"job_postings":1175,"median_wage_million_vnd":10.3,"training_seats":400,"training_applicants":503},{"month":"2025-06","district":"Riverside","working_age_pop_thousand":180,"youth_unemployment_pct":6.8,"job_postings":1197,"median_wage_million_vnd":10.3,"training_seats":400,"training_applicants":558},{"month":"2025-07","district":"Riverside","working_age_pop_thousand":180,"youth_unemployment_pct":6.8,"job_postings":1156,"median_wage_million_vnd":10.4,"training_seats":400,"training_applicants":458},{"month":"2025-08","district":"Riverside","working_age_pop_thousand":180,"youth_unemployment_pct":7.2,"job_postings":1107,"median_wage_million_vnd":10.6,"training_seats":400,"training_applicants":405},{"month":"2025-09","district":"Riverside","working_age_pop_thousand":180,"youth_unemployment_pct":6.9,"job_postings":1218,"median_wage_million_vnd":10.6,"training_seats":400,"training_applicants":474},{"month":"2025-10","district":"Riverside","working_age_pop_thousand":180,"youth_unemployment_pct":6.9,"job_postings":1119,"median_wage_million_vnd":10.7,"training_seats":400,"training_applicants":438},{"month":"2025-11","district":"Riverside","working_age_pop_thousand":180,"youth_unemployment_pct":6.4,"job_postings":1216,"median_wage_million_vnd":10.8,"training_seats":400,"training_applicants":476},{"month":"2025-12","district":"Riverside","working_age_pop_thousand":180,"youth_unemployment_pct":6.5,"job_postings":1202,"median_wage_million_vnd":10.6,"training_seats":400,"training_applicants":496},{"month":"2024-01","district":"Old Market","working_age_pop_thousand":150,"youth_unemployment_pct":8.7,"job_postings":703,"median_wage_million_vnd":9.3,"training_seats":350,"training_applicants":393},{"month":"2024-02","district":"Old Market","working_age_pop_thousand":150,"youth_unemployment_pct":8.6,"job_postings":791,"median_wage_million_vnd":9.0,"training_seats":350,"training_applicants":429},{"month":"2024-03","district":"Old Market","working_age_pop_thousand":150,"youth_unemployment_pct":7.5,"job_postings":787,"median_wage_million_vnd":9.1,"training_seats":350,"training_applicants":479},{"month":"2024-04","district":"Old Market","working_age_pop_thousand":150,"youth_unemployment_pct":8.1,"job_postings":757,"median_wage_million_vnd":9.3,"training_seats":350,"training_applicants":421},{"month":"2024-05","district":"Old Market","working_age_pop_thousand":150,"youth_unemployment_pct":8.6,"job_postings":799,"median_wage_million_vnd":9.3,"training_seats":350,"training_applicants":399},{"month":"2024-06","district":"Old Market","working_age_pop_thousand":150,"youth_unemployment_pct":8.2,"job_postings":758,"median_wage_million_vnd":9.2,"training_seats":350,"training_applicants":368},{"month":"2024-07","district":"Old Market","working_age_pop_thousand":150,"youth_unemployment_pct":8.7,"job_postings":799,"median_wage_million_vnd":9.4,"training_seats":350,"training_applicants":431},{"month":"2024-08","district":"Old Market","working_age_pop_thousand":150,"youth_unemployment_pct":8.2,"job_postings":646,"median_wage_million_vnd":9.2,"training_seats":350,"training_applicants":411},{"month":"2024-09","district":"Old Market","working_age_pop_thousand":150,"youth_unemployment_pct":8.3,"job_postings":795,"median_wage_million_vnd":9.3,"training_seats":350,"training_applicants":388},{"month":"2024-10","district":"Old Market","working_age_pop_thousand":150,"youth_unemployment_pct":8.5,"job_postings":747,"median_wage_million_vnd":9.4,"training_seats":350,"training_applicants":432},{"month":"2024-11","district":"Old Market","working_age_pop_thousand":150,"youth_unemployment_pct":8.3,"job_postings":825,"median_wage_million_vnd":9.4,"training_seats":350,"training_applicants":497},{"month":"2024-12","district":"Old Market","working_age_pop_thousand":150,"youth_unemployment_pct":8.1,"job_postings":766,"median_wage_million_vnd":9.3,"training_seats":350,"training_applicants":403},{"month":"2025-01","district":"Old Market","working_age_pop_thousand":150,"youth_unemployment_pct":8.3,"job_postings":668,"median_wage_million_vnd":9.6,"training_seats":350,"training_applicants":429},{"month":"2025-02","district":"Old Market","working_age_pop_thousand":150,"youth_unemployment_pct":8.3,"job_postings":717,"median_wage_million_vnd":9.6,"training_seats":350,"training_applicants":444},{"month":"2025-03","district":"Old Market","working_age_pop_thousand":150,"youth_unemployment_pct":8.7,"job_postings":831,"median_wage_million_vnd":9.6,"training_seats":350,"training_applicants":471},{"month":"2025-04","district":"Old Market","working_age_pop_thousand":150,"youth_unemployment_pct":7.9,"job_postings":836,"median_wage_million_vnd":9.7,"training_seats":350,"training_applicants":482},{"month":"2025-05","district":"Old Market","working_age_pop_thousand":150,"youth_unemployment_pct":8.1,"job_postings":809,"median_wage_million_vnd":9.7,"training_seats":350,"training_applicants":440},{"month":"2025-06","district":"Old Market","working_age_pop_thousand":150,"youth_unemployment_pct":8.6,"job_postings":757,"median_wage_million_vnd":9.7,"training_seats":350,"training_applicants":455},{"month":"2025-07","district":"Old Market","working_age_pop_thousand":150,"youth_unemployment_pct":7.9,"job_postings":771,"median_wage_million_vnd":9.9,"training_seats":350,"training_applicants":428},{"month":"2025-08","district":"Old Market","working_age_pop_thousand":150,"youth_unemployment_pct":8.2,"job_postings":763,"median_wage_million_vnd":9.8,"training_seats":350,"training_applicants":435},{"month":"2025-09","district":"Old Market","working_age_pop_thousand":150,"youth_unemployment_pct":8.3,"job_postings":774,"median_wage_million_vnd":9.8,"training_seats":350,"training_applicants":395},{"month":"2025-10","district":"Old Market","working_age_pop_thousand":150,"youth_unemployment_pct":7.7,"job_postings":806,"median_wage_million_vnd":10.0,"training_seats":350,"training_applicants":474},{"month":"2025-11","district":"Old Market","working_age_pop_thousand":150,"youth_unemployment_pct":8.3,"job_postings":767,"median_wage_million_vnd":9.9,"training_seats":350,"training_applicants":402},{"month":"2025-12","district":"Old Market","working_age_pop_thousand":150,"youth_unemployment_pct":7.5,"job_postings":773,"median_wage_million_vnd":10.1,"training_seats":350,"training_applicants":492},{"month":"2024-01","district":"Harbour","working_age_pop_thousand":210,"youth_unemployment_pct":13.3,"job_postings":1202,"median_wage_million_vnd":8.4,"training_seats":300,"training_applicants":820},{"month":"2024-02","district":"Harbour","working_age_pop_thousand":210,"youth_unemployment_pct":13.5,"job_postings":1239,"median_wage_million_vnd":8.5,"training_seats":300,"training_applicants":838},{"month":"2024-03","district":"Harbour","working_age_pop_thousand":210,"youth_unemployment_pct":13.7,"job_postings":1128,"median_wage_million_vnd":8.5,"training_seats":300,"training_applicants":795},{"month":"2024-04","district":"Harbour","working_age_pop_thousand":210,"youth_unemployment_pct":13.5,"job_postings":1230,"median_wage_million_vnd":8.4,"training_seats":300,"training_applicants":881},{"month":"2024-05","district":"Harbour","working_age_pop_thousand":210,"youth_unemployment_pct":14.0,"job_postings":1117,"median_wage_million_vnd":8.7,"training_seats":300,"training_applicants":871},{"month":"2024-06","district":"Harbour","working_age_pop_thousand":210,"youth_unemployment_pct":14.1,"job_postings":1199,"median_wage_million_vnd":8.6,"training_seats":300,"training_applicants":769},{"month":"2024-07","district":"Harbour","working_age_pop_thousand":210,"youth_unemployment_pct":14.1,"job_postings":1206,"median_wage_million_vnd":8.6,"training_seats":300,"training_applicants":915},{"month":"2024-08","district":"Harbour","working_age_pop_thousand":210,"youth_unemployment_pct":14.1,"job_postings":1412,"median_wage_million_vnd":8.6,"training_seats":300,"training_applicants":796},{"month":"2024-09","district":"Harbour","working_age_pop_thousand":210,"youth_unemployment_pct":14.3,"job_postings":1435,"median_wage_million_vnd":8.6,"training_seats":300,"training_applicants":793},{"month":"2024-10","district":"Harbour","working_age_pop_thousand":210,"youth_unemployment_pct":14.1,"job_postings":1448,"median_wage_million_vnd":8.8,"training_seats":300,"training_applicants":861},{"month":"2024-11","district":"Harbour","working_age_pop_thousand":210,"youth_unemployment_pct":14.3,"job_postings":1447,"median_wage_million_vnd":8.7,"training_seats":300,"training_applicants":910},{"month":"2024-12","district":"Harbour","working_age_pop_thousand":210,"youth_unemployment_pct":14.0,"job_postings":1303,"median_wage_million_vnd":8.7,"training_seats":300,"training_applicants":870},{"month":"2025-01","district":"Harbour","working_age_pop_thousand":210,"youth_unemployment_pct":14.0,"job_postings":1389,"median_wage_million_vnd":9.0,"training_seats":300,"training_applicants":861},{"month":"2025-02","district":"Harbour","working_age_pop_thousand":210,"youth_unemployment_pct":14.2,"job_postings":1569,"median_wage_million_vnd":8.9,"training_seats":300,"training_applicants":882},{"month":"2025-03","district":"Harbour","working_age_pop_thousand":210,"youth_unemployment_pct":13.8,"job_postings":1627,"median_wage_million_vnd":8.8,"training_seats":300,"training_applicants":898},{"month":"2025-04","district":"Harbour","working_age_pop_thousand":210,"youth_unemployment_pct":14.5,"job_postings":1559,"median_wage_million_vnd":8.9,"training_seats":300,"training_applicants":922},{"month":"2025-05","district":"Harbour","working_age_pop_thousand":210,"youth_unemployment_pct":14.3,"job_postings":1471,"median_wage_million_vnd":8.9,"training_seats":300,"training_applicants":947},{"month":"2025-06","district":"Harbour","working_age_pop_thousand":210,"youth_unemployment_pct":14.6,"job_postings":1487,"median_wage_million_vnd":8.9,"training_seats":300,"training_applicants":848},{"month":"2025-07","district":"Harbour","working_age_pop_thousand":210,"youth_unemployment_pct":14.8,"job_postings":1610,"median_wage_million_vnd":9.1,"training_seats":300,"training_applicants":916},{"month":"2025-08","district":"Harbour","working_age_pop_thousand":210,"youth_unemployment_pct":15.3,"job_postings":1655,"median_wage_million_vnd":8.9,"training_seats":300,"training_applicants":855},{"month":"2025-09","district":"Harbour","working_age_pop_thousand":210,"youth_unemployment_pct":14.4,"job_postings":1504,"median_wage_million_vnd":9.2,"training_seats":300,"training_applicants":789},{"month":"2025-10","district":"Harbour","working_age_pop_thousand":210,"youth_unemployment_pct":14.5,"job_postings":1885,"median_wage_million_vnd":9.1,"training_seats":300,"training_applicants":898},{"month":"2025-11","district":"Harbour","working_age_pop_thousand":210,"youth_unemployment_pct":14.7,"job_postings":1702,"median_wage_million_vnd":9.1,"training_seats":300,"training_applicants":1025},{"month":"2025-12","district":"Harbour","working_age_pop_thousand":210,"youth_unemployment_pct":15.2,"job_postings":1951,"median_wage_million_vnd":9.4,"training_seats":300,"training_applicants":859},{"month":"2024-01","district":"Hillside","working_age_pop_thousand":90,"youth_unemployment_pct":14.5,"job_postings":160,"median_wage_million_vnd":6.9,"training_seats":200,"training_applicants":161},{"month":"2024-02","district":"Hillside","working_age_pop_thousand":90,"youth_unemployment_pct":15.1,"job_postings":170,"median_wage_million_vnd":7.0,"training_seats":200,"training_applicants":186},{"month":"2024-03","district":"Hillside","working_age_pop_thousand":90,"youth_unemployment_pct":14.6,"job_postings":172,"median_wage_million_vnd":6.9,"training_seats":200,"training_applicants":180},{"month":"2024-04","district":"Hillside","working_age_pop_thousand":90,"youth_unemployment_pct":14.6,"job_postings":156,"median_wage_million_vnd":7.0,"training_seats":200,"training_applicants":175},{"month":"2024-05","district":"Hillside","working_age_pop_thousand":90,"youth_unemployment_pct":14.7,"job_postings":163,"median_wage_million_vnd":7.1,"training_seats":200,"training_applicants":194},{"month":"2024-06","district":"Hillside","working_age_pop_thousand":90,"youth_unemployment_pct":14.6,"job_postings":141,"median_wage_million_vnd":7.0,"training_seats":200,"training_applicants":178},{"month":"2024-07","district":"Hillside","working_age_pop_thousand":90,"youth_unemployment_pct":15.0,"job_postings":164,"median_wage_million_vnd":7.1,"training_seats":200,"training_applicants":195},{"month":"2024-08","district":"Hillside","working_age_pop_thousand":90,"youth_unemployment_pct":14.8,"job_postings":160,"median_wage_million_vnd":7.2,"training_seats":200,"training_applicants":173},{"month":"2024-09","district":"Hillside","working_age_pop_thousand":90,"youth_unemployment_pct":14.6,"job_postings":148,"median_wage_million_vnd":7.1,"training_seats":200,"training_applicants":168},{"month":"2024-10","district":"Hillside","working_age_pop_thousand":90,"youth_unemployment_pct":15.4,"job_postings":155,"median_wage_million_vnd":7.2,"training_seats":200,"training_applicants":185},{"month":"2024-11","district":"Hillside","working_age_pop_thousand":90,"youth_unemployment_pct":15.1,"job_postings":149,"median_wage_million_vnd":7.2,"training_seats":200,"training_applicants":186},{"month":"2024-12","district":"Hillside","working_age_pop_thousand":90,"youth_unemployment_pct":15.5,"job_postings":155,"median_wage_million_vnd":7.2,"training_seats":200,"training_applicants":207},{"month":"2025-01","district":"Hillside","working_age_pop_thousand":90,"youth_unemployment_pct":15.6,"job_postings":140,"median_wage_million_vnd":7.2,"training_seats":200,"training_applicants":200},{"month":"2025-02","district":"Hillside","working_age_pop_thousand":90,"youth_unemployment_pct":15.9,"job_postings":152,"median_wage_million_vnd":7.4,"training_seats":200,"training_applicants":192},{"month":"2025-03","district":"Hillside","working_age_pop_thousand":90,"youth_unemployment_pct":15.1,"job_postings":161,"median_wage_million_vnd":7.4,"training_seats":200,"training_applicants":178},{"month":"2025-04","district":"Hillside","working_age_pop_thousand":90,"youth_unemployment_pct":14.9,"job_postings":152,"median_wage_million_vnd":7.2,"training_seats":200,"training_applicants":195},{"month":"2025-05","district":"Hillside","working_age_pop_thousand":90,"youth_unemployment_pct":15.4,"job_postings":166,"median_wage_million_vnd":7.5,"training_seats":200,"training_applicants":208},{"month":"2025-06","district":"Hillside","working_age_pop_thousand":90,"youth_unemployment_pct":15.8,"job_postings":149,"median_wage_million_vnd":7.3,"training_seats":200,"training_applicants":203},{"month":"2025-07","district":"Hillside","working_age_pop_thousand":90,"youth_unemployment_pct":15.5,"job_postings":141,"median_wage_million_vnd":7.4,"training_seats":200,"training_applicants":204},{"month":"2025-08","district":"Hillside","working_age_pop_thousand":90,"youth_unemployment_pct":15.4,"job_postings":148,"median_wage_million_vnd":7.2,"training_seats":200,"training_applicants":190},{"month":"2025-09","district":"Hillside","working_age_pop_thousand":90,"youth_unemployment_pct":15.6,"job_postings":153,"median_wage_million_vnd":7.4,"training_seats":200,"training_applicants":205},{"month":"2025-10","district":"Hillside","working_age_pop_thousand":90,"youth_unemployment_pct":14.8,"job_postings":142,"median_wage_million_vnd":7.6,"training_seats":200,"training_applicants":169},{"month":"2025-11","district":"Hillside","working_age_pop_thousand":90,"youth_unemployment_pct":15.0,"job_postings":150,"median_wage_million_vnd":7.6,"training_seats":200,"training_applicants":205},{"month":"2025-12","district":"Hillside","working_age_pop_thousand":90,"youth_unemployment_pct":15.9,"job_postings":159,"median_wage_million_vnd":7.6,"training_seats":200,"training_applicants":191},{"month":"2024-01","district":"Tech Park","working_age_pop_thousand":240,"youth_unemployment_pct":6.3,"job_postings":2205,"median_wage_million_vnd":13.4,"training_seats":600,"training_applicants":969},{"month":"2024-02","district":"Tech Park","working_age_pop_thousand":240,"youth_unemployment_pct":5.8,"job_postings":2351,"median_wage_million_vnd":13.8,"training_seats":600,"training_applicants":851},{"month":"2024-03","district":"Tech Park","working_age_pop_thousand":240,"youth_unemployment_pct":6.0,"job_postings":2430,"median_wage_million_vnd":13.6,"training_seats":600,"training_applicants":1060},{"month":"2024-04","district":"Tech Park","working_age_pop_thousand":240,"youth_unemployment_pct":5.5,"job_postings":2276,"median_wage_million_vnd":13.4,"training_seats":600,"training_applicants":1027},{"month":"2024-05","district":"Tech Park","working_age_pop_thousand":240,"youth_unemployment_pct":6.8,"job_postings":2231,"median_wage_million_vnd":13.9,"training_seats":600,"training_applicants":1015},{"month":"2024-06","district":"Tech Park","working_age_pop_thousand":240,"youth_unemployment_pct":5.9,"job_postings":2484,"median_wage_million_vnd":14.0,"training_seats":600,"training_applicants":1053},{"month":"2024-07","district":"Tech Park","working_age_pop_thousand":240,"youth_unemployment_pct":5.1,"job_postings":2334,"median_wage_million_vnd":13.8,"training_seats":600,"training_applicants":980},{"month":"2024-08","district":"Tech Park","working_age_pop_thousand":240,"youth_unemployment_pct":5.5,"job_postings":2495,"median_wage_million_vnd":14.0,"training_seats":600,"training_applicants":995},{"month":"2024-09","district":"Tech Park","working_age_pop_thousand":240,"youth_unemployment_pct":5.5,"job_postings":2385,"median_wage_million_vnd":13.9,"training_seats":600,"training_applicants":1070},{"month":"2024-10","district":"Tech Park","working_age_pop_thousand":240,"youth_unemployment_pct":6.0,"job_postings":2300,"median_wage_million_vnd":14.1,"training_seats":600,"training_applicants":924},{"month":"2024-11","district":"Tech Park","working_age_pop_thousand":240,"youth_unemployment_pct":5.4,"job_postings":2396,"median_wage_million_vnd":14.0,"training_seats":600,"training_applicants":1028},{"month":"2024-12","district":"Tech Park","working_age_pop_thousand":240,"youth_unemployment_pct":5.0,"job_postings":2510,"median_wage_million_vnd":14.0,"training_seats":600,"training_applicants":971},{"month":"2025-01","district":"Tech Park","working_age_pop_thousand":240,"youth_unemployment_pct":5.4,"job_postings":2550,"median_wage_million_vnd":14.1,"training_seats":600,"training_applicants":1012},{"month":"2025-02","district":"Tech Park","working_age_pop_thousand":240,"youth_unemployment_pct":5.3,"job_postings":2626,"median_wage_million_vnd":14.1,"training_seats":600,"training_applicants":1011},{"month":"2025-03","district":"Tech Park","working_age_pop_thousand":240,"youth_unemployment_pct":5.3,"job_postings":2830,"median_wage_million_vnd":14.5,"training_seats":600,"training_applicants":938},{"month":"2025-04","district":"Tech Park","working_age_pop_thousand":240,"youth_unemployment_pct":5.4,"job_postings":2385,"median_wage_million_vnd":14.4,"training_seats":600,"training_applicants":981},{"month":"2025-05","district":"Tech Park","working_age_pop_thousand":240,"youth_unemployment_pct":5.5,"job_postings":2632,"median_wage_million_vnd":14.2,"training_seats":600,"training_applicants":997},{"month":"2025-06","district":"Tech Park","working_age_pop_thousand":240,"youth_unemployment_pct":5.5,"job_postings":2615,"median_wage_million_vnd":14.3,"training_seats":600,"training_applicants":1048},{"month":"2025-07","district":"Tech Park","working_age_pop_thousand":240,"youth_unemployment_pct":5.6,"job_postings":3054,"median_wage_million_vnd":14.4,"training_seats":600,"training_applicants":1008},{"month":"2025-08","district":"Tech Park","working_age_pop_thousand":240,"youth_unemployment_pct":5.3,"job_postings":3191,"median_wage_million_vnd":14.8,"training_seats":600,"training_applicants":974},{"month":"2025-09","district":"Tech Park","working_age_pop_thousand":240,"youth_unemployment_pct":5.1,"job_postings":2943,"median_wage_million_vnd":14.5,"training_seats":600,"training_applicants":1000},{"month":"2025-10","district":"Tech Park","working_age_pop_thousand":240,"youth_unemployment_pct":5.6,"job_postings":2913,"median_wage_million_vnd":14.7,"training_seats":600,"training_applicants":1084},{"month":"2025-11","district":"Tech Park","working_age_pop_thousand":240,"youth_unemployment_pct":4.9,"job_postings":3045,"median_wage_million_vnd":14.7,"training_seats":600,"training_applicants":1159},{"month":"2025-12","district":"Tech Park","working_age_pop_thousand":240,"youth_unemployment_pct":5.1,"job_postings":2895,"median_wage_million_vnd":14.4,"training_seats":600,"training_applicants":977},{"month":"2024-01","district":"Lakeside","working_age_pop_thousand":130,"youth_unemployment_pct":11.7,"job_postings":426,"median_wage_million_vnd":8.8,"training_seats":300,"training_applicants":429},{"month":"2024-02","district":"Lakeside","working_age_pop_thousand":130,"youth_unemployment_pct":11.0,"job_postings":451,"median_wage_million_vnd":8.9,"training_seats":300,"training_applicants":377},{"month":"2024-03","district":"Lakeside","working_age_pop_thousand":130,"youth_unemployment_pct":11.5,"job_postings":437,"median_wage_million_vnd":8.9,"training_seats":300,"training_applicants":428},{"month":"2024-04","district":"Lakeside","working_age_pop_thousand":130,"youth_unemployment_pct":11.0,"job_postings":484,"median_wage_million_vnd":8.8,"training_seats":300,"training_applicants":377},{"month":"2024-05","district":"Lakeside","working_age_pop_thousand":130,"youth_unemployment_pct":11.1,"job_postings":430,"median_wage_million_vnd":8.9,"training_seats":300,"training_applicants":416},{"month":"2024-06","district":"Lakeside","working_age_pop_thousand":130,"youth_unemployment_pct":11.2,"job_postings":466,"median_wage_million_vnd":9.1,"training_seats":300,"training_applicants":437},{"month":"2024-07","district":"Lakeside","working_age_pop_thousand":130,"youth_unemployment_pct":10.9,"job_postings":468,"median_wage_million_vnd":9.1,"training_seats":300,"training_applicants":407},{"month":"2024-08","district":"Lakeside","working_age_pop_thousand":130,"youth_unemployment_pct":10.8,"job_postings":503,"median_wage_million_vnd":9.1,"training_seats":300,"training_applicants":439},{"month":"2024-09","district":"Lakeside","working_age_pop_thousand":130,"youth_unemployment_pct":10.8,"job_postings":465,"median_wage_million_vnd":9.1,"training_seats":300,"training_applicants":423},{"month":"2024-10","district":"Lakeside","working_age_pop_thousand":130,"youth_unemployment_pct":10.8,"job_postings":498,"median_wage_million_vnd":9.1,"training_seats":300,"training_applicants":390},{"month":"2024-11","district":"Lakeside","working_age_pop_thousand":130,"youth_unemployment_pct":10.6,"job_postings":503,"median_wage_million_vnd":9.0,"training_seats":300,"training_applicants":395},{"month":"2024-12","district":"Lakeside","working_age_pop_thousand":130,"youth_unemployment_pct":10.5,"job_postings":465,"median_wage_million_vnd":9.3,"training_seats":300,"training_applicants":403},{"month":"2025-01","district":"Lakeside","working_age_pop_thousand":130,"youth_unemployment_pct":10.8,"job_postings":514,"median_wage_million_vnd":9.2,"training_seats":300,"training_applicants":494},{"month":"2025-02","district":"Lakeside","working_age_pop_thousand":130,"youth_unemployment_pct":10.9,"job_postings":451,"median_wage_million_vnd":9.3,"training_seats":300,"training_applicants":396},{"month":"2025-03","district":"Lakeside","working_age_pop_thousand":130,"youth_unemployment_pct":10.3,"job_postings":461,"median_wage_million_vnd":9.2,"training_seats":300,"training_applicants":453},{"month":"2025-04","district":"Lakeside","working_age_pop_thousand":130,"youth_unemployment_pct":10.8,"job_postings":483,"median_wage_million_vnd":9.4,"training_seats":300,"training_applicants":466},{"month":"2025-05","district":"Lakeside","working_age_pop_thousand":130,"youth_unemployment_pct":10.4,"job_postings":525,"median_wage_million_vnd":9.4,"training_seats":300,"training_applicants":422},{"month":"2025-06","district":"Lakeside","working_age_pop_thousand":130,"youth_unemployment_pct":10.5,"job_postings":454,"median_wage_million_vnd":9.4,"training_seats":300,"training_applicants":418},{"month":"2025-07","district":"Lakeside","working_age_pop_thousand":130,"youth_unemployment_pct":10.2,"job_postings":486,"median_wage_million_vnd":9.3,"training_seats":300,"training_applicants":411},{"month":"2025-08","district":"Lakeside","working_age_pop_thousand":130,"youth_unemployment_pct":10.0,"job_postings":437,"median_wage_million_vnd":9.6,"training_seats":300,"training_applicants":410},{"month":"2025-09","district":"Lakeside","working_age_pop_thousand":130,"youth_unemployment_pct":10.5,"job_postings":502,"median_wage_million_vnd":9.5,"training_seats":300,"training_applicants":395},{"month":"2025-10","district":"Lakeside","working_age_pop_thousand":130,"youth_unemployment_pct":10.0,"job_postings":509,"median_wage_million_vnd":9.8,"training_seats":300,"training_applicants":460},{"month":"2025-11","district":"Lakeside","working_age_pop_thousand":130,"youth_unemployment_pct":10.2,"job_postings":472,"median_wage_million_vnd":9.8,"training_seats":300,"training_applicants":421},{"month":"2025-12","district":"Lakeside","working_age_pop_thousand":130,"youth_unemployment_pct":10.3,"job_postings":462,"median_wage_million_vnd":9.6,"training_seats":300,"training_applicants":415},{"month":"2024-01","district":"Northfield","working_age_pop_thousand":170,"youth_unemployment_pct":12.4,"job_postings":794,"median_wage_million_vnd":8.0,"training_seats":250,"training_applicants":596},{"month":"2024-02","district":"Northfield","working_age_pop_thousand":170,"youth_unemployment_pct":12.3,"job_postings":828,"median_wage_million_vnd":8.0,"training_seats":250,"training_applicants":550},{"month":"2024-03","district":"Northfield","working_age_pop_thousand":170,"youth_unemployment_pct":12.6,"job_postings":948,"median_wage_million_vnd":8.1,"training_seats":250,"training_applicants":574},{"month":"2024-04","district":"Northfield","working_age_pop_thousand":170,"youth_unemployment_pct":12.9,"job_postings":822,"median_wage_million_vnd":8.1,"training_seats":250,"training_applicants":677},{"month":"2024-05","district":"Northfield","working_age_pop_thousand":170,"youth_unemployment_pct":12.5,"job_postings":833,"median_wage_million_vnd":8.2,"training_seats":250,"training_applicants":668},{"month":"2024-06","district":"Northfield","working_age_pop_thousand":170,"youth_unemployment_pct":13.3,"job_postings":881,"median_wage_million_vnd":8.3,"training_seats":250,"training_applicants":693},{"month":"2024-07","district":"Northfield","working_age_pop_thousand":170,"youth_unemployment_pct":12.8,"job_postings":892,"median_wage_million_vnd":8.2,"training_seats":250,"training_applicants":634},{"month":"2024-08","district":"Northfield","working_age_pop_thousand":170,"youth_unemployment_pct":13.1,"job_postings":797,"median_wage_million_vnd":8.3,"training_seats":250,"training_applicants":658},{"month":"2024-09","district":"Northfield","working_age_pop_thousand":170,"youth_unemployment_pct":12.7,"job_postings":928,"median_wage_million_vnd":8.3,"training_seats":250,"training_applicants":617},{"month":"2024-10","district":"Northfield","working_age_pop_thousand":170,"youth_unemployment_pct":13.2,"job_postings":970,"median_wage_million_vnd":8.4,"training_seats":250,"training_applicants":684},{"month":"2024-11","district":"Northfield","working_age_pop_thousand":170,"youth_unemployment_pct":12.7,"job_postings":980,"median_wage_million_vnd":8.3,"training_seats":250,"training_applicants":682},{"month":"2024-12","district":"Northfield","working_age_pop_thousand":170,"youth_unemployment_pct":12.9,"job_postings":1049,"median_wage_million_vnd":8.4,"training_seats":250,"training_applicants":579},{"month":"2025-01","district":"Northfield","working_age_pop_thousand":170,"youth_unemployment_pct":13.3,"job_postings":1055,"median_wage_million_vnd":8.4,"training_seats":250,"training_applicants":652},{"month":"2025-02","district":"Northfield","working_age_pop_thousand":170,"youth_unemployment_pct":13.4,"job_postings":1030,"median_wage_million_vnd":8.3,"training_seats":250,"training_applicants":596},{"month":"2025-03","district":"Northfield","working_age_pop_thousand":170,"youth_unemployment_pct":13.4,"job_postings":1003,"median_wage_million_vnd":8.4,"training_seats":250,"training_applicants":661},{"month":"2025-04","district":"Northfield","working_age_pop_thousand":170,"youth_unemployment_pct":13.5,"job_postings":1176,"median_wage_million_vnd":8.5,"training_seats":250,"training_applicants":619},{"month":"2025-05","district":"Northfield","working_age_pop_thousand":170,"youth_unemployment_pct":13.5,"job_postings":1051,"median_wage_million_vnd":8.7,"training_seats":250,"training_applicants":684},{"month":"2025-06","district":"Northfield","working_age_pop_thousand":170,"youth_unemployment_pct":13.5,"job_postings":1143,"median_wage_million_vnd":8.5,"training_seats":250,"training_applicants":716},{"month":"2025-07","district":"Northfield","working_age_pop_thousand":170,"youth_unemployment_pct":13.0,"job_postings":1187,"median_wage_million_vnd":8.4,"training_seats":250,"training_applicants":636},{"month":"2025-08","district":"Northfield","working_age_pop_thousand":170,"youth_unemployment_pct":13.3,"job_postings":1091,"median_wage_million_vnd":8.6,"training_seats":250,"training_applicants":733},{"month":"2025-09","district":"Northfield","working_age_pop_thousand":170,"youth_unemployment_pct":14.1,"job_postings":1247,"median_wage_million_vnd":8.6,"training_seats":250,"training_applicants":673},{"month":"2025-10","district":"Northfield","working_age_pop_thousand":170,"youth_unemployment_pct":14.1,"job_postings":1240,"median_wage_million_vnd":8.6,"training_seats":250,"training_applicants":657},{"month":"2025-11","district":"Northfield","working_age_pop_thousand":170,"youth_unemployment_pct":13.9,"job_postings":1300,"median_wage_million_vnd":8.9,"training_seats":250,"training_applicants":723},{"month":"2025-12","district":"Northfield","working_age_pop_thousand":170,"youth_unemployment_pct":13.8,"job_postings":1228,"median_wage_million_vnd":8.7,"training_seats":250,"training_applicants":750},{"month":"2024-01","district":"Eastgate","working_age_pop_thousand":160,"youth_unemployment_pct":9.4,"job_postings":635,"median_wage_million_vnd":9.0,"training_seats":350,"training_applicants":482},{"month":"2024-02","district":"Eastgate","working_age_pop_thousand":160,"youth_unemployment_pct":9.3,"job_postings":678,"median_wage_million_vnd":8.8,"training_seats":350,"training_applicants":542},{"month":"2024-03","district":"Eastgate","working_age_pop_thousand":160,"youth_unemployment_pct":8.8,"job_postings":679,"median_wage_million_vnd":8.9,"training_seats":350,"training_applicants":506},{"month":"2024-04","district":"Eastgate","working_age_pop_thousand":160,"youth_unemployment_pct":9.3,"job_postings":672,"median_wage_million_vnd":8.9,"training_seats":350,"training_applicants":460},{"month":"2024-05","district":"Eastgate","working_age_pop_thousand":160,"youth_unemployment_pct":9.3,"job_postings":657,"median_wage_million_vnd":9.1,"training_seats":350,"training_applicants":486},{"month":"2024-06","district":"Eastgate","working_age_pop_thousand":160,"youth_unemployment_pct":8.8,"job_postings":644,"median_wage_million_vnd":9.2,"training_seats":350,"training_applicants":463},{"month":"2024-07","district":"Eastgate","working_age_pop_thousand":160,"youth_unemployment_pct":8.6,"job_postings":680,"median_wage_million_vnd":9.2,"training_seats":350,"training_applicants":525},{"month":"2024-08","district":"Eastgate","working_age_pop_thousand":160,"youth_unemployment_pct":9.4,"job_postings":704,"median_wage_million_vnd":9.2,"training_seats":350,"training_applicants":576},{"month":"2024-09","district":"Eastgate","working_age_pop_thousand":160,"youth_unemployment_pct":8.7,"job_postings":678,"median_wage_million_vnd":9.1,"training_seats":350,"training_applicants":477},{"month":"2024-10","district":"Eastgate","working_age_pop_thousand":160,"youth_unemployment_pct":8.7,"job_postings":709,"median_wage_million_vnd":9.2,"training_seats":350,"training_applicants":583},{"month":"2024-11","district":"Eastgate","working_age_pop_thousand":160,"youth_unemployment_pct":9.1,"job_postings":714,"median_wage_million_vnd":9.3,"training_seats":350,"training_applicants":547},{"month":"2024-12","district":"Eastgate","working_age_pop_thousand":160,"youth_unemployment_pct":9.0,"job_postings":815,"median_wage_million_vnd":9.3,"training_seats":350,"training_applicants":511},{"month":"2025-01","district":"Eastgate","working_age_pop_thousand":160,"youth_unemployment_pct":8.9,"job_postings":692,"median_wage_million_vnd":9.3,"training_seats":350,"training_applicants":590},{"month":"2025-02","district":"Eastgate","working_age_pop_thousand":160,"youth_unemployment_pct":9.0,"job_postings":672,"median_wage_million_vnd":9.4,"training_seats":350,"training_applicants":484},{"month":"2025-03","district":"Eastgate","working_age_pop_thousand":160,"youth_unemployment_pct":9.4,"job_postings":671,"median_wage_million_vnd":9.5,"training_seats":350,"training_applicants":482},{"month":"2025-04","district":"Eastgate","working_age_pop_thousand":160,"youth_unemployment_pct":9.2,"job_postings":677,"median_wage_million_vnd":9.4,"training_seats":350,"training_applicants":471},{"month":"2025-05","district":"Eastgate","working_age_pop_thousand":160,"youth_unemployment_pct":8.6,"job_postings":744,"median_wage_million_vnd":9.4,"training_seats":350,"training_applicants":480},{"month":"2025-06","district":"Eastgate","working_age_pop_thousand":160,"youth_unemployment_pct":9.0,"job_postings":720,"median_wage_million_vnd":9.5,"training_seats":350,"training_applicants":557},{"month":"2025-07","district":"Eastgate","working_age_pop_thousand":160,"youth_unemployment_pct":9.4,"job_postings":732,"median_wage_million_vnd":9.6,"training_seats":350,"training_applicants":543},{"month":"2025-08","district":"Eastgate","working_age_pop_thousand":160,"youth_unemployment_pct":8.9,"job_postings":720,"median_wage_million_vnd":9.6,"training_seats":350,"training_applicants":473},{"month":"2025-09","district":"Eastgate","working_age_pop_thousand":160,"youth_unemployment_pct":9.5,"job_postings":738,"median_wage_million_vnd":9.6,"training_seats":350,"training_applicants":438},{"month":"2025-10","district":"Eastgate","working_age_pop_thousand":160,"youth_unemployment_pct":9.3,"job_postings":760,"median_wage_million_vnd":9.7,"training_seats":350,"training_applicants":534},{"month":"2025-11","district":"Eastgate","working_age_pop_thousand":160,"youth_unemployment_pct":9.3,"job_postings":773,"median_wage_million_vnd":9.7,"training_seats":350,"training_applicants":547},{"month":"2025-12","district":"Eastgate","working_age_pop_thousand":160,"youth_unemployment_pct":9.4,"job_postings":734,"median_wage_million_vnd":9.7,"training_seats":350,"training_applicants":560},{"month":"2024-01","district":"Greenbelt","working_age_pop_thousand":110,"youth_unemployment_pct":10.1,"job_postings":317,"median_wage_million_vnd":7.6,"training_seats":250,"training_applicants":212},{"month":"2024-02","district":"Greenbelt","working_age_pop_thousand":110,"youth_unemployment_pct":10.2,"job_postings":292,"median_wage_million_vnd":7.6,"training_seats":250,"training_applicants":261},{"month":"2024-03","district":"Greenbelt","working_age_pop_thousand":110,"youth_unemployment_pct":10.4,"job_postings":261,"median_wage_million_vnd":7.6,"training_seats":250,"training_applicants":217},{"month":"2024-04","district":"Greenbelt","working_age_pop_thousand":110,"youth_unemployment_pct":10.0,"job_postings":285,"median_wage_million_vnd":7.6,"training_seats":250,"training_applicants":301},{"month":"2024-05","district":"Greenbelt","working_age_pop_thousand":110,"youth_unemployment_pct":9.9,"job_postings":256,"median_wage_million_vnd":7.7,"training_seats":250,"training_applicants":213},{"month":"2024-06","district":"Greenbelt","working_age_pop_thousand":110,"youth_unemployment_pct":10.7,"job_postings":278,"median_wage_million_vnd":7.7,"training_seats":250,"training_applicants":280},{"month":"2024-07","district":"Greenbelt","working_age_pop_thousand":110,"youth_unemployment_pct":10.1,"job_postings":287,"median_wage_million_vnd":7.8,"training_seats":250,"training_applicants":278},{"month":"2024-08","district":"Greenbelt","working_age_pop_thousand":110,"youth_unemployment_pct":10.0,"job_postings":290,"median_wage_million_vnd":7.8,"training_seats":250,"training_applicants":253},{"month":"2024-09","district":"Greenbelt","working_age_pop_thousand":110,"youth_unemployment_pct":10.1,"job_postings":285,"median_wage_million_vnd":7.7,"training_seats":250,"training_applicants":251},{"month":"2024-10","district":"Greenbelt","working_age_pop_thousand":110,"youth_unemployment_pct":9.7,"job_postings":282,"median_wage_million_vnd":7.9,"training_seats":250,"training_applicants":238},{"month":"2024-11","district":"Greenbelt","working_age_pop_thousand":110,"youth_unemployment_pct":10.3,"job_postings":294,"median_wage_million_vnd":7.9,"training_seats":250,"training_applicants":240},{"month":"2024-12","district":"Greenbelt","working_age_pop_thousand":110,"youth_unemployment_pct":10.0,"job_postings":292,"median_wage_million_vnd":8.0,"training_seats":250,"training_applicants":255},{"month":"2025-01","district":"Greenbelt","working_age_pop_thousand":110,"youth_unemployment_pct":9.9,"job_postings":280,"median_wage_million_vnd":8.1,"training_seats":250,"training_applicants":264},{"month":"2025-02","district":"Greenbelt","working_age_pop_thousand":110,"youth_unemployment_pct":9.7,"job_postings":289,"median_wage_million_vnd":8.1,"training_seats":250,"training_applicants":258},{"month":"2025-03","district":"Greenbelt","working_age_pop_thousand":110,"youth_unemployment_pct":10.0,"job_postings":297,"median_wage_million_vnd":8.1,"training_seats":250,"training_applicants":247},{"month":"2025-04","district":"Greenbelt","working_age_pop_thousand":110,"youth_unemployment_pct":10.4,"job_postings":321,"median_wage_million_vnd":7.9,"training_seats":250,"training_applicants":286},{"month":"2025-05","district":"Greenbelt","working_age_pop_thousand":110,"youth_unemployment_pct":10.1,"job_postings":273,"median_wage_million_vnd":8.0,"training_seats":250,"training_applicants":256},{"month":"2025-06","district":"Greenbelt","working_age_pop_thousand":110,"youth_unemployment_pct":9.8,"job_postings":309,"median_wage_million_vnd":8.1,"training_seats":250,"training_applicants":268},{"month":"2025-07","district":"Greenbelt","working_age_pop_thousand":110,"youth_unemployment_pct":9.4,"job_postings":322,"median_wage_million_vnd":8.1,"training_seats":250,"training_applicants":248},{"month":"2025-08","district":"Greenbelt","working_age_pop_thousand":110,"youth_unemployment_pct":9.6,"job_postings":283,"median_wage_million_vnd":8.3,"training_seats":250,"training_applicants":250},{"month":"2025-09","district":"Greenbelt","working_age_pop_thousand":110,"youth_unemployment_pct":9.5,"job_postings":278,"median_wage_million_vnd":8.3,"training_seats":250,"training_applicants":271},{"month":"2025-10","district":"Greenbelt","working_age_pop_thousand":110,"youth_unemployment_pct":9.9,"job_postings":307,"median_wage_million_vnd":8.1,"training_seats":250,"training_applicants":258},{"month":"2025-11","district":"Greenbelt","working_age_pop_thousand":110,"youth_unemployment_pct":9.6,"job_postings":286,"median_wage_million_vnd":8.2,"training_seats":250,"training_applicants":222},{"month":"2025-12","district":"Greenbelt","working_age_pop_thousand":110,"youth_unemployment_pct":9.6,"job_postings":317,"median_wage_million_vnd":8.2,"training_seats":250,"training_applicants":267},{"month":"2024-01","district":"Uplands","working_age_pop_thousand":70,"youth_unemployment_pct":16.9,"job_postings":90,"median_wage_million_vnd":6.2,"training_seats":150,"training_applicants":114},{"month":"2024-02","district":"Uplands","working_age_pop_thousand":70,"youth_unemployment_pct":16.5,"job_postings":83,"median_wage_million_vnd":6.2,"training_seats":150,"training_applicants":108},{"month":"2024-03","district":"Uplands","working_age_pop_thousand":70,"youth_unemployment_pct":16.8,"job_postings":80,"median_wage_million_vnd":6.3,"training_seats":150,"training_applicants":101},{"month":"2024-04","district":"Uplands","working_age_pop_thousand":70,"youth_unemployment_pct":16.8,"job_postings":84,"median_wage_million_vnd":6.3,"training_seats":150,"training_applicants":112},{"month":"2024-05","district":"Uplands","working_age_pop_thousand":70,"youth_unemployment_pct":17.5,"job_postings":83,"median_wage_million_vnd":6.4,"training_seats":150,"training_applicants":118},{"month":"2024-06","district":"Uplands","working_age_pop_thousand":70,"youth_unemployment_pct":17.0,"job_postings":83,"median_wage_million_vnd":6.4,"training_seats":150,"training_applicants":103},{"month":"2024-07","district":"Uplands","working_age_pop_thousand":70,"youth_unemployment_pct":17.2,"job_postings":74,"median_wage_million_vnd":6.3,"training_seats":150,"training_applicants":110},{"month":"2024-08","district":"Uplands","working_age_pop_thousand":70,"youth_unemployment_pct":17.2,"job_postings":76,"median_wage_million_vnd":6.4,"training_seats":150,"training_applicants":106},{"month":"2024-09","district":"Uplands","working_age_pop_thousand":70,"youth_unemployment_pct":17.4,"job_postings":87,"median_wage_million_vnd":6.4,"training_seats":150,"training_applicants":114},{"month":"2024-10","district":"Uplands","working_age_pop_thousand":70,"youth_unemployment_pct":17.1,"job_postings":73,"median_wage_million_vnd":6.4,"training_seats":150,"training_applicants":109},{"month":"2024-11","district":"Uplands","working_age_pop_thousand":70,"youth_unemployment_pct":17.6,"job_postings":75,"median_wage_million_vnd":6.5,"training_seats":150,"training_applicants":111},{"month":"2024-12","district":"Uplands","working_age_pop_thousand":70,"youth_unemployment_pct":17.0,"job_postings":84,"median_wage_million_vnd":6.4,"training_seats":150,"training_applicants":105},{"month":"2025-01","district":"Uplands","working_age_pop_thousand":70,"youth_unemployment_pct":17.2,"job_postings":76,"median_wage_million_vnd":6.5,"training_seats":150,"training_applicants":90},{"month":"2025-02","district":"Uplands","working_age_pop_thousand":70,"youth_unemployment_pct":17.3,"job_postings":75,"median_wage_million_vnd":6.5,"training_seats":150,"training_applicants":116},{"month":"2025-03","district":"Uplands","working_age_pop_thousand":70,"youth_unemployment_pct":17.4,"job_postings":78,"median_wage_million_vnd":6.5,"training_seats":150,"training_applicants":107},{"month":"2025-04","district":"Uplands","working_age_pop_thousand":70,"youth_unemployment_pct":17.7,"job_postings":82,"median_wage_million_vnd":6.5,"training_seats":150,"training_applicants":104},{"month":"2025-05","district":"Uplands","working_age_pop_thousand":70,"youth_unemployment_pct":17.3,"job_postings":81,"median_wage_million_vnd":6.6,"training_seats":150,"training_applicants":118},{"month":"2025-06","district":"Uplands","working_age_pop_thousand":70,"youth_unemployment_pct":18.0,"job_postings":79,"median_wage_million_vnd":6.7,"training_seats":150,"training_applicants":109},{"month":"2025-07","district":"Uplands","working_age_pop_thousand":70,"youth_unemployment_pct":16.9,"job_postings":84,"median_wage_million_vnd":6.6,"training_seats":150,"training_applicants":106},{"month":"2025-08","district":"Uplands","working_age_pop_thousand":70,"youth_unemployment_pct":18.0,"job_postings":67,"median_wage_million_vnd":6.8,"training_seats":150,"training_applicants":110},{"month":"2025-09","district":"Uplands","working_age_pop_thousand":70,"youth_unemployment_pct":18.0,"job_postings":75,"median_wage_million_vnd":6.6,"training_seats":150,"training_applicants":117},{"month":"2025-10","district":"Uplands","working_age_pop_thousand":70,"youth_unemployment_pct":17.6,"job_postings":78,"median_wage_million_vnd":6.8,"training_seats":150,"training_applicants":106},{"month":"2025-11","district":"Uplands","working_age_pop_thousand":70,"youth_unemployment_pct":17.3,"job_postings":68,"median_wage_million_vnd":6.6,"training_seats":150,"training_applicants":123},{"month":"2025-12","district":"Uplands","working_age_pop_thousand":70,"youth_unemployment_pct":17.5,"job_postings":73,"median_wage_million_vnd":6.7,"training_seats":150,"training_applicants":125}]/*END*/;
+<section class="slide" data-part="1">
+  <div class="head"><p class="eyebrow">What is a dashboard</p><h2>Every good dashboard answers four questions</h2></div>
+  <div class="fourq">
+    <div class="card st" style="--i:1"><p class="tag">Level</p><p class="q">Where are we?</p><p class="txt">The current value of the few measures that matter, in big numbers.</p>
+      <div class="ex"><span>Land</span><p class="small">Quang Ninh has about 22 years of convertible farmland left.</p><span>PFM</span><p class="small">Viet Nam's PFM index is −0.11, rank 99 of 169.</p></div></div>
+    <div class="card st" style="--i:2"><p class="tag">Benchmark</p><p class="q">Compared to what?</p><p class="txt">Peers, a target, a threshold, or what income predicts.</p>
+      <div class="ex"><span>Land</span><p class="small">4 of 63 provinces are under 50 years; the median has 162.</p><span>PFM</span><p class="small">The ASEAN-4 average is +0.28.</p></div></div>
+    <div class="card st" style="--i:3"><p class="tag">Trend</p><p class="q">Which way is it moving?</p><p class="txt">Change over time, or under a scenario.</p>
+      <div class="ex"><span>Land</span><p class="small">Unused land fell from 14.3% of the country in 2008 to 3.5% in 2023.</p><span>PFM</span><p class="small">How the scores move when one source of data is left out.</p></div></div>
+    <div class="card inv st" style="--i:4"><p class="tag">Decision</p><p class="q">So what?</p><p class="txt">The sentence the reader acts on, written at the top.</p>
+      <div class="ex" style="border-color:rgba(246,244,238,.2)"><span style="color:var(--accent)">Land</span><p class="small" style="color:var(--soft-d)">Build a recurring revenue base before the fastest-converting provinces run out.</p><span style="color:var(--accent)">PFM</span><p class="small" style="color:var(--soft-d)">Budget preparation is the weakest link: start there.</p></div></div>
+  </div>
+  <aside class="notes">
+7:45 to 8:45. A practical checklist. Before you build, write one sentence for each of the four. If you cannot fill the fourth, you have a monitoring page, not a decision tool.
+The examples come from the two dashboards you will see in a minute and use in the hands-on.
+  </aside>
+</section>
 
-const NS = "http://www.w3.org/2000/svg";
-const el = (tag, attrs, text) => {
-  const e = document.createElementNS(NS, tag);
-  for (const k in attrs) e.setAttribute(k, attrs[k]);
-  if (text !== undefined) e.textContent = text;
-  return e;
-};
-const mean = xs => xs.reduce((a, b) => a + b, 0) / xs.length;
-const median = xs => { const s = [...xs].sort((a, b) => a - b), m = s.length / 2; return s.length % 2 ? s[m - .5] : (s[m - 1] + s[m]) / 2; };
-const f1 = x => x.toFixed(1);
+<section class="slide" data-part="1">
+  <div class="head"><p class="eyebrow">What is a dashboard</p><h2>Anatomy of a useful one</h2></div>
+  <div class="wire">
+    <div class="w h"><p class="lab">Headline</p><p class="say">The answer, in one sentence with numbers</p></div>
+    <div class="w k"><p class="lab">Key number</p><p class="say">Where are we?</p></div>
+    <div class="w k"><p class="lab">Key number</p><p class="say">Compared to what?</p></div>
+    <div class="w k"><p class="lab">Key number</p><p class="say">Which way is it moving?</p></div>
+    <div class="w"><p class="lab">Controls</p><p class="say">Filters and sliders, so readers test their own case</p></div>
+    <div class="w c"><p class="lab">Main chart</p><p class="say">The one comparison that supports the headline</p>
+      <svg viewBox="0 0 560 80" width="560" height="80" aria-hidden="true"><g fill="#B9C6D6"><rect x="0" y="50" width="48" height="30" rx="4"/><rect x="64" y="42" width="48" height="38" rx="4"/><rect x="128" y="46" width="48" height="34" rx="4"/><rect x="192" y="30" width="48" height="50" rx="4"/><rect x="256" y="34" width="48" height="46" rx="4"/><rect x="320" y="20" width="48" height="60" rx="4"/><rect x="384" y="24" width="48" height="56" rx="4"/></g><rect x="448" y="4" width="48" height="76" rx="4" fill="#19C39A"/></svg></div>
+    <div class="w"><p class="lab">Detail</p><p class="say">A ranking or table, for readers who want to check</p></div>
+    <div class="w f"><p class="say">Source, date and method, so every number can be traced</p></div>
+  </div>
+  <aside class="notes">
+8:45 to 9:30. Read it top to bottom, the way a reader does. Headline first, in words, because many readers stop there. Then three numbers that answer the first three questions. Then one main chart. Controls and detail are for the reader who wants to test their own case. Source, date and method at the bottom make the page trustworthy.
+If you cannot write the headline, you are not ready to build.
+  </aside>
+</section>
 
-const months = [...new Set(DATA.map(r => r.month))].sort();
-const names = [...new Set(DATA.map(r => r.district))];
-const rowsOf = n => DATA.filter(r => r.district === n).sort((a, b) => a.month.localeCompare(b.month));
-const last3 = (n, fn) => mean(rowsOf(n).slice(-3).map(fn));
+<section class="slide dark" data-part="1">
+  <div class="head"><p class="eyebrow">Example 1 · Vietnam Land Brief</p><h2>How long can provinces keep selling land?</h2></div>
+  <div class="ex-grid">
+    <div class="shots">
+      <figure class="main"><img src="assets/img/land-2.webp" alt="Land at risk panel: map of Viet Nam's provinces coloured by years of convertible farmland left, with a ranked list"><figcaption>02 Land at risk</figcaption></figure>
+      <p class="link">sachadray.github.io/vietnam-land</p>
+    </div>
+    <div class="side">
+      <div class="pt"><p class="k">Reader</p><p class="v">Finance officials whose provinces pay for investment by converting farmland</p></div>
+      <div class="pt"><p class="k">Question</p><p class="v">How many years can that continue, and where does it stop first?</p></div>
+      <div class="pt"><p class="k">Design</p><ul class="v"><li>Three panels, no long scroll</li><li>A map for where, a ranking for who is first</li><li>Sliders let the reader test the assumptions</li></ul></div>
+      <div class="thumbs"><figure><img src="assets/img/land-1.webp" alt="What the land is panel: inventory, composition over time, built land against the 2030 plan"><figcaption>01 What the land is</figcaption></figure><figure><img src="assets/img/land-3.webp" alt="Scenarios panel: sliders and four small charts of the revenue arithmetic"><figcaption>03 Scenarios</figcaption></figure></div>
+    </div>
+  </div>
+  <aside class="notes">
+9:30 to 10:30. One of mine. Land revenue reached 575.5 trillion dong in 2025, about a fifth of state revenue, and a hectare can be sold only once.
+Panel 1 sets the context, panel 2 answers the question (four provinces have under 50 years at their recent pace: Quang Ninh 22, Hai Phong 31, Bac Ninh 44, Hung Yen 49), panel 3 lets the reader change the assumptions.
+If there is a connection, open the live page and switch panels. Half of you will work with this data in Part 2.
+  </aside>
+</section>
 
-const D = names.map(n => ({
-  name: n,
-  need: last3(n, r => r.youth_unemployment_pct),
-  opp: last3(n, r => r.job_postings / r.working_age_pop_thousand),
-  queue: last3(n, r => r.training_applicants / r.training_seats),
-  wage: last3(n, r => r.median_wage_million_vnd),
-}));
-const med = { need: median(D.map(d => d.need)), opp: median(D.map(d => d.opp)), queue: median(D.map(d => d.queue)) };
-D.forEach(d => d.pick = d.need > med.need && d.opp > med.opp && d.queue > med.queue);
-const picks = D.filter(d => d.pick);
+<section class="slide dark" data-part="1">
+  <div class="head"><p class="eyebrow">Example 2 · Viet Nam PFM benchmark</p><h2>Where is public financial management weakest?</h2></div>
+  <div class="ex-grid">
+    <div class="shots">
+      <figure class="main"><img src="assets/img/pfm-1.webp" alt="Benchmark view: the budget cycle drawn as three boxes and a circle, coloured by Viet Nam's score, with a settings sidebar"><figcaption>Benchmark</figcaption></figure>
+      <p class="link">sachadray.github.io/vietnam-pfm-benchmarking</p>
+    </div>
+    <div class="side">
+      <div class="pt"><p class="k">Reader</p><p class="v">Ministry of Finance officials and the economists writing the public finance review</p></div>
+      <div class="pt"><p class="k">Question</p><p class="v">Where is Viet Nam strong or weak, against peers and against what its income predicts?</p></div>
+      <div class="pt"><p class="k">Design</p><ul class="v"><li>The budget cycle as the organising picture</li><li>The reader picks the comparison set</li><li>Switch an indicator off and every score recomputes</li></ul></div>
+      <div class="thumbs"><figure><img src="assets/img/pfm-2.webp" alt="Dot plot of all economies by dimension and a table of scores by economy"><figcaption>Among all economies</figcaption></figure><figure><img src="assets/img/pfm-3.webp" alt="Predicted scores view: the budget cycle coloured by the difference to the income-predicted score"><figcaption>Predicted by income</figcaption></figure></div>
+    </div>
+  </div>
+  <aside class="notes">
+10:30 to 11:30. A second one, for a different reader. 68 international indicators for 194 economies, combined into four dimensions of the budget cycle. Every score is a z-score: 0 is the average of all economies, higher is better.
+Viet Nam is at −0.11 overall, rank 99 of 169; strongest on budget reliability (+0.50), weakest on budget preparation (−0.38).
+The design choice to point out: the reader can change the comparison set and the indicators, and the page recomputes. A dashboard that lets the reader test your assumptions earns more trust than one that hides them.
+  </aside>
+</section>
 
-// province series, weighted by working-age population
-const prov = months.map(m => {
-  const rs = DATA.filter(r => r.month === m), w = rs.reduce((a, r) => a + r.working_age_pop_thousand, 0);
-  return {
-    month: m,
-    unemp: rs.reduce((a, r) => a + r.youth_unemployment_pct * r.working_age_pop_thousand, 0) / w,
-    opp: rs.reduce((a, r) => a + r.job_postings, 0) / w,
-    queue: rs.reduce((a, r) => a + r.training_applicants, 0) / rs.reduce((a, r) => a + r.training_seats, 0),
-  };
-});
-const now = k => mean(prov.slice(-3).map(p => p[k])), yearAgo = k => mean(prov.slice(-15, -12).map(p => p[k]));
+<section class="slide" data-part="1">
+  <div class="head"><p class="eyebrow">Prompting</p><h2>A good prompt is a brief, in six parts</h2></div>
+  <div class="six">
+    <div class="card st" style="--i:1"><span class="badge b-role">ROLE</span><p class="ask">Who should the AI be? Name a job, not a personality.</p><p class="eg">"You are a public finance economist who builds dashboards for ministries."</p></div>
+    <div class="card st" style="--i:2"><span class="badge b-context">CONTEXT</span><p class="ask">What does it need to know that is not in the data? Who reads it, what they know, why now.</p><p class="eg">"The reader is a provincial director with two minutes."</p></div>
+    <div class="card st" style="--i:3"><span class="badge b-task">TASK</span><p class="ask">The one thing to produce, and the question or decision it serves.</p><p class="eg">"Build a dashboard that answers: which provinces run out first?"</p></div>
+    <div class="card st" style="--i:4"><span class="badge b-data">DATA</span><p class="ask">Which files, what one row means, the units, known problems, any formula to use.</p><p class="eg">"Leave out Da Nang: its series has a break."</p></div>
+    <div class="card st" style="--i:5"><span class="badge b-output">OUTPUT</span><p class="ask">The format and exactly what goes on the screen, in order.</p><p class="eg">"One HTML file: headline, map, top-10 chart, two sliders."</p></div>
+    <div class="card st" style="--i:6"><span class="badge b-checks">CHECKS</span><p class="ask">How to prove the numbers: a value you already know, a table to print first.</p><p class="eg">"Quang Ninh should be about 22 years."</p></div>
+  </div>
+  <p class="txt">"Make a dashboard from this data" has none of the six. You get a chart of everything, and no way to know if it is right.</p>
+  <aside class="notes">
+11:30 to 12:45. The AI is a fast colleague who knows nothing about your reader. Brief it the way you would brief a person.
+Role sets the standard of work. Context is what only you know. Task is one thing, tied to a decision. Data tells it what the files mean and where the traps are. Output describes the screen. Checks is the part most people skip, and the most important: give it a number you already know, so you can tell at once whether it got the calculation right.
+  </aside>
+</section>
 
-// ---------- headline ----------
-const banner = document.getElementById("banner");
-const b = document.createElement("b");
-b.textContent = "Open the two centres in " + picks.map(d => d.name).join(" and ") + ". ";
-banner.append(b, "They are the only districts where youth unemployment is high, employers are hiring, and existing training already turns people away.");
+<section class="slide" data-part="1">
+  <div class="head"><p class="eyebrow">A concrete prompt · Land track</p><h2>Six parts, in about 250 words</h2></div>
+  <div class="annot">
+    <div class="ap"><span class="badge b-role">ROLE</span><p>You are a data analyst and web developer who builds clear, one-screen dashboards for government officials.</p></div>
+    <div class="ap"><span class="badge b-context">CONTEXT</span><p>Provinces raise revenue by converting farmland into housing and industry. Each hectare can be converted only once; about 30% is protected. The reader is a <em>provincial finance director with two minutes</em>.</p></div>
+    <div class="ap"><span class="badge b-task">TASK</span><p>Build a dashboard that answers: <em>"Which provinces will run out of convertible farmland first, and how sensitive is that to the pace of conversion?"</em></p></div>
+    <div class="ap"><span class="badge b-data">DATA</span><p>land_provinces.csv (thousand ha, 2018 to 2023) and vn_provinces.geojson, joined on iso. years left = agri 2023 × (1 − 30%) ÷ yearly conversion. <em>Leave out Da Nang.</em></p></div>
+    <div class="ap"><span class="badge b-output">OUTPUT</span><p>One self-contained HTML file: a headline with numbers, a map in four risk bands, the 10 provinces with fewest years, two sliders (pace, protected share), a footnote with method and source.</p></div>
+    <div class="ap"><span class="badge b-checks">CHECKS</span><p>First print the five provinces with the fewest years left. <em>Quang Ninh should be about 22.</em> If yours differs, explain why.</p></div>
+  </div>
+  <aside class="notes">
+12:45 to 13:30. This is the build prompt for the land track in Part 2, shortened to fit the slide; the full text is on the handout. Point at three things.
+Context names the reader and their time budget, which decides the design.
+Data gives the formula, so the AI does not invent its own.
+Checks gives a known answer, 22 years for Quang Ninh. If the AI says 31, you know at once something is wrong.
+  </aside>
+</section>
 
-// ---------- tiles ----------
-const tiles = [
-  ["Youth unemployment, province", f1(now("unemp")) + "%", Math.abs(now("unemp") - yearAgo("unemp")) < 0.05 ? "Unchanged on a year earlier" : (now("unemp") > yearAgo("unemp") ? "+" : "") + f1(now("unemp") - yearAgo("unemp")) + " points on a year earlier"],
-  ["Job postings per 1,000 working-age", f1(now("opp")), (100 * (now("opp") / yearAgo("opp") - 1) >= 0 ? "+" : "") + f1(100 * (now("opp") / yearAgo("opp") - 1)) + "% on a year earlier"],
-  ["Applicants per training seat", f1(now("queue")), "Above 1 means excess demand"],
-];
-const tilesEl = document.getElementById("tiles");
-tiles.forEach(([l, v, d]) => {
-  const c = document.createElement("div"); c.className = "card tile";
-  [["l", l], ["v", v], ["d", d]].forEach(([k, t]) => { const x = document.createElement("div"); x.className = k; x.textContent = t; c.append(x); });
-  tilesEl.append(c);
-});
+<section class="slide" data-part="1">
+  <div class="head"><p class="eyebrow">A concrete prompt · PFM track</p><h2>Same six parts, a different reader</h2></div>
+  <div class="annot">
+    <div class="ap"><span class="badge b-role">ROLE</span><p>You are a public finance economist and data-visualisation designer.</p></div>
+    <div class="ap"><span class="badge b-context">CONTEXT</span><p>The Ministry of Finance wants to know where its budget system is strong or weak compared with its neighbours. The reader is a <em>senior official who knows the budget but not statistics</em>.</p></div>
+    <div class="ap"><span class="badge b-task">TASK</span><p>Build a dashboard that answers: <em>"How does Viet Nam compare with its neighbours, and where is the biggest gap?"</em></p></div>
+    <div class="ap"><span class="badge b-data">DATA</span><p>scores.csv: D1 to D4 and overall as z-scores (0 = world average, higher is better). Compare with IDN, MYS, PHL, THA, KHM, KOR, JPN and the ASEAN-4 average, <em>leaving Viet Nam out of averages</em>.</p></div>
+    <div class="ap"><span class="badge b-output">OUTPUT</span><p>One HTML file: a headline, five score tiles, a dot plot of all economies with Viet Nam highlighted, a red-to-green table, a dropdown to change the focus economy.</p></div>
+    <div class="ap"><span class="badge b-checks">CHECKS</span><p>First print Viet Nam's scores and rank. <em>Expected: overall −0.11, rank 99 of 169.</em></p></div>
+  </div>
+  <aside class="notes">
+13:30 to 14:00. The second track's build prompt. Notice what changed: the reader does not know statistics, so the context says so, and the full prompt asks for a footnote that explains a z-score. The check is again a number we already know.
+  </aside>
+</section>
 
-// ---------- tooltip ----------
-const tip = document.getElementById("tip");
-const showTip = (ev, text) => { tip.textContent = text; tip.style.display = "block"; tip.style.left = Math.min(ev.clientX + 14, innerWidth - 250) + "px"; tip.style.top = ev.clientY + 14 + "px"; };
-const hideTip = () => tip.style.display = "none";
-const hover = (node, text) => { node.addEventListener("pointermove", ev => showTip(ev, text)); node.addEventListener("pointerleave", hideTip); };
+<section class="slide" data-part="1">
+  <div class="head"><p class="eyebrow">Prompting</p><h2>Four prompts, in this order</h2></div>
+  <div class="seq" style="grid-template-columns:repeat(4,1fr)">
+    <div class="card st" style="--i:1"><p class="tag">1 · Explore</p><p class="say">"Describe each file: one row, units, years, missing values, anything wrong. No charts yet."</p></div>
+    <div class="card st" style="--i:2"><p class="tag">2 · Build</p><p class="say">The six-part brief. One screen, for one reader and one decision.</p></div>
+    <div class="card st" style="--i:3"><p class="tag">3 · Improve</p><p class="say">"Make the headline state numbers." "Remove what does not help the reader decide."</p></div>
+    <div class="card st" style="--i:4"><p class="tag">4 · Check</p><p class="say">"Show me step by step how you computed this number. How could this page mislead?"</p></div>
+  </div>
+  <p class="lead">Most people jump to step 2. Steps 1, 3 and 4 are where you add value.</p>
+  <aside class="notes">
+14:00 to 14:30. One prompt rarely does it. Explore before you build, so you know the data's problems before the AI hides them in a chart. Improve with one targeted change at a time. Check before anyone else sees it.
+These are exactly the steps of the hands-on.
+  </aside>
+</section>
 
-// ---------- scatter ----------
-function drawScatter(sel) {
-  const svg = document.getElementById("scatter"); svg.replaceChildren();
-  const m = { l: 46, r: 16, t: 12, b: 40 }, W = 520, H = 360;
-  const x0 = 0, x1 = Math.ceil(Math.max(...D.map(d => d.opp)) / 2) * 2 + 1, y0 = 4, y1 = 20;
-  const X = v => m.l + (v - x0) / (x1 - x0) * (W - m.l - m.r), Y = v => H - m.b - (v - y0) / (y1 - y0) * (H - m.t - m.b);
-  for (let v = y0; v <= y1; v += 4) { svg.append(el("line", { x1: m.l, x2: W - m.r, y1: Y(v), y2: Y(v), stroke: "var(--line)" })); svg.append(el("text", { x: m.l - 8, y: Y(v) + 4, "text-anchor": "end" }, v + "%")); }
-  for (let v = 0; v <= x1; v += 3) svg.append(el("text", { x: X(v), y: H - m.b + 16, "text-anchor": "middle" }, v));
-  svg.append(el("text", { x: (m.l + W - m.r) / 2, y: H - 4, "text-anchor": "middle" }, "Job postings per 1,000 working-age residents"));
-  svg.append(el("text", { x: m.l, y: m.t + 2 }, "Youth unemployment"));
-  svg.append(el("line", { x1: X(med.opp), x2: X(med.opp), y1: m.t + 10, y2: H - m.b, stroke: "var(--muted)", "stroke-dasharray": "4 4" }));
-  svg.append(el("line", { x1: m.l, x2: W - m.r, y1: Y(med.need), y2: Y(med.need), stroke: "var(--muted)", "stroke-dasharray": "4 4" }));
-  const placed = D.map(d => [X(d.opp) - 9, Y(d.need) - 9, 18, 18]);
-  D.forEach(d => {
-    const cx = X(d.opp), cy = Y(d.need);
-    if (d.name === sel) svg.append(el("circle", { cx, cy, r: 11, fill: "none", stroke: "var(--text)", "stroke-width": 1.5 }));
-    svg.append(el("circle", { cx, cy, r: 6, fill: d.pick ? "var(--s1)" : "var(--ctx)", stroke: "var(--surface)", "stroke-width": 2 }));
-    const lw = d.name.length * 6.6 + 4, off = d.name === sel ? 15 : 11;
-    const cands = [
-      { x: cx + off, y: cy + 4, a: "start", box: [cx + off, cy - 8, lw, 16] },
-      { x: cx - off, y: cy + 4, a: "end", box: [cx - off - lw, cy - 8, lw, 16] },
-      { x: cx, y: cy - off, a: "middle", box: [cx - lw / 2, cy - off - 12, lw, 16] },
-      { x: cx, y: cy + off + 10, a: "middle", box: [cx - lw / 2, cy + off - 2, lw, 16] },
-    ];
-    const hits = ([x, y, w, h]) => x + w > W - m.r || x < m.l || placed.some(q => x < q[0] + q[2] && x + w > q[0] && y < q[1] + q[3] && y + h > q[1]);
-    const c = cands.find(k => !hits(k.box)) || cands[0];
-    placed.push(c.box);
-    svg.append(el("text", { x: c.x, y: c.y, "text-anchor": c.a, class: d.pick ? "name" : "" }, d.name));
-    const hit = el("circle", { cx, cy, r: 14, fill: "transparent" });
-    hover(hit, `${d.name}\nYouth unemployment ${f1(d.need)}%\nPostings per 1,000: ${f1(d.opp)}\nApplicants per seat: ${f1(d.queue)}`);
-    svg.append(hit);
-  });
-}
+<section class="slide" data-part="1">
+  <div class="head"><p class="eyebrow">Prompting · bigger projects</p><h2>For a full dashboard, build in stages and check each one</h2></div>
+  <div class="stages">
+    <div class="lane"><p>Land brief</p><div class="stg"><div><b>Setup</b><span>Role, context, data, style</span></div><div class="chk"><b>1 · Numbers</b><span>Check: Quang Ninh 22 years</span></div><div><b>2 · Panel 01</b><span>What the land is</span></div><div><b>3 · Panel 02</b><span>Map and ranking</span></div><div class="chk"><b>4 · Scenarios</b><span>Check: 48 years to the floor</span></div><div><b>5 · Review</b><span>Trace every number</span></div></div></div>
+    <div class="lane"><p>PFM benchmark</p><div class="stg"><div><b>Setup</b><span>Role, context, data, style</span></div><div class="chk"><b>1 · Engine</b><span>Check: −0.11, rank 99/169</span></div><div><b>2 · Benchmark</b><span>Cycle, dots, tables</span></div><div class="chk"><b>3 · Controls</b><span>Check: 65 in joint sample</span></div><div class="chk"><b>4 · Predicted</b><span>Check: slope 0.214</span></div></div></div>
+  </div>
+  <p class="txt">These prompts aim to rebuild both dashboards from the data files alone, one checked stage at a time. They are on the prompts page, ready to paste into Claude Code.</p>
+  <p class="link">sachadray.github.io/hackathon-dashboard/prompts.html</p>
+  <aside class="notes">
+14:30 to 15:00. How the two real dashboards could be rebuilt from the data files, with no access to my code. Each lane is a sequence of prompts. The green stages carry a check: a number known in advance that the AI must reproduce before you go on.
+The lesson for the hackathon: a big build in one prompt cannot be checked. A sequence of small, verified steps can. The prompts page has every stage written out.
+  </aside>
+</section>
 
-// ---------- bars ----------
-function drawBars() {
-  const svg = document.getElementById("bars"); svg.replaceChildren();
-  const m = { l: 96, r: 44, t: 8, b: 28 }, W = 520, H = 360;
-  const S = [...D].sort((a, b) => b.queue - a.queue), xmax = Math.ceil(S[0].queue), bh = (H - m.t - m.b) / S.length;
-  const X = v => m.l + v / xmax * (W - m.l - m.r);
-  for (let v = 0; v <= xmax; v++) svg.append(el("text", { x: X(v), y: H - 8, "text-anchor": "middle" }, v));
-  const labels = [];
-  S.forEach((d, i) => {
-    const y = m.t + i * bh + 3, h = bh - 6;
-    const bar = el("path", { d: `M${m.l},${y} H${X(d.queue) - 4} a4,4 0 0 1 4,4 V${y + h - 4} a4,4 0 0 1 -4,4 H${m.l} Z`, fill: d.pick ? "var(--s1)" : "var(--ctx)" });
-    hover(bar, `${d.name}\n${f1(d.queue)} applicants per seat`);
-    svg.append(bar);
-    svg.append(el("text", { x: m.l - 8, y: y + h / 2 + 4, "text-anchor": "end", class: d.pick ? "name" : "" }, d.name));
-    labels.push(el("text", { x: X(d.queue) + 8, y: y + h / 2 + 4, class: "halo" }, f1(d.queue)));
-  });
-  svg.append(el("line", { x1: X(1), x2: X(1), y1: m.t, y2: H - m.b, stroke: "var(--text)", "stroke-dasharray": "4 4" }));
-  labels.forEach(t => svg.append(t));
-}
+<!-- ============================ PART 2 ============================ -->
 
-// ---------- trend ----------
-function drawTrend(sel) {
-  const svg = document.getElementById("trend"); svg.replaceChildren();
-  const m = { l: 46, r: 110, t: 10, b: 28 }, W = 1060, H = 300;
-  const s = rowsOf(sel).map(r => r.youth_unemployment_pct), p = prov.map(q => q.unemp);
-  const lo = Math.floor(Math.min(...s, ...p) - 1), hi = Math.ceil(Math.max(...s, ...p) + 1);
-  const X = i => m.l + i / (months.length - 1) * (W - m.l - m.r), Y = v => H - m.b - (v - lo) / (hi - lo) * (H - m.t - m.b);
-  const step = hi - lo > 8 ? 2 : 1;
-  for (let v = lo; v <= hi; v += step) { svg.append(el("line", { x1: m.l, x2: W - m.r, y1: Y(v), y2: Y(v), stroke: "var(--line)" })); svg.append(el("text", { x: m.l - 8, y: Y(v) + 4, "text-anchor": "end" }, v + "%")); }
-  months.forEach((mo, i) => { if (i % 3 === 0) svg.append(el("text", { x: X(i), y: H - 8, "text-anchor": "middle" }, mo)); });
-  const path = (ys, stroke) => svg.append(el("path", { d: ys.map((v, i) => (i ? "L" : "M") + X(i) + "," + Y(v)).join(""), fill: "none", stroke, "stroke-width": 2, "stroke-linejoin": "round" }));
-  path(p, "var(--ctx)"); path(s, "var(--s1)");
-  const n = months.length - 1, gap = Math.abs(Y(s[n]) - Y(p[n])) < 16 ? (s[n] >= p[n] ? -8 : 8) : 0;
-  svg.append(el("text", { x: X(n) + 8, y: Y(s[n]) + 4 + gap, class: "name" }, sel));
-  svg.append(el("text", { x: X(n) + 8, y: Y(p[n]) + 4 - gap }, "Province"));
-  const cross = el("line", { y1: m.t, y2: H - m.b, stroke: "var(--muted)", visibility: "hidden" });
-  svg.append(cross);
-  const hit = el("rect", { x: m.l, y: m.t, width: W - m.l - m.r, height: H - m.t - m.b, fill: "transparent" });
-  hit.addEventListener("pointermove", ev => {
-    const box = svg.getBoundingClientRect(), px = (ev.clientX - box.left) / box.width * W;
-    const i = Math.max(0, Math.min(n, Math.round((px - m.l) / (W - m.l - m.r) * n)));
-    cross.setAttribute("x1", X(i)); cross.setAttribute("x2", X(i)); cross.setAttribute("visibility", "visible");
-    showTip(ev, `${months[i]}\n${f1(s[i])}%  ${sel}\n${f1(p[i])}%  Province average`);
-  });
-  hit.addEventListener("pointerleave", () => { cross.setAttribute("visibility", "hidden"); hideTip(); });
-  svg.append(hit);
-  document.getElementById("trendTitle").textContent = "Youth unemployment: " + sel + " against the province";
-  document.getElementById("lgName").textContent = sel;
-}
+<section class="slide part" data-part="2">
+  <p class="eyebrow">Part 2 · 18 minutes</p>
+  <div class="fill">
+    <p class="part-num">2</p>
+    <h2 style="font-size:96px">Hands-on: a dashboard in 15 minutes</h2>
+  </div>
+  <div class="part-list">
+    <p>In pairs, one laptop, any AI assistant that reads files</p>
+    <p>Real data: the files behind the two examples</p>
+    <p>Goal: one screen and a headline you can defend</p>
+  </div>
+  <aside class="notes">15:00. Part 2. Ask pairs to form now, one laptop per pair, and open claude.ai (the free plan works) or the assistant they already use.</aside>
+</section>
 
-// ---------- table ----------
-const tbl = document.getElementById("tbl");
-const head = tbl.insertRow();
-["District", "Youth unemployment (%)", "Postings per 1,000", "Applicants per seat", "Median wage (million VND)"].forEach(t => { const th = document.createElement("th"); th.textContent = t; head.append(th); });
-[...D].sort((a, b) => b.pick - a.pick || b.need - a.need).forEach(d => {
-  const tr = tbl.insertRow(); if (d.pick) tr.className = "pick";
-  [d.name, f1(d.need), f1(d.opp), f1(d.queue), f1(d.wage)].forEach(t => tr.insertCell().textContent = t);
-});
+<section class="slide" data-part="2">
+  <div class="head"><p class="eyebrow">The challenge</p><h2>Pick one track per pair</h2></div>
+  <div class="tracks">
+    <div class="track a st" style="--i:1"><p class="tag" style="color:#174f96">Track A · Land</p><p class="q">Which provinces will run out of convertible farmland first?</p><p class="txt">Reader: a provincial finance director. Files: land by province, 2018 to 2023, and a map of the 63 provinces.</p><img src="assets/img/land-2.webp" alt=""></div>
+    <div class="track b st" style="--i:2"><p class="tag" style="color:#8A5A0B">Track B · PFM</p><p class="q">How does Viet Nam compare with its neighbours, and where is the biggest gap?</p><p class="txt">Reader: a Ministry of Finance official. Files: scores for 194 economies on four budget dimensions.</p><img src="assets/img/pfm-2.webp" alt=""></div>
+  </div>
+  <aside class="notes">
+15:00 to 16:00. Split the room: left half Track A, right half Track B, so the debrief can compare.
+Both are real questions from current World Bank work in Viet Nam, with the real data. Track A involves a map, Track B a comparison across countries. Neither needs any coding knowledge.
+  </aside>
+</section>
 
-// ---------- filter ----------
-const pick = document.getElementById("pick");
-names.forEach(n => { const o = document.createElement("option"); o.textContent = n; pick.append(o); });
-pick.value = picks.length ? picks[0].name : names[0];
-const redraw = () => { drawScatter(pick.value); drawTrend(pick.value); };
-pick.addEventListener("change", redraw);
-drawBars(); redraw();
-</script>
+<section class="slide" data-part="2">
+  <div class="head"><p class="eyebrow">The data</p><h2>What is in each pack</h2></div>
+  <div class="files">
+    <div>
+      <p class="tag" style="font-size:24px;font-weight:600;letter-spacing:2px;color:#174f96;margin-bottom:12px">TRACK A · LAND PACK</p>
+      <table>
+        <tr><th>File</th><th>What it holds</th><th></th></tr>
+        <tr class="need"><td>land_provinces.csv</td><td>Area by province and category: farmland, forest, built, residential</td><td class="n">63 × 5</td></tr>
+        <tr class="need"><td>vn_provinces.geojson</td><td>Province shapes for the map, joined on <b>iso</b></td><td class="n">63</td></tr>
+        <tr><td>land_national.csv</td><td>The whole country by category, 2008 to 2023</td><td class="n">14 yrs</td></tr>
+        <tr><td>land_finance.csv</td><td>Land revenue, GDP, the 2030 plan targets, with sources</td><td class="n">24</td></tr>
+      </table>
+    </div>
+    <div>
+      <p class="tag" style="font-size:24px;font-weight:600;letter-spacing:2px;color:#8A5A0B;margin-bottom:12px">TRACK B · PFM PACK</p>
+      <table>
+        <tr><th>File</th><th>What it holds</th><th></th></tr>
+        <tr class="need"><td>scores.csv</td><td>Four dimension scores and the overall index per economy</td><td class="n">194</td></tr>
+        <tr class="need"><td>economies.csv</td><td>Names, income group, region</td><td class="n">194</td></tr>
+        <tr><td>indicators.csv</td><td>The 85 indicators: name, source, dimension</td><td class="n">85</td></tr>
+        <tr><td>indicator_values.csv</td><td>Raw value and z-score per indicator and economy</td><td class="n">9,817</td></tr>
+        <tr><td>gdp_per_capita.csv</td><td>GDP per capita 2025, US dollars</td><td class="n">192</td></tr>
+      </table>
+    </div>
+  </div>
+  <p class="txt">★ The two files you need for the 15 minutes. Each pack has a README with every column explained. Units: thousand hectares; z-scores (0 = average, higher is better).</p>
+  <aside class="notes">
+16:00 to 17:00. Walk through the starred files only. The others are there for teams who want to go further during the hackathon.
+Land: the categories are farmland (agri), forest, specially used land (industry, roads, public works) and homestead (residential). Built land is special plus homestead.
+PFM: every score is a z-score. 0 is the average of the economies with data, +1 is one standard deviation better.
+  </aside>
+</section>
+
+<section class="slide" data-part="2">
+  <div class="head"><p class="eyebrow">Step by step · 15 minutes</p><h2>Follow the handout. The prompts are ready to paste.</h2></div>
+  <div class="timerwrap">
+    <div class="tsteps">
+      <div class="tstep" data-min="1"><p class="m">1<span>min</span></p><div><b>Set up</b><p class="txt">Open the handout, download your pack, open claude.ai, attach the two starred files.</p></div></div>
+      <div class="tstep" data-min="2"><p class="m">2<span>min</span></p><div><b>Explore</b><p class="txt">Paste prompt 1. Read what it finds wrong in the data.</p></div></div>
+      <div class="tstep" data-min="6"><p class="m">6<span>min</span></p><div><b>Build</b><p class="txt">Paste prompt 2. Check the printed table before the dashboard.</p></div></div>
+      <div class="tstep" data-min="3"><p class="m">3<span>min</span></p><div><b>Improve</b><p class="txt">Pick one prompt from list 3. One change at a time.</p></div></div>
+      <div class="tstep" data-min="3"><p class="m">3<span>min</span></p><div><b>Check and share</b><p class="txt">Prompt 4, then write your headline in one sentence. Show your neighbours.</p></div></div>
+    </div>
+    <div class="clock" data-timer>
+      <p class="t">15:00</p>
+      <div class="btns"><button data-act="toggle">Start 15:00</button><button data-act="reset">Reset</button></div>
+      <img src="assets/qr-handout.svg" alt="QR code for the student handout">
+      <p class="small">sachadray.github.io/<br>hackathon-dashboard/handout.html</p>
+    </div>
+  </div>
+  <aside class="notes">
+17:00 to 32:00. Press T or Start. The current step lights up as time passes. Walk around.
+Minute 3: ask what the Explore prompt found (Land: Da Nang's break, two blank 2021 values; PFM: D4 not in the overall index, economies with no score).
+Minute 9: check that pairs looked at the printed table and the known value before the dashboard (Quang Ninh 22; Viet Nam −0.11, rank 99).
+Common problems: no headline sentence, the map not joining (the join key is iso), red-green colours, averages that include Viet Nam.
+If the AI's page does not render in the chat, ask it to "give me the complete HTML file", save it as dashboard.html and open it in the browser.
+  </aside>
+</section>
+
+<section class="slide" data-part="2">
+  <div class="head"><p class="eyebrow">Debrief</p><h2>What 15 minutes can produce</h2></div>
+  <div class="row" style="gap:28px">
+    <img class="st" style="--i:1;width:824px;height:440px;object-fit:cover;object-position:top left;border-radius:14px;border:2px solid var(--paper2)" src="assets/img/land-15min.webp" alt="A one-screen land dashboard: headline, map of years left, ten provinces that run out first, two sliders">
+    <img class="st" style="--i:2;width:824px;height:440px;object-fit:cover;object-position:top left;border-radius:14px;border:2px solid var(--paper2)" src="assets/img/pfm-15min.webp" alt="A one-screen PFM dashboard: headline, five score tiles, dot plot of all economies, table of comparators">
+  </div>
+  <div class="row" style="gap:28px">
+    <div class="card line"><p class="tag">Ask of any dashboard</p><p class="say">Can I say the answer in one sentence?</p></div>
+    <div class="card line"><p class="tag">&nbsp;</p><p class="say">Can I trace every number to a file and a formula?</p></div>
+    <div class="card line"><p class="tag">&nbsp;</p><p class="say">What does it leave out that the reader needs?</p></div>
+  </div>
+  <aside class="notes">
+32:00 to 33:00. Show these two reference versions (examples/ on the site); they are what the build prompts aim for, with a little iteration. Ask one pair per track to read out their headline.
+Then the three questions. The third matters most for the hackathon: the land dashboard says nothing about how much revenue each province depends on; the PFM one says nothing about why preparation is weak. Each is a next question, which takes us back to the workflow.
+  </aside>
+</section>
+
+<!-- ============================ PART 3 ============================ -->
+
+<section class="slide part" data-part="3">
+  <p class="eyebrow">Part 3 · 10 minutes</p>
+  <div class="fill">
+    <p class="part-num">3</p>
+    <h2 style="font-size:96px">Uses of AI</h2>
+  </div>
+  <div class="part-list">
+    <p>What AI changes for economic analysis</p>
+    <p>Setting up GitHub and Claude Code</p>
+    <p>Using it responsibly, and what you bring</p>
+  </div>
+  <aside class="notes">33:00. Part 3. Ten minutes. The set-up slides are also on the handout, so do not read every step aloud.</aside>
+</section>
+
+<section class="slide" data-part="3">
+  <div class="head"><p class="eyebrow">What AI is changing</p><h2>Four steps got much faster</h2></div>
+  <div class="row grow">
+    <div class="card st" style="--i:1"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5"/><path d="M3 12c0 1.7 4 3 9 3s9-1.3 9-3"/></svg><h3>Data access</h3><p class="txt">Finding, downloading and reshaping data takes minutes, not days.</p></div>
+    <div class="card st" style="--i:2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg><h3>Methods</h3><p class="txt">Cleaning, regressions and scoring engines run from a plain-language request.</p></div>
+    <div class="card st" style="--i:3"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><h3>Literature</h3><p class="txt">A first map of what is known, with sources you can open and check.</p></div>
+    <div class="card st" style="--i:4"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg><h3>Dashboards</h3><p class="txt">An interactive page from a prompt, as you just did, without web-design skills.</p></div>
+  </div>
+  <aside class="notes">
+33:00 to 34:00. One before-and-after each. Data: the land brief combines statistics office tables with fiscal figures from the press and the National Assembly. Methods: the PFM engine standardises 68 indicators for 194 economies and is verified against an Excel workbook. Literature: a first map, and you still open the papers. Dashboards: you just built one in 15 minutes.
+Each of these still needs your check.
+  </aside>
+</section>
+
+<section class="slide accent" data-part="3">
+  <div class="fill">
+    <p class="big">Building got cheap.<br>Choosing what to build<br>did not.</p>
+    <p class="lead">What is scarce now: the question, the check and the message.</p>
+  </div>
+  <aside class="notes">34:00 to 34:30. Pause here. If anyone can produce ten charts in ten minutes, a chart is no longer the contribution. Knowing which question matters, spotting a wrong number and saying what it means for the reader: that is.</aside>
+</section>
+
+<section class="slide" data-part="3">
+  <div class="head"><p class="eyebrow">Set-up for the hackathon</p><h2>Three tools, one workflow</h2></div>
+  <div class="tool3">
+    <div class="card st" style="--i:1"><p class="tag">Where you work</p><h3>Claude Code</h3><p class="txt">An AI assistant that reads, writes and runs the files in your project folder, and explains what it does.</p></div>
+    <div class="arr"><svg width="56" height="28" viewBox="0 0 40 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M2 12h34M28 4l8 8-8 8"/></svg></div>
+    <div class="card st" style="--i:2"><p class="tag">Where it is kept</p><h3>GitHub</h3><p class="txt">Your project online, with every version saved, so the team works on the same files and nothing is lost.</p></div>
+    <div class="arr"><svg width="56" height="28" viewBox="0 0 40 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M2 12h34M28 4l8 8-8 8"/></svg></div>
+    <div class="card inv st" style="--i:3"><p class="tag">Where it is seen</p><h3>GitHub Pages</h3><p class="txt">A free public link to your dashboard, for the judges: username.github.io/project</p></div>
+  </div>
+  <div class="free">
+    <p class="small"><b>GitHub:</b> free. Students can also apply for the GitHub Student Developer Pack with a university email.</p>
+    <p class="small"><b>Claude Code:</b> needs a paid Claude plan (Pro or above) or API credits. One account per team is enough.</p>
+    <p class="small"><b>No paid plan?</b> Do what you did today: claude.ai chat with file uploads, then upload the HTML file to GitHub.</p>
+  </div>
+  <aside class="notes">
+34:30 to 35:30. This is how the two example dashboards were built: Claude Code working in a GitHub repository, published with GitHub Pages. This deck and the handout are built the same way.
+Be clear about cost: GitHub and Pages are free for public repositories; Claude Code is not free. Teams without a paid plan can do everything the way they did in the hands-on and still publish on GitHub Pages.
+  </aside>
+</section>
+
+<section class="slide" data-part="3">
+  <div class="head"><p class="eyebrow">Set-up · GitHub for beginners</p><h2>From zero to a public link in six steps</h2></div>
+  <div class="steps6">
+    <div class="card st" style="--i:1"><p class="num">1</p><h3>Create an account</h3><p class="say">github.com → Sign up. Use your university email, then apply at education.github.com.</p></div>
+    <div class="card st" style="--i:2"><p class="num">2</p><h3>Create a repository</h3><p class="say">"+" → New repository. Name it, choose <b>Public</b>, tick "Add a README".</p></div>
+    <div class="card st" style="--i:3"><p class="num">3</p><h3>Add your files</h3><p class="say">Add file → Upload files. Drag your data in, then "Commit changes".</p></div>
+    <div class="card st" style="--i:4"><p class="num">4</p><h3>Invite your team</h3><p class="say">Settings → Collaborators → Add people, by GitHub username.</p></div>
+    <div class="card st" style="--i:5"><p class="num">5</p><h3>Publish</h3><p class="say">Put the dashboard in <code>docs/index.html</code>. Settings → Pages → Deploy from a branch → main, /docs.</p></div>
+    <div class="card inv st" style="--i:6"><p class="num" style="color:var(--accent)">6</p><h3>Share the link</h3><p class="say">After a minute or two: <code style="background:rgba(246,244,238,.12)">username.github.io/repository</code></p></div>
+  </div>
+  <div class="vocab">
+    <p><b>Repository:</b> a project folder, online, with its full history.</p>
+    <p><b>Commit:</b> a saved version, with a message saying what changed.</p>
+    <p><b>Branch:</b> a parallel copy to try something without breaking the main one.</p>
+    <p><b>Pull request:</b> a proposal to merge a branch, which teammates review.</p>
+  </div>
+  <aside class="notes">
+35:30 to 36:30. Do not read every step. The point: all of this happens in the browser, no installation needed. One person creates the repository and invites the others.
+The four words at the bottom are the whole vocabulary you need this week.
+Repositories must be public for free GitHub Pages; do not upload anything confidential.
+  </aside>
+</section>
+
+<section class="slide" data-part="3">
+  <div class="head"><p class="eyebrow">Set-up · Claude Code for beginners</p><h2>Three ways in, from easiest to most powerful</h2></div>
+  <div class="ways">
+    <div class="card st" style="--i:1"><p class="tag">1 · In the browser</p><h3>claude.ai/code</h3><p class="txt">Sign in, connect your GitHub account, pick your repository. Nothing to install: the work runs in the cloud and is saved to GitHub.</p></div>
+    <div class="card st" style="--i:2"><p class="tag">2 · Desktop app</p><h3>Claude for Mac or Windows</h3><p class="txt">Install the Claude desktop app, sign in, open the Code tab and choose your project folder.</p></div>
+    <div class="card st" style="--i:3"><p class="tag">3 · Terminal</p><h3>Command line</h3>
+<pre><span class="c"># macOS, Linux</span>
+curl -fsSL https://claude.ai/install.sh | bash
+<span class="c"># Windows PowerShell</span>
+irm https://claude.ai/install.ps1 | iex
+<span class="c"># then, in your project</span>
+cd my-project
+claude</pre></div>
+  </div>
+  <p class="need"><b>What you need:</b> a Claude Pro (or higher) subscription, or Claude Console API credits. At the first start you sign in through the browser. Type <b>/help</b> to see the commands.</p>
+  <aside class="notes">
+36:30 to 37:30. For most of you, option 1 is the right start: no installation, and it works directly on your GitHub repository.
+Option 3 is what professionals use; the commands are from the official quickstart at code.claude.com/docs.
+Remind them of the cost: one paid account per team is enough; the others follow along on the shared repository.
+  </aside>
+</section>
+
+<section class="slide" data-part="3">
+  <div class="head"><p class="eyebrow">Your first Claude Code session</p><h2>Five prompts, five habits</h2></div>
+  <div class="habits">
+    <div class="plist">
+      <div class="st" style="--i:1"><b>Orient</b><span>"Read every file in data/. Tell us what each holds and what looks wrong. No code yet."</span></div>
+      <div class="st" style="--i:2"><b>Plan</b><span>"Propose a plan for a one-screen dashboard that answers [question]. Wait for approval."</span></div>
+      <div class="st" style="--i:3"><b>Build</b><span>"Build stage 1 only: compute the numbers and print them. Then stop."</span></div>
+      <div class="st" style="--i:4"><b>Publish</b><span>"Put the dashboard in docs/index.html, commit and push."</span></div>
+      <div class="st" style="--i:5"><b>Challenge</b><span>"Act as a sceptical judge. Recompute the three numbers you would question first."</span></div>
+    </div>
+    <div class="hlist">
+      <p>Ask for a plan before code<span>You approve the approach, not 500 lines.</span></p>
+      <p>One stage at a time<span>Check a number you know before going on.</span></p>
+      <p>Read what it changed<span>It shows each edit; accept only what you understand.</span></p>
+      <p>Commit after every working step<span>Any mistake is then one step from undone.</span></p>
+      <p>Write a CLAUDE.md<span>A file it reads every session: your reader, data and rules.</span></p>
+    </div>
+  </div>
+  <aside class="notes">
+37:30 to 38:30. The prompts on the left are on the prompts page, written out in full. The habits on the right are what separate a team that ships from a team that spends day 2 untangling code nobody understands.
+CLAUDE.md is a plain text file at the top of the repository. Put in it: who the reader is, what each data file means, and rules such as "every chart has a source line".
+  </aside>
+</section>
+
+<section class="slide" data-part="3">
+  <div class="head"><p class="eyebrow">For the hackathon</p><h2>Two and a half days, three checkpoints</h2></div>
+  <div class="row grow">
+    <div class="card st" style="--i:1"><p class="tag">Day 1</p><h3>Name the reader and the decision</h3><p class="txt">Write one sentence: who decides what. Check the data can support it. Set up the repository.</p></div>
+    <div class="card st" style="--i:2"><p class="tag">Day 2</p><h3>A rough dashboard by noon</h3><p class="txt">One working screen early. Spend the afternoon on checks and on the message.</p></div>
+    <div class="card st" style="--i:3"><p class="tag">Day 3</p><h3>Pitch the headline</h3><p class="txt">Your first sentence is the recommendation. The dashboard is your evidence, on a public link.</p></div>
+  </div>
+  <p class="lead">Give one teammate a single job: try to break the numbers.</p>
+  <aside class="notes">
+38:30 to 39:30. What you did in 15 minutes is the hackathon in miniature. Day 1: one sentence, "our reader is X and they must decide Y". If you cannot write it, do not open a chart tool. Day 2: a rough version early beats a polished one late. Day 3: lead with the recommendation.
+Roles: one person owns the data, one the message, one plays the sceptic.
+  </aside>
+</section>
+
+<section class="slide dark" data-part="3">
+  <div class="head"><p class="eyebrow">Responsible use of AI</p><h2>You manage the tool, not the other way around</h2></div>
+  <div class="checks">
+    <div class="chk st" style="--i:1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><p>Trace every number back to its source<span>Recompute three of them yourself, by hand or in a spreadsheet.</span></p></div>
+    <div class="chk st" style="--i:2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><p>Explain every chart without the AI in the room<span>"The AI did it" is not an answer a judge accepts.</span></p></div>
+    <div class="chk st" style="--i:3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><p>Keep private data out of the prompt and off public pages<span>No personal or confidential data in a public tool or a public repository.</span></p></div>
+    <div class="chk st" style="--i:4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><p>Say where AI helped<span>A line on the page or in the pitch is enough.</span></p></div>
+  </div>
+  <aside class="notes">
+39:30 to 41:00. Your name is on the result, so you are accountable for it.
+Trace: in the hands-on, the check value (22 years, −0.11) was how you knew the AI computed correctly. Do that for every important number.
+Explain: if a judge asks how a figure was computed, answer in your own words.
+Privacy: free GitHub Pages sites are public, and so is anything you paste into some tools.
+Disclose: say where AI helped.
+  </aside>
+</section>
+
+<section class="slide" data-part="3">
+  <div class="head"><p class="eyebrow">Your value proposition</p><h2>What you bring that the tool does not</h2></div>
+  <div class="trio">
+    <div class="t st" style="--i:1"><p class="word">Judgement</p><p class="txt">Knowing which question matters, and noticing when a result looks wrong.</p></div>
+    <div class="t st" style="--i:2"><p class="word">Connection</p><p class="txt">Listening to the person who has to decide, and earning their trust.</p></div>
+    <div class="t st" style="--i:3"><p class="word">Time</p><p class="txt">Hours to go deep on one problem, which senior people rarely have.</p></div>
+  </div>
+  <aside class="notes">
+41:00 to 43:00. A fair worry: if the tool builds the dashboard, what is left for a junior economist? Three things.
+Judgement: which question is worth asking, and the instinct that a number is off. You build it by checking many numbers, which is why the check step matters.
+Connection: decisions are made by people, and people act on advice from someone they trust and who listened to them first.
+Time: you can spend a full day understanding one dataset. That depth is what makes you useful to a team.
+  </aside>
+</section>
+
+<!-- ============================ CLOSE ============================ -->
+
+<section class="slide dark">
+  <div class="head"><p class="eyebrow">Live poll</p><h2>Before you go: what did you learn?</h2></div>
+  <div class="poll-grid grow" style="grid-template-columns:380px 1fr;gap:44px">
+    <div class="poll-join">
+      <img src="assets/qr-poll-end.svg" alt="QR code for the end-of-session poll" style="width:300px;height:300px">
+      <a class="link" data-poll-url="end" href="poll.html?p=end" style="font-size:20px;word-break:break-all">poll.html?p=end</a>
+      <p class="poll-n"><b>0</b><span>answers</span></p>
+      <p class="poll-status">connecting…</p>
+      <div class="poll-tools"><button data-poll="end" data-act="csv">Save answers (CSV)</button><button data-poll="end" data-act="reset">Clear screen</button></div>
+    </div>
+    <div class="pr-end" data-poll-results="end"></div>
+  </div>
+  <aside class="notes">
+43:00 to 45:00. Leave this up while people answer. New answers appear at the top of each column. Read two or three aloud.
+Click an answer to hide it on this screen if needed (it is hidden only here).
+Before closing the browser, press "Save answers (CSV)": the relay deletes answers after 12 hours.
+  </aside>
+</section>
+
+<section class="slide accent">
+  <div class="fill">
+    <p class="big">Start with the decision.<br>End with the decision.</p>
+  </div>
+  <div class="links3">
+    <div><img src="assets/qr-handout.svg" alt="QR code for the handout"><p class="txt" style="color:var(--ink)"><b>Handout</b><br>data, steps and prompts</p></div>
+    <div><p class="txt" style="color:var(--ink)"><b>Prompts</b><br>sachadray.github.io/<br>hackathon-dashboard/prompts.html</p></div>
+    <div><p class="txt" style="color:var(--ink)"><b>The two examples</b><br>sachadray.github.io/vietnam-land<br>sachadray.github.io/vietnam-pfm-benchmarking</p></div>
+  </div>
+  <aside class="notes">45:00. One line to keep. The handout, the prompts and both data packs stay online for the whole hackathon. Questions.</aside>
+</section>
+
+</div>
+</div>
+
+<nav class="nav" aria-label="Slide navigation"><button class="prev" aria-label="Previous slide">←</button><button class="help-btn" aria-label="Keyboard shortcuts">?</button><button class="next" aria-label="Next slide">→</button></nav>
+<div class="help" role="dialog" aria-label="Keyboard shortcuts"><div>
+  <b>Keyboard</b><br>
+  <kbd>→</kbd> <kbd>Space</kbd> next · <kbd>←</kbd> previous · <kbd>Home</kbd> <kbd>End</kbd><br>
+  a number, then <kbd>Enter</kbd>: jump to that slide<br>
+  <kbd>F</kbd> full screen · <kbd>S</kbd> presenter view with notes<br>
+  <kbd>T</kbd> start or pause the 15-minute timer<br>
+  Print to PDF from the browser for one slide per page.
+</div></div>
+
+<script src="assets/poll.js"></script>
+<script src="assets/deck.js"></script>
 </body>
 </html>
