@@ -25,9 +25,10 @@ it must use.
 OUTPUT
 The format (one HTML file, a table, 200 words) and exactly what goes on the screen.
 
-CHECKS
-How to prove the numbers are right: a value you already know, a table to print
-first, what to report back.
+QUALITY CHECKS
+How to test the data before trusting it: do the parts add up to the totals?
+Which assumptions did it make, and do they reproduce a value you already know
+(calibration)? Where do two datasets disagree?
 ```
 
 ## land-1 | land | 1 | Explore the files (2 min)
@@ -99,10 +100,14 @@ One self-contained HTML file with no external libraries, on one screen:
 5. A footnote with the method and the source (National Statistics Office of
    Viet Nam).
 
-CHECKS
-Before the dashboard, print a table of the five provinces with the fewest years
-left. At the default settings Quang Ninh should be about 22 years. If your
-number differs, explain why before going on.
+QUALITY CHECKS
+Before the dashboard:
+1. Check that agri + forest + special + homestead never exceed total for any
+   province, and report any province where they do.
+2. State the assumptions you used (the 30% protected share, the 2018-2023
+   pace) and calibrate: print the five provinces with the fewest years left.
+   Quang Ninh should be about 22 years. If yours differs, explain why.
+3. Flag inconsistencies: Da Nang's break, and any blank values.
 ```
 
 ## land-3 | land | 3 | Improve it: pick one (3 min)
@@ -201,10 +206,15 @@ One self-contained HTML file with no external libraries, on one screen:
 5. A dropdown to change the focus economy; everything updates.
 6. A footnote explaining z-scores and naming the sources.
 
-CHECKS
-Before the dashboard, print Viet Nam's five scores and its rank on the overall
-index, ranking only economies that have a score. Expected: overall -0.11, rank
-99 of 169. If yours differs, explain why before going on.
+QUALITY CHECKS
+Before the dashboard:
+1. Check that overall equals the mean of D1, D2 and D3 for every economy, and
+   that scores.csv and economies.csv list the same economies.
+2. State the assumptions (z-scores; group averages leave out Viet Nam) and
+   calibrate: print Viet Nam's five scores and its rank on the overall index,
+   ranking only economies with a score. Expected: overall -0.11, rank 99 of
+   169. If yours differs, explain why.
+3. Flag economies with missing scores.
 ```
 
 ## pfm-3 | pfm | 3 | Improve it: pick one (3 min)

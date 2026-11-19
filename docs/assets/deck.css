@@ -167,7 +167,7 @@ a { color: inherit; }
 
 /* annotated prompt */
 .annot { flex: 1; background: var(--ink); border-radius: 24px; padding: 34px 44px; display: flex; flex-direction: column; gap: 16px; min-height: 0; }
-.ap { display: grid; grid-template-columns: 150px 1fr; gap: 26px; align-items: start; }
+.ap { display: grid; grid-template-columns: 210px 1fr; gap: 26px; align-items: start; }
 .ap .badge { justify-self: start; margin-top: 3px; }
 .ap p { font-family: var(--mono); font-size: 22px; line-height: 1.42; color: var(--paper); }
 .ap p em { font-style: normal; color: var(--accent); }
@@ -323,3 +323,14 @@ body.speaker .viewport { position: static; display: grid; grid-template-columns:
   .slide .st { animation: none !important; }
   .nav, .help, .poll-tools, .clock .btns { display: none !important; }
 }
+
+/* jump buttons and the appendix */
+.jump { align-self: flex-start; font: 600 24px var(--text); padding: 12px 26px; border-radius: 999px; border: 0; background: var(--ink); color: var(--paper); cursor: pointer; }
+.jump:hover { background: var(--accent-d); }
+.jump.back { position: absolute; right: 120px; top: 104px; background: var(--paper2); color: var(--ink); font-size: 22px; }
+.apx { display: grid; grid-template-columns: 860px 1fr; gap: 40px; flex: 1; min-height: 0; }
+.apx-col { display: flex; flex-direction: column; gap: 22px; min-height: 0; }
+.apx figure { margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.apx figcaption { font-size: 24px; line-height: 1.3; }
+.apx figcaption b { display: inline-grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: var(--accent); color: var(--ink); font-family: var(--display); margin-right: 10px; }
+.apx img { width: 100%; height: auto; border-radius: 14px; border: 2px solid var(--paper2); display: block; background: #fff; }

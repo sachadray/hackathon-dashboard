@@ -1,104 +1,63 @@
 # From data to decision
 
-A 45-minute session for undergraduate students at the VietLeap Hackathon (UEH, November 2026): how to turn
-economic data into dashboards that help people decide, and how to use AI to build them.
+Material for a 45-minute session on turning economic data into dashboards that help people decide, and on
+using AI to build them. Prepared for undergraduate students at the VietLeap Hackathon (University of Economics
+Ho Chi Minh City, November 2026).
 
-Everything is served from `docs/` by GitHub Pages:
+**Slides:** <https://sachadray.github.io/hackathon-dashboard/>
 
-| Page | Link | What it is |
+## Hands-on exercises
+
+Two 15-minute exercises, each built on the real data behind a published dashboard. Work in pairs with any AI
+assistant that reads files ([claude.ai](https://claude.ai) works on the free plan).
+
+**[Download both exercises: instructions, prompts and data (.zip)](https://sachadray.github.io/hackathon-dashboard/data/hands-on-exercises.zip)**
+· or follow them online in the **[handout](https://sachadray.github.io/hackathon-dashboard/handout.html)**
+
+| | Track A · Land | Track B · Public financial management |
 |---|---|---|
-| Slides | <https://sachadray.github.io/hackathon-dashboard/> | 34 slides in three parts, with speaker notes and live polls |
-| Handout | <https://sachadray.github.io/hackathon-dashboard/handout.html> | What students open for the hands-on: data, five steps, prompts to copy |
-| Prompts | <https://sachadray.github.io/hackathon-dashboard/prompts.html> | Every prompt: hands-on, staged rebuilds of both example dashboards, first Claude Code session |
-| Poll | `poll.html?p=start` and `poll.html?p=end` | What students see when they scan the QR codes |
+| Question | Which provinces will run out of convertible farmland first? | How does Viet Nam compare with its neighbours, and where is the biggest gap? |
+| Data | Land use for 63 provinces, 2018–2023, and a province map | Scores for 194 economies on four dimensions of the budget cycle |
+| Files you need | `land_provinces.csv`, `vn_provinces.geojson` | `scores.csv`, `economies.csv` |
+| Data only | [land_pack.zip](https://sachadray.github.io/hackathon-dashboard/data/land_pack.zip) · [README](docs/data/land/README.md) | [pfm_pack.zip](https://sachadray.github.io/hackathon-dashboard/data/pfm_pack.zip) · [README](docs/data/pfm/README.md) |
+| Full dashboard | [Vietnam Land Brief](https://sachadray.github.io/vietnam-land/) | [Viet Nam PFM benchmark](https://sachadray.github.io/vietnam-pfm-benchmarking/) |
+| 15-minute version | [example](https://sachadray.github.io/hackathon-dashboard/examples/land-15min.html) | [example](https://sachadray.github.io/hackathon-dashboard/examples/pfm-15min.html) |
 
-## The session
+## Prompts
 
-| Part | Minutes | Content |
-|---|---|---|
-| Opening | 3 | Live poll: use of AI, dashboards, GitHub |
-| 1. Dashboard explainer | 12 | Why it matters, workflow and trilemma, a definition, the four questions, anatomy, two examples (Vietnam Land Brief, Viet Nam PFM benchmark), the six-part prompt, staged prompting |
-| 2. Hands-on | 18 | In pairs, 15 minutes: build a dashboard from the data behind one of the two examples |
-| 3. Uses of AI | 10 | What AI changes, GitHub and Claude Code for beginners, the hackathon checkpoints, responsible use, students' value proposition |
-| Close | 2 | Open-ended live poll: what they learned, impressions |
+All prompts follow six parts: role, context, task, data, output and quality checks. The
+**[prompts page](https://sachadray.github.io/hackathon-dashboard/prompts.html)** has them ready to copy:
 
-## Presenting
+- the hands-on prompts for both tracks;
+- staged prompts that rebuild each full dashboard from the data files alone, checking each stage against a known number;
+- prompts for a first session in Claude Code.
 
-Open the slides link in a browser.
+The source of every prompt is in [`prompts/`](prompts/).
 
-| Key | Action |
-|---|---|
-| → Space / ← | Next / previous slide |
-| a number, then Enter | Jump to that slide |
-| F | Full screen |
-| S | Presenter view in a new window: notes with timings, next slide, elapsed time. It stays in sync with the main window. |
-| T | Start or pause the 15-minute hands-on timer (slide 21); the current step lights up |
-| ? | Help |
+## Presenting the slides
 
-Print from the browser (landscape, background graphics on) for a PDF with one slide per page.
+Arrow keys to move, **S** for a presenter view with notes and timings, **F** for full screen, **T** to start the
+15-minute timer. Slides 2 and 33 run live polls: students scan a QR code and the results update on screen.
+Answers go through [ntfy.sh](https://ntfy.sh), a free public relay, are anonymous and are deleted after 12 hours
+(save them with the button on the slide). To rehearse without touching the real poll, add `?topic=test1` to the
+slides and poll URLs.
 
-### The live polls
+## Data sources
 
-Answers go through [ntfy.sh](https://ntfy.sh), a free public relay: no account, no server of our own. Students
-scan the QR code on slide 2 or 33, answer on their phone, and the slide updates within a second or two.
+- **Land:** National Statistics Office of Viet Nam (land-use statistics); Natural Earth (province boundaries, public
+  domain); Ministry of Finance, ISEAS, OECD and National Assembly Resolution 39/2021/QH15 for the fiscal figures.
+- **PFM:** PEFA Secretariat, IBP Open Budget Survey, World Bank (GovTech Maturity Index, Worldwide Governance
+  Indicators, Global Public Procurement Database, B-READY), IMF (World Economic Outlook, ISORA) and others; the
+  source and link of each of the 85 indicators is in `indicators.csv`.
 
-- **Answers are deleted after 12 hours.** Press "Save answers (CSV)" on the poll slide before closing the browser.
-- **Rehearse on a separate topic** so test answers never reach the real one: add `?topic=rehearsal-anything` to
-  both the slides URL and the poll URL, for example `…/hackathon-dashboard/?topic=rehearsal-1` and
-  `…/poll.html?p=start&topic=rehearsal-1`. The QR codes always point at the real topic.
-- **The relay is public.** Anyone who knows the topic name can read or post. Answers are anonymous, every message is
-  validated before it is counted, and text is shown as plain text. Click an open answer on slide 33 to hide it on
-  your screen.
-- Students on the same Wi-Fi share one rate limit at the relay (by default a burst of 60 requests, then one every
-  five seconds). One submission is one request. If a large room submits in the same few seconds, some phones
-  wait: the page retries automatically for about 15 seconds, then asks the student to press Send again.
+Each pack's README explains every column and the known problems in the data.
 
-## The data packs
-
-`docs/data/land/` and `docs/data/pfm/`, each with a README that explains every column, plus a zip of each.
-
-- **Land** (from [sachadray/vietnam-land](https://sachadray.github.io/vietnam-land/)): GSO land use by province
-  2018–2023 and nationally 2008–2023, Natural Earth province boundaries (public domain), and published fiscal
-  figures with their sources. **Left out on purpose:** the CEIC export and the real-estate credit and Savills price
-  series derived from it, which are licensed.
-- **PFM** (from [sachadray/vietnam-pfm-benchmarking](https://sachadray.github.io/vietnam-pfm-benchmarking/)): the
-  processed tables behind the public dashboard (scores, economies, indicators, indicator values, config) and GDP per
-  capita 2025. The public dashboard already embeds the same figures.
-
-Checked: from these files alone, the land runway reproduces the brief exactly (4 / 13 / 19 / 24 provinces by
-risk tier; Quang Ninh 22 years), and recomputing the PFM scores from `indicator_values.csv` reproduces
-`scores.csv` to 1e-10 (Viet Nam −0.11, rank 99 of 169).
-
-## Rebuilding
-
-The pages are static files. Three scripts regenerate what they embed:
-
-```bash
-python build/make_data_packs.py --land ../vietnam-land --pfm ../vietnam-pfm-benchmarking   # data packs (needs both source repos)
-python build/build_site.py      # embeds data in docs/examples/ and prompts in handout.html and prompts.html
-python build/make_qr.py         # QR codes (pip install segno)
-```
-
-Prompts are written once, in `prompts/*.md`; `build_site.py` copies them into the handout and prompts pages.
-Edit the markdown, never the copy in the HTML.
-
-## Layout
+## Repository
 
 ```
-docs/                 the published site
-  index.html          slides (styles and engine in assets/deck.css, assets/deck.js)
-  handout.html        student handout
-  prompts.html        all prompts
-  poll.html           poll form for students; ?view=results shows live results full-page
-  examples/           what 15 minutes can produce, one per track
-  data/               the two data packs and their zips
-  assets/             css, js, QR codes, screenshots
-prompts/              the prompts, in markdown (single source)
-build/                scripts that build the packs, the pages and the QR codes
+docs/       the published site: slides, handout, prompts page, poll, examples and data
+prompts/    the prompts, in markdown (the pages are built from these)
+build/      scripts that build the data packs, the pages and the QR codes
 ```
 
-## Publishing
-
-GitHub Pages serves this repository from the `docs/` folder: Settings → Pages → Deploy from a branch →
-`main`, `/docs`. A Pages site is public even when the repository is private, so `docs/` holds only what students
-may see.
+To rebuild after editing a prompt: `python build/build_site.py`.

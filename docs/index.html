@@ -51,11 +51,11 @@ Answers are kept for 12 hours only. Press "Save answers (CSV)" at the end of the
 </section>
 
 <section class="slide">
-  <div class="head"><p class="eyebrow">Today</p><h2>Three parts, 45 minutes</h2></div>
+  <div class="head"><p class="eyebrow">Today</p><h2>Outline</h2></div>
   <div class="row grow agenda">
-    <div class="card st" style="--i:1"><p class="tag">Part 1</p><p class="min">12<span>min</span></p><h3>Dashboard explainer</h3><p class="txt">What a dashboard is, two real examples, and how to write a prompt that builds one.</p></div>
-    <div class="card inv st" style="--i:2"><p class="tag">Part 2</p><p class="min" style="color:var(--paper)">18<span style="color:var(--soft-d)">min</span></p><h3>Hands-on</h3><p class="txt">In pairs: build a dashboard in 15 minutes from the data behind the two examples.</p></div>
-    <div class="card st" style="--i:3"><p class="tag">Part 3</p><p class="min">10<span>min</span></p><h3>Uses of AI</h3><p class="txt">What AI changes, setting up GitHub and Claude Code, using AI responsibly, and what you bring.</p></div>
+    <div class="card st" style="--i:1"><p class="tag">Part 1</p><h3>Dashboard explainer</h3><p class="txt">What a dashboard is, two real examples, and how to write a prompt that builds one.</p></div>
+    <div class="card inv st" style="--i:2"><p class="tag">Part 2</p><h3>Hands-on exercise</h3><p class="txt">In pairs: build a dashboard in 15 minutes from the data behind the two examples.</p></div>
+    <div class="card st" style="--i:3"><p class="tag">Part 3</p><h3>Uses of AI</h3><p class="txt">What AI changes, setting up GitHub and Claude Code, using AI responsibly, and what you bring.</p></div>
   </div>
   <aside class="notes">
 3:00 to 3:30. The middle part is the point: you leave with a dashboard you built. Part 1 gives you the vocabulary and the prompts; Part 3 gets you ready for the next two and a half days.
@@ -100,7 +100,7 @@ The hackathon is practice for the right-hand column. What you take home is somet
     <svg class="arrow" viewBox="0 0 40 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M2 12h34M28 4l8 8-8 8"/></svg>
     <div class="step st" style="--i:3"><p class="n">3</p><p class="w">Analysis</p></div>
     <svg class="arrow" viewBox="0 0 40 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M2 12h34M28 4l8 8-8 8"/></svg>
-    <div class="step st" style="--i:4"><p class="n">4</p><p class="w">Dashboard</p></div>
+    <div class="step st" style="--i:4"><p class="n">4</p><p class="w">Visualization</p></div>
     <svg class="arrow" viewBox="0 0 40 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M2 12h34M28 4l8 8-8 8"/></svg>
     <div class="step on st" style="--i:5"><p class="n">5</p><p class="w">Decision</p></div>
   </div>
@@ -108,13 +108,13 @@ The hackathon is practice for the right-hand column. What you take home is somet
     <p class="txt">Who decides what?</p>
     <p class="txt">Find it, clean it, check it</p>
     <p class="txt">The simplest method that answers</p>
-    <p class="txt">One screen, one message</p>
+    <p class="txt">The chart or dashboard that carries the message</p>
     <p class="txt">Recommend, then listen</p>
   </div>
   <p class="lead">Plan for loops. Every step sends you back to an earlier one.</p>
   <aside class="notes">
 4:30 to 5:30. The line looks tidy and never is. The data shows the question cannot be answered as asked, so you go back. The analysis turns up an outlier, so you go back to the data. The reader asks a different question once they see the dashboard, so you go back to the start.
-Budget time for at least two loops. Note where the work ends: with a decision. The dashboard is one step before it.
+Budget time for at least two loops. Note where the work ends: with a decision. The visualization, whether one chart or a dashboard, is one step before it.
   </aside>
 </section>
 
@@ -144,7 +144,7 @@ The three lines on the right are the three common ways teams get stuck.
 
 <section class="slide" data-part="1">
   <div class="head"><p class="eyebrow">What is a dashboard</p><h2>A definition</h2></div>
-  <p class="defn st" style="--i:1">A dashboard is <mark>one screen</mark> that answers <mark>a recurring question</mark> for <mark>a specific reader</mark>, by comparing <mark>a few measures against a benchmark</mark>, <mark>so that they can decide</mark> what to do.</p>
+  <p class="defn st" style="--i:1">A dashboard is <mark>one screen</mark> that answers <mark>a recurring question</mark> for <mark>a specific reader</mark>, by comparing <mark>key performance indicators (KPI) against a benchmark</mark>, <mark>so that they can decide</mark> what to do.</p>
   <div class="clauses">
     <div class="clause st" style="--i:2"><b>One screen</b><p class="small">If the reader has to scroll to get the message, it is a report.</p></div>
     <div class="clause st" style="--i:3"><b>A recurring question</b><p class="small">The reader comes back when the data updates: monthly, yearly, during a crisis.</p></div>
@@ -248,12 +248,12 @@ The design choice to point out: the reader can change the comparison set and the
     <div class="card st" style="--i:3"><span class="badge b-task">TASK</span><p class="ask">The one thing to produce, and the question or decision it serves.</p><p class="eg">"Build a dashboard that answers: which provinces run out first?"</p></div>
     <div class="card st" style="--i:4"><span class="badge b-data">DATA</span><p class="ask">Which files, what one row means, the units, known problems, any formula to use.</p><p class="eg">"Leave out Da Nang: its series has a break."</p></div>
     <div class="card st" style="--i:5"><span class="badge b-output">OUTPUT</span><p class="ask">The format and exactly what goes on the screen, in order.</p><p class="eg">"One HTML file: headline, map, top-10 chart, two sliders."</p></div>
-    <div class="card st" style="--i:6"><span class="badge b-checks">CHECKS</span><p class="ask">How to prove the numbers: a value you already know, a table to print first.</p><p class="eg">"Quang Ninh should be about 22 years."</p></div>
+    <div class="card st" style="--i:6"><span class="badge b-checks">QUALITY CHECKS</span><p class="ask">Test the data before trusting it: parts against totals, assumptions stated and calibrated, datasets that disagree.</p><p class="eg">"Do the provinces add up to the national total?"</p></div>
   </div>
   <p class="txt">"Make a dashboard from this data" has none of the six. You get a chart of everything, and no way to know if it is right.</p>
   <aside class="notes">
 11:30 to 12:45. The AI is a fast colleague who knows nothing about your reader. Brief it the way you would brief a person.
-Role sets the standard of work. Context is what only you know. Task is one thing, tied to a decision. Data tells it what the files mean and where the traps are. Output describes the screen. Checks is the part most people skip, and the most important: give it a number you already know, so you can tell at once whether it got the calculation right.
+Role sets the standard of work. Context is what only you know. Task is one thing, tied to a decision. Data tells it what the files mean and where the traps are. Output describes the screen. Quality checks are the part most people skip, and the most important: ask it to test the data (do the parts add up to the total?), to state its assumptions and calibrate them on a number you already know, and to flag where two datasets disagree.
   </aside>
 </section>
 
@@ -265,13 +265,13 @@ Role sets the standard of work. Context is what only you know. Task is one thing
     <div class="ap"><span class="badge b-task">TASK</span><p>Build a dashboard that answers: <em>"Which provinces will run out of convertible farmland first, and how sensitive is that to the pace of conversion?"</em></p></div>
     <div class="ap"><span class="badge b-data">DATA</span><p>land_provinces.csv (thousand ha, 2018 to 2023) and vn_provinces.geojson, joined on iso. years left = agri 2023 × (1 − 30%) ÷ yearly conversion. <em>Leave out Da Nang.</em></p></div>
     <div class="ap"><span class="badge b-output">OUTPUT</span><p>One self-contained HTML file: a headline with numbers, a map in four risk bands, the 10 provinces with fewest years, two sliders (pace, protected share), a footnote with method and source.</p></div>
-    <div class="ap"><span class="badge b-checks">CHECKS</span><p>First print the five provinces with the fewest years left. <em>Quang Ninh should be about 22.</em> If yours differs, explain why.</p></div>
+    <div class="ap"><span class="badge b-checks">QUALITY CHECKS</span><p>Before any chart: do the provinces add up to the national totals? State the 30% assumption and <em>calibrate on a known value: Quang Ninh ≈ 22 years</em>. Flag inconsistencies: Da Nang's break, the blank 2021 values.</p></div>
   </div>
   <aside class="notes">
 12:45 to 13:30. This is the build prompt for the land track in Part 2, shortened to fit the slide; the full text is on the handout. Point at three things.
 Context names the reader and their time budget, which decides the design.
 Data gives the formula, so the AI does not invent its own.
-Checks gives a known answer, 22 years for Quang Ninh. If the AI says 31, you know at once something is wrong.
+Quality checks come before any chart: the provinces should add up to the national totals (they do, within 1.2 thousand hectares); the 30% protected share is an assumption, stated and calibrated on a known answer, 22 years for Quang Ninh; and the known breaks in the data are flagged rather than hidden.
   </aside>
 </section>
 
@@ -283,10 +283,10 @@ Checks gives a known answer, 22 years for Quang Ninh. If the AI says 31, you kno
     <div class="ap"><span class="badge b-task">TASK</span><p>Build a dashboard that answers: <em>"How does Viet Nam compare with its neighbours, and where is the biggest gap?"</em></p></div>
     <div class="ap"><span class="badge b-data">DATA</span><p>scores.csv: D1 to D4 and overall as z-scores (0 = world average, higher is better). Compare with IDN, MYS, PHL, THA, KHM, KOR, JPN and the ASEAN-4 average, <em>leaving Viet Nam out of averages</em>.</p></div>
     <div class="ap"><span class="badge b-output">OUTPUT</span><p>One HTML file: a headline, five score tiles, a dot plot of all economies with Viet Nam highlighted, a red-to-green table, a dropdown to change the focus economy.</p></div>
-    <div class="ap"><span class="badge b-checks">CHECKS</span><p>First print Viet Nam's scores and rank. <em>Expected: overall −0.11, rank 99 of 169.</em></p></div>
+    <div class="ap"><span class="badge b-checks">QUALITY CHECKS</span><p>Before any chart: is overall the mean of D1 to D3? Do both files list the same 194 economies? State the assumptions (z-scores, averages exclude Viet Nam) and <em>calibrate: overall −0.11, rank 99 of 169</em>.</p></div>
   </div>
   <aside class="notes">
-13:30 to 14:00. The second track's build prompt. Notice what changed: the reader does not know statistics, so the context says so, and the full prompt asks for a footnote that explains a z-score. The check is again a number we already know.
+13:30 to 14:00. The second track's build prompt. Notice what changed: the reader does not know statistics, so the context says so, and the full prompt asks for a footnote that explains a z-score. The quality checks test the data (overall should equal the mean of D1 to D3; the two files should list the same economies), state the assumptions and calibrate on a number we already know.
   </aside>
 </section>
 
@@ -305,14 +305,14 @@ These are exactly the steps of the hands-on.
   </aside>
 </section>
 
-<section class="slide" data-part="1">
+<section class="slide" data-part="1" data-id="staged">
   <div class="head"><p class="eyebrow">Prompting · bigger projects</p><h2>For a full dashboard, build in stages and check each one</h2></div>
   <div class="stages">
     <div class="lane"><p>Land brief</p><div class="stg"><div><b>Setup</b><span>Role, context, data, style</span></div><div class="chk"><b>1 · Numbers</b><span>Check: Quang Ninh 22 years</span></div><div><b>2 · Panel 01</b><span>What the land is</span></div><div><b>3 · Panel 02</b><span>Map and ranking</span></div><div class="chk"><b>4 · Scenarios</b><span>Check: 48 years to the floor</span></div><div><b>5 · Review</b><span>Trace every number</span></div></div></div>
     <div class="lane"><p>PFM benchmark</p><div class="stg"><div><b>Setup</b><span>Role, context, data, style</span></div><div class="chk"><b>1 · Engine</b><span>Check: −0.11, rank 99/169</span></div><div><b>2 · Benchmark</b><span>Cycle, dots, tables</span></div><div class="chk"><b>3 · Controls</b><span>Check: 65 in joint sample</span></div><div class="chk"><b>4 · Predicted</b><span>Check: slope 0.214</span></div></div></div>
   </div>
   <p class="txt">These prompts aim to rebuild both dashboards from the data files alone, one checked stage at a time. They are on the prompts page, ready to paste into Claude Code.</p>
-  <p class="link">sachadray.github.io/hackathon-dashboard/prompts.html</p>
+  <div class="row" style="align-items:center;justify-content:space-between"><p class="link">sachadray.github.io/hackathon-dashboard/prompts.html</p><button class="jump" data-goto="appendix-prompts">The actual prompts behind the PFM benchmark →</button></div>
   <aside class="notes">
 14:30 to 15:00. How the two real dashboards could be rebuilt from the data files, with no access to my code. Each lane is a sequence of prompts. The green stages carry a check: a number known in advance that the AI must reproduce before you go on.
 The lesson for the hackathon: a big build in one prompt cannot be checked. A sequence of small, verified steps can. The prompts page has every stage written out.
@@ -462,7 +462,7 @@ Each of these still needs your check.
 </section>
 
 <section class="slide" data-part="3">
-  <div class="head"><p class="eyebrow">Set-up for the hackathon</p><h2>Three tools, one workflow</h2></div>
+  <div class="head"><p class="eyebrow">The toolkit</p><h2>Set-up for AI dashboards</h2></div>
   <div class="tool3">
     <div class="card st" style="--i:1"><p class="tag">Where you work</p><h3>Claude Code</h3><p class="txt">An AI assistant that reads, writes and runs the files in your project folder, and explains what it does.</p></div>
     <div class="arr"><svg width="56" height="28" viewBox="0 0 40 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M2 12h34M28 4l8 8-8 8"/></svg></div>
@@ -498,31 +498,9 @@ Be clear about cost: GitHub and Pages are free for public repositories; Claude C
     <p><b>Pull request:</b> a proposal to merge a branch, which teammates review.</p>
   </div>
   <aside class="notes">
-35:30 to 36:30. Do not read every step. The point: all of this happens in the browser, no installation needed. One person creates the repository and invites the others.
+35:30 to 37:00. Do not read every step. The point: all of this happens in the browser, no installation needed. One person creates the repository and invites the others.
 The four words at the bottom are the whole vocabulary you need this week.
 Repositories must be public for free GitHub Pages; do not upload anything confidential.
-  </aside>
-</section>
-
-<section class="slide" data-part="3">
-  <div class="head"><p class="eyebrow">Set-up · Claude Code for beginners</p><h2>Three ways in, from easiest to most powerful</h2></div>
-  <div class="ways">
-    <div class="card st" style="--i:1"><p class="tag">1 · In the browser</p><h3>claude.ai/code</h3><p class="txt">Sign in, connect your GitHub account, pick your repository. Nothing to install: the work runs in the cloud and is saved to GitHub.</p></div>
-    <div class="card st" style="--i:2"><p class="tag">2 · Desktop app</p><h3>Claude for Mac or Windows</h3><p class="txt">Install the Claude desktop app, sign in, open the Code tab and choose your project folder.</p></div>
-    <div class="card st" style="--i:3"><p class="tag">3 · Terminal</p><h3>Command line</h3>
-<pre><span class="c"># macOS, Linux</span>
-curl -fsSL https://claude.ai/install.sh | bash
-<span class="c"># Windows PowerShell</span>
-irm https://claude.ai/install.ps1 | iex
-<span class="c"># then, in your project</span>
-cd my-project
-claude</pre></div>
-  </div>
-  <p class="need"><b>What you need:</b> a Claude Pro (or higher) subscription, or Claude Console API credits. At the first start you sign in through the browser. Type <b>/help</b> to see the commands.</p>
-  <aside class="notes">
-36:30 to 37:30. For most of you, option 1 is the right start: no installation, and it works directly on your GitHub repository.
-Option 3 is what professionals use; the commands are from the official quickstart at code.claude.com/docs.
-Remind them of the cost: one paid account per team is enough; the others follow along on the shared repository.
   </aside>
 </section>
 
@@ -545,7 +523,7 @@ Remind them of the cost: one paid account per team is enough; the others follow 
     </div>
   </div>
   <aside class="notes">
-37:30 to 38:30. The prompts on the left are on the prompts page, written out in full. The habits on the right are what separate a team that ships from a team that spends day 2 untangling code nobody understands.
+37:00 to 38:30. Claude Code itself needs a paid Claude plan; the install options for the browser, the desktop app and the terminal are on the prompts page. The prompts on the left are on the prompts page, written out in full. The habits on the right are what separate a team that ships from a team that spends day 2 untangling code nobody understands.
 CLAUDE.md is a plain text file at the top of the repository. Put in it: who the reader is, what each data file means, and rules such as "every chart has a source line".
   </aside>
 </section>
@@ -585,14 +563,14 @@ Disclose: say where AI helped.
   <div class="head"><p class="eyebrow">Your value proposition</p><h2>What you bring that the tool does not</h2></div>
   <div class="trio">
     <div class="t st" style="--i:1"><p class="word">Judgement</p><p class="txt">Knowing which question matters, and noticing when a result looks wrong.</p></div>
-    <div class="t st" style="--i:2"><p class="word">Connection</p><p class="txt">Listening to the person who has to decide, and earning their trust.</p></div>
-    <div class="t st" style="--i:3"><p class="word">Time</p><p class="txt">Hours to go deep on one problem, which senior people rarely have.</p></div>
+    <div class="t st" style="--i:2"><p class="word">Connection</p><p class="txt">Understanding what the reader wants, and what can influence their decision.</p></div>
+    <div class="t st" style="--i:3"><p class="word">(Quality) Time</p><p class="txt">Hours to go deep on one problem, which senior people rarely have.</p></div>
   </div>
   <aside class="notes">
 41:00 to 43:00. A fair worry: if the tool builds the dashboard, what is left for a junior economist? Three things.
 Judgement: which question is worth asking, and the instinct that a number is off. You build it by checking many numbers, which is why the check step matters.
-Connection: decisions are made by people, and people act on advice from someone they trust and who listened to them first.
-Time: you can spend a full day understanding one dataset. That depth is what makes you useful to a team.
+Connection: a dashboard only helps if you understand what the reader wants and what can influence their decision: their constraints, their timing, who they answer to. That comes from talking to people, not from the data.
+(Quality) time: you can spend a full, focused day understanding one dataset. That depth is what makes you useful to a team.
   </aside>
 </section>
 
@@ -627,6 +605,22 @@ Before closing the browser, press "Save answers (CSV)": the relay deletes answer
     <div><p class="txt" style="color:var(--ink)"><b>The two examples</b><br>sachadray.github.io/vietnam-land<br>sachadray.github.io/vietnam-pfm-benchmarking</p></div>
   </div>
   <aside class="notes">45:00. One line to keep. The handout, the prompts and both data packs stay online for the whole hackathon. Questions.</aside>
+</section>
+
+<section class="slide appendix" data-id="appendix-prompts">
+  <div class="head"><p class="eyebrow">Appendix · Behind the PFM benchmark</p><h2>The actual prompts, in three steps</h2></div>
+  <div class="apx">
+    <div class="apx-col">
+      <figure><figcaption><b>1</b> Dimensions to rank, and a spreadsheet of databases</figcaption><img src="assets/img/pfm-prompt-1.webp" alt="Prompt: as a senior economist, find indicators to benchmark Viet Nam's public financial management against ASEAN-5, China, Korea, Japan and income-group averages on five dimensions, using the Worldwide Governance Indicators or another cross-country database, arranged in a spreadsheet"></figure>
+      <figure><figcaption><b>2</b> A handover prompt, to move the work to Claude Code</figcaption><img src="assets/img/pfm-prompt-2.webp" alt="Prompt: write a handover prompt for me to start on Claude Code on this project"></figure>
+    </div>
+    <div class="apx-col">
+      <figure><figcaption><b>3</b> The visualization: the handover, pasted into Claude Code</figcaption><img src="assets/img/pfm-prompt-3.webp" alt="Prompt in Claude Code: as a senior World Bank economist, create a dynamic HTML dashboard and a tractable Excel file benchmarking PFM on five dimensions, with indicators that can be switched off, adding PEFA 2016-framework data; read all documents and devise a plan before starting, followed by the handover summary"></figure>
+      <p class="small">Note what the third prompt does before any building: "read through all documents and devise a plan". The plan was approved, then built and checked one stage at a time.</p>
+    </div>
+  </div>
+  <button class="jump back" data-goto="staged">← Back to the prompts slide</button>
+  <aside class="notes">Appendix, shown on demand from the "bigger projects" slide. Three real prompts, in order. Step 1 in a chat: scope the benchmarking (dimensions, comparators, databases) and get a spreadsheet of indicators. Step 2: ask the chat to write a handover prompt that summarises everything decided so far. Step 3: paste the handover into Claude Code with the new data (PEFA), and ask for a plan before any code. The dashboard you saw in Example 2 came out of that plan, built in stages.</aside>
 </section>
 
 </div>

@@ -69,8 +69,46 @@ def prompt_pages():
             inject(page, "PROMPTS", payload)
 
 
+TRACKS = [
+    ("land", "Track A · Land", "Which provinces will run out of convertible farmland first?",
+     "A provincial finance director", ["land_provinces.csv", "vn_provinces.geojson"]),
+    ("pfm", "Track B · PFM", "How does Viet Nam compare with its neighbours, and where is the biggest gap?",
+     "A Ministry of Finance official", ["scores.csv", "economies.csv"]),
+]
+STEPS = [(1, "Explore the files", 2), (2, "Build the dashboard", 6), (3, "Improve it: pick one line", 3), (4, "Check it, then share it", 3)]
+
+
+def exercises_zip():
+    """One download with both hands-on exercises: instructions, prompts and data."""
+    import zipfile
+    P = {p["id"]: p for p in all_prompts()["handson"]["prompts"]}
+    md = ["# Hands-on exercises: build a dashboard in 15 minutes", "",
+          "Work in pairs on one laptop. Pick one track. Open an AI assistant that reads files "
+          "(claude.ai works on the free plan), attach the two files listed for your track, and paste "
+          "the prompts below in order. Online version: https://sachadray.github.io/hackathon-dashboard/handout.html", "",
+          "| Minutes | Step |", "|---|---|", "| 1 | Set up: open the assistant, attach the two files |"]
+    md += [f"| {m} | {title} |" for _, title, m in STEPS]
+    md += ["", "## The six parts of a good prompt", "", "```", P["template"]["text"], "```", ""]
+    for key, name, q, reader, files in TRACKS:
+        md += [f"## {name}", "", f"**Question:** {q}", "", f"**Reader:** {reader}", "",
+               f"**Attach:** `{key}/{files[0]}` and `{key}/{files[1]}`. Every column is explained in `{key}/README.md`.", ""]
+        for n, title, m in STEPS:
+            md += [f"### {n}. {title} ({m} min)", "", "```", P[f"{key}-{n}"]["text"], "```", ""]
+    md += ["## If something goes wrong", "",
+           "- The dashboard does not appear in the chat: ask \"Give me the complete HTML file\", save it as `dashboard.html` and open it in a browser.",
+           "- The map is empty: ask it to check the join between `iso` in the CSV and `iso` in the GeoJSON.",
+           "- The numbers differ from the known value: ask for the calculation step by step for Quang Ninh, or for Viet Nam.", ""]
+    out = DOCS / "data" / "hands-on-exercises.zip"
+    with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as z:
+        z.writestr("hands-on-exercises/EXERCISES.md", "\n".join(md))
+        for key in ("land", "pfm"):
+            for f in sorted((DOCS / "data" / key).iterdir()):
+                z.write(f, f"hands-on-exercises/{key}/{f.name}")
+
+
 if __name__ == "__main__":
     land_example()
     pfm_example()
     prompt_pages()
+    exercises_zip()
     print("site built")

@@ -50,7 +50,7 @@ White cards on a light grey page. A diverging red-white-green scale for
 z-scores, centred on 0. Every indicator name starts with a small badge for its
 source (PEFA, OBS, GTMI, WGI ...).
 
-CHECKS
+QUALITY CHECKS
 Never hard-code a score. Every score on the page is computed by the engine from
 indicator_values.csv, so that switching an indicator off changes it.
 ```
@@ -81,7 +81,7 @@ A small test page that prints, for every economy, the largest difference
 between your D1 to D4 and overall and those in scores.csv, then Viet Nam's
 row.
 
-CHECKS
+QUALITY CHECKS
 The largest difference must be below 0.000001. Viet Nam: D1 -0.38 (rank 95 of
 138), D2 +0.29 (71 of 191), D3 -0.23 (100 of 170), D4 +0.50 (40 of 180),
 overall -0.11 (99 of 169). The ASEAN-4 average (IDN, MYS, PHL, THA) of the
@@ -123,7 +123,7 @@ OUTPUT, top to bottom:
    OBS round and PEFA year for each.
 8. "Method and sources" in plain language.
 
-CHECKS
+QUALITY CHECKS
 The cycle box for budget preparation reads -0.38, rank 95/138, ASEAN-4 average
 +0.16.
 ```
@@ -149,7 +149,7 @@ OUTPUT
 - "Download data (CSV)" of the current scores, and "Reset to workbook
   settings".
 
-CHECKS
+QUALITY CHECKS
 1. Changing the comparison set never changes a score, only what is shown.
 2. The joint sample has 65 economies.
 3. Switching off all PEFA indicators changes Viet Nam's D1; switching them back
@@ -182,7 +182,7 @@ OUTPUT
 - Everything follows the indicator selection and focus economy set in the
   sidebar.
 
-CHECKS
+QUALITY CHECKS
 Overall index: 169 economies, slope 0.214, Viet Nam predicted -0.07, difference
 -0.04. Budget preparation (D1): slope 0.295, difference -0.37. Budget execution
 (D2): difference +0.39.

@@ -16,12 +16,12 @@
   let cur = 0;
 
   // ---------- footer, page numbers and part labels ----------
-  const PARTS = { 0: "From data to decision", 1: "Part 1 · Dashboard explainer", 2: "Part 2 · Hands-on", 3: "Part 3 · Uses of AI" };
+  const PARTS = { 0: "From data to decision", 1: "Part 1 · Dashboard explainer", 2: "Part 2 · Hands-on exercise", 3: "Part 3 · Uses of AI" };
   slides.forEach((s, i) => {
     if (s.dataset.nofoot === undefined) {
       const f = document.createElement("div"); f.className = "foot";
       const l = document.createElement("span"), dot = document.createElement("i"); dot.className = "part-dot";
-      l.append(dot, PARTS[s.dataset.part || 0]);
+      l.append(dot, s.classList.contains("appendix") ? "Appendix" : PARTS[s.dataset.part || 0]);
       const r = document.createElement("span"); r.textContent = (i + 1) + " / " + N;
       f.append(l, r); s.append(f);
     }
@@ -65,6 +65,11 @@
   let tx = null;
   document.addEventListener("touchstart", e => { tx = e.touches[0].clientX; }, { passive: true });
   document.addEventListener("touchend", e => { if (tx == null) return; const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 50) show(cur + (dx < 0 ? 1 : -1)); tx = null; });
+  // buttons that jump to a named slide (the appendix and back)
+  document.addEventListener("click", e => {
+    const g = e.target.closest("[data-goto]"); if (!g) return;
+    const i = slides.findIndex(s => s.dataset.id === g.dataset.goto); if (i >= 0) show(i);
+  });
   document.querySelector(".nav .prev").addEventListener("click", () => show(cur - 1));
   document.querySelector(".nav .next").addEventListener("click", () => show(cur + 1));
   document.querySelector(".nav .help-btn").addEventListener("click", () => document.querySelector(".help").classList.toggle("on"));

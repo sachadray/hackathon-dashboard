@@ -52,7 +52,7 @@ Blue for agricultural land, orange for built land, grey for unused. Each panel
 opens with a two-sentence lede with the key numbers in bold. Every chart has a
 "Reading it" line underneath. Sources at the bottom of each panel.
 
-CHECKS
+QUALITY CHECKS
 Never invent a number. Every figure on the page must come from the files or
 from a formula I give you.
 ```
@@ -79,7 +79,7 @@ Compute and print these tables. No HTML yet.
 4. Risk tiers by runway: critical under 50 years, high 50-100, moderate
    100-200, ample over 200, no runway when it cannot be computed.
 
-CHECKS
+QUALITY CHECKS
 Expect 4 critical (Quang Ninh 22, Hai Phong 31, Bac Ninh 44, Hung Yen 49),
 13 high, 19 moderate, 24 ample, and 3 with no runway (Da Nang excluded; Lai Chau
 and Ca Mau show no net conversion). If any number differs, stop and explain.
@@ -110,7 +110,7 @@ OUTPUT
 - Horizontal diverging bars: "Where the 15 years went", change 2008-2023 by
   category, unused land in red.
 
-CHECKS
+QUALITY CHECKS
 The needed pace should be about 265 thousand ha a year ((5,840 - 3,985) / 7).
 ```
 
@@ -138,7 +138,7 @@ OUTPUT
   indicator, not a forecast) and "Withheld" (Da Nang, Lai Chau, Ca Mau, and that
   these are the 63 provinces before the 2025 merger). Boundaries: Natural Earth.
 
-CHECKS
+QUALITY CHECKS
 Hover Quang Ninh: 22 years, critical. The legend counts must read 4, 13, 19,
 24, 3.
 ```
@@ -178,7 +178,7 @@ OUTPUT
   price per hectare, revenue % of GDP with the 2025 level dashed) and a table
   "All three at these settings".
 
-CHECKS
+QUALITY CHECKS
 At the defaults, nationally: scenario 1 converts 17.7k ha in 2025 and 82.5k ha
 in 2045, revenue 4.46% of GDP in 2045, 48 years to the floor. Scenario 2:
 17.8k ha in 2045, 0.96% of GDP, more than 100 years. Scenario 3: 16.8k ha,
