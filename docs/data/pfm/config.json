@@ -1,0 +1,255 @@
+{
+ "source_workbook": "VietNam_PFM_benchmarking_v5.xlsx",
+ "subpillars": [
+  {
+   "sub": "1a",
+   "name": "Fiscal strategy & macro-fiscal framework",
+   "dim": "D1",
+   "share": 0
+  },
+  {
+   "sub": "1b",
+   "name": "Budget process and policy-based budgeting",
+   "dim": "D1",
+   "share": 0
+  },
+  {
+   "sub": "1c",
+   "name": "Investment planning",
+   "dim": "D1",
+   "share": 0
+  },
+  {
+   "sub": "1d",
+   "name": "Fiscal risk reporting",
+   "dim": "D1",
+   "share": 0
+  },
+  {
+   "sub": "1e",
+   "name": "Debt strategy",
+   "dim": "D1",
+   "share": 0
+  },
+  {
+   "sub": "2a",
+   "name": "Predictability of in-year budget",
+   "dim": "D2",
+   "share": 0
+  },
+  {
+   "sub": "2b",
+   "name": "Revenue administration",
+   "dim": "D2",
+   "share": 0
+  },
+  {
+   "sub": "2c",
+   "name": "Public procurement",
+   "dim": "D2",
+   "share": 0
+  },
+  {
+   "sub": "2d",
+   "name": "Investment monitoring",
+   "dim": "D2",
+   "share": 0
+  },
+  {
+   "sub": "2e",
+   "name": "Debt approval and reporting",
+   "dim": "D2",
+   "share": 0
+  },
+  {
+   "sub": "2f",
+   "name": "Internal controls and audit",
+   "dim": "D2",
+   "share": 0
+  },
+  {
+   "sub": "3a",
+   "name": "Fiscal transparency",
+   "dim": "D3",
+   "share": 0
+  },
+  {
+   "sub": "3b",
+   "name": "Asset monitoring",
+   "dim": "D3",
+   "share": 0
+  },
+  {
+   "sub": "3c",
+   "name": "Accounting & fiscal reporting",
+   "dim": "D3",
+   "share": 0
+  },
+  {
+   "sub": "3d",
+   "name": "External audit & oversight",
+   "dim": "D3",
+   "share": 0
+  },
+  {
+   "sub": "3e",
+   "name": "Accountability to citizens",
+   "dim": "D3",
+   "share": 0
+  },
+  {
+   "sub": "4a",
+   "name": "Budget reliability",
+   "dim": "D4",
+   "share": 0
+  },
+  {
+   "sub": "4b",
+   "name": "Fiscal stability",
+   "dim": "D4",
+   "share": 0
+  },
+  {
+   "sub": "4c",
+   "name": "Perceived government effectiveness",
+   "dim": "D4",
+   "share": 0
+  }
+ ],
+ "dimensions": [
+  {
+   "dim": "D1",
+   "name": "Budget preparation",
+   "share": 0.5,
+   "overall": 1
+  },
+  {
+   "dim": "D2",
+   "name": "Budget execution",
+   "share": 0.5,
+   "overall": 1
+  },
+  {
+   "dim": "D3",
+   "name": "Transparency, accountability & oversight",
+   "share": 0.5,
+   "overall": 1
+  },
+  {
+   "dim": "D4",
+   "name": "Budget reliability & perceived effectiveness",
+   "share": 0.5,
+   "overall": 0
+  }
+ ],
+ "params": {
+  "min_dims": 2,
+  "cap": 3
+ },
+ "comparators": {
+  "focus": "VNM",
+  "economies": [
+   {
+    "iso3": "IDN",
+    "show": 1
+   },
+   {
+    "iso3": "MYS",
+    "show": 1
+   },
+   {
+    "iso3": "PHL",
+    "show": 1
+   },
+   {
+    "iso3": "THA",
+    "show": 1
+   },
+   {
+    "iso3": "KHM",
+    "show": 1
+   },
+   {
+    "iso3": "KOR",
+    "show": 1
+   },
+   {
+    "iso3": "JPN",
+    "show": 1
+   }
+  ],
+  "groups": [
+   {
+    "slot": 1,
+    "name": "ASEAN-4",
+    "type": "List",
+    "criterion": null,
+    "show": 1,
+    "min_n": 2,
+    "members": [
+     "IDN",
+     "MYS",
+     "PHL",
+     "THA"
+    ]
+   },
+   {
+    "slot": 2,
+    "name": "Upper-middle-income",
+    "type": "Income",
+    "criterion": "Upper middle income",
+    "show": 1,
+    "min_n": 10,
+    "members": []
+   },
+   {
+    "slot": 3,
+    "name": "High-income",
+    "type": "Income",
+    "criterion": "High income",
+    "show": 0,
+    "min_n": 10,
+    "members": []
+   },
+   {
+    "slot": 4,
+    "name": "Lower-middle-income",
+    "type": "Income",
+    "criterion": "Lower middle income",
+    "show": 0,
+    "min_n": 10,
+    "members": []
+   },
+   {
+    "slot": 5,
+    "name": "East Asia & Pacific",
+    "type": "Region",
+    "criterion": "East Asia and Pacific",
+    "show": 0,
+    "min_n": 10,
+    "members": []
+   },
+   {
+    "slot": 6,
+    "name": "ASEAN",
+    "type": "List",
+    "criterion": null,
+    "show": 0,
+    "min_n": 3,
+    "members": [
+     "BRN",
+     "KHM",
+     "IDN",
+     "LAO",
+     "MYS",
+     "MMR",
+     "PHL",
+     "SGP",
+     "THA",
+     "TLS",
+     "VNM"
+    ]
+   }
+  ]
+ }
+}

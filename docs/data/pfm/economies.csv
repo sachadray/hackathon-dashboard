@@ -1,0 +1,195 @@
+iso3,economy,income,oecd,asean5,region,pefa_year,obs_year
+AFG,Afghanistan,Low income,0,0,South Asia,2018.0,2025.0
+ALB,Albania,Upper middle income,0,0,Europe and Central Asia,2025.0,2025.0
+DZA,Algeria,Upper middle income,0,0,Middle East and North Africa,,2025.0
+AND,Andorra,High income,0,0,Europe and Central Asia,,
+AGO,Angola,Lower middle income,0,0,Sub-Saharan Africa,,2025.0
+ATG,Antigua & Barbuda,High income,0,0,Latin America and the Caribbean,,
+ARG,Argentina,Upper middle income,0,0,Latin America and the Caribbean,2019.0,2025.0
+ARM,Armenia,Upper middle income,0,0,Europe and Central Asia,2024.0,2025.0
+ABW,Aruba,High income,0,0,Latin America and the Caribbean,,
+AUS,Australia,High income,1,0,East Asia and Pacific,,2023.0
+AUT,Austria,High income,1,0,Europe and Central Asia,,
+AZE,Azerbaijan,Upper middle income,0,0,Europe and Central Asia,,2023.0
+BHS,"Bahamas, The",High income,0,0,Latin America and the Caribbean,,
+BHR,Bahrain,High income,0,0,Middle East and North Africa,,
+BGD,Bangladesh,Lower middle income,0,0,South Asia,2023.0,2025.0
+BRB,Barbados,High income,0,0,Latin America and the Caribbean,,
+BLR,Belarus,Upper middle income,0,0,Europe and Central Asia,,
+BEL,Belgium,High income,1,0,Europe and Central Asia,,
+BLZ,Belize,Upper middle income,0,0,Latin America and the Caribbean,,
+BEN,Benin,Lower middle income,0,0,Sub-Saharan Africa,,2025.0
+BTN,Bhutan,Lower middle income,0,0,South Asia,2023.0,
+BOL,Bolivia,Lower middle income,0,0,Latin America and the Caribbean,2025.0,2025.0
+BIH,Bosnia & Herzegovina,Upper middle income,0,0,Europe and Central Asia,,2025.0
+BWA,Botswana,Upper middle income,0,0,Sub-Saharan Africa,2020.0,2025.0
+BRA,Brazil,Upper middle income,0,0,Latin America and the Caribbean,,2025.0
+BRN,Brunei Darussalam,High income,0,0,East Asia and Pacific,,
+BGR,Bulgaria,High income,0,0,Europe and Central Asia,,2023.0
+BFA,Burkina Faso,Low income,0,0,Sub-Saharan Africa,2017.0,2025.0
+BDI,Burundi,Low income,0,0,Sub-Saharan Africa,2023.0,2025.0
+CPV,Cabo Verde,Upper middle income,0,0,Sub-Saharan Africa,,
+KHM,Cambodia,Lower middle income,0,0,East Asia and Pacific,2022.0,2025.0
+CMR,Cameroon,Lower middle income,0,0,Sub-Saharan Africa,2023.0,2025.0
+CAN,Canada,High income,1,0,North America,,2023.0
+CAF,Central African Rep.,Low income,0,0,Sub-Saharan Africa,,2023.0
+TCD,Chad,Low income,0,0,Sub-Saharan Africa,2018.0,2025.0
+CHL,Chile,High income,1,0,Latin America and the Caribbean,,2025.0
+CHN,China,Upper middle income,0,0,East Asia and Pacific,,2025.0
+COL,Colombia,Upper middle income,1,0,Latin America and the Caribbean,2024.0,2023.0
+COM,Comoros,Lower middle income,0,0,Sub-Saharan Africa,,2023.0
+COD,"Congo, Dem. Rep.",Low income,0,0,Sub-Saharan Africa,2020.0,2025.0
+COG,"Congo, Rep.",Lower middle income,0,0,Sub-Saharan Africa,,
+CRI,Costa Rica,High income,1,0,Latin America and the Caribbean,2022.0,2023.0
+CIV,Cote d'Ivoire,Lower middle income,0,0,Sub-Saharan Africa,2026.0,2025.0
+HRV,Croatia,High income,0,0,Europe and Central Asia,,2025.0
+CYP,Cyprus,High income,0,0,Europe and Central Asia,,
+CZE,Czechia,High income,1,0,Europe and Central Asia,,2023.0
+DNK,Denmark,High income,1,0,Europe and Central Asia,,
+DJI,Djibouti,Lower middle income,0,0,Middle East and North Africa,2023.0,
+DMA,Dominica,Upper middle income,0,0,Latin America and the Caribbean,,
+DOM,Dominican Republic,Upper middle income,0,0,Latin America and the Caribbean,2022.0,2025.0
+ECU,Ecuador,Upper middle income,0,0,Latin America and the Caribbean,,2023.0
+EGY,"Egypt, Arab Rep.",Lower middle income,0,0,Middle East and North Africa,,2025.0
+SLV,El Salvador,Upper middle income,0,0,Latin America and the Caribbean,2019.0,2025.0
+GNQ,Equatorial Guinea,Upper middle income,0,0,Sub-Saharan Africa,,2023.0
+ERI,Eritrea,Low income,0,0,Sub-Saharan Africa,,
+EST,Estonia,High income,1,0,Europe and Central Asia,,
+SWZ,Eswatini,Lower middle income,0,0,Sub-Saharan Africa,,2023.0
+ETH,Ethiopia,Low income,0,0,Sub-Saharan Africa,2019.0,2025.0
+FJI,Fiji,Upper middle income,0,0,East Asia and Pacific,2025.0,2023.0
+FIN,Finland,High income,1,0,Europe and Central Asia,,
+FRA,France,High income,1,0,Europe and Central Asia,,2023.0
+GAB,Gabon,Upper middle income,0,0,Sub-Saharan Africa,2017.0,
+GMB,"Gambia, The",Low income,0,0,Sub-Saharan Africa,2024.0,2025.0
+GEO,Georgia,Upper middle income,0,0,Europe and Central Asia,2022.0,2023.0
+DEU,Germany,High income,1,0,Europe and Central Asia,,2023.0
+GHA,Ghana,Lower middle income,0,0,Sub-Saharan Africa,2018.0,2025.0
+GRC,Greece,High income,1,0,Europe and Central Asia,,
+GRD,Grenada,Upper middle income,0,0,Latin America and the Caribbean,,
+GTM,Guatemala,Upper middle income,0,0,Latin America and the Caribbean,2018.0,2025.0
+GIN,Guinea,Lower middle income,0,0,Sub-Saharan Africa,2026.0,2023.0
+GNB,Guinea-Bissau,Low income,0,0,Sub-Saharan Africa,,2025.0
+GUY,Guyana,High income,0,0,Latin America and the Caribbean,,
+HTI,Haiti,Lower middle income,0,0,Latin America and the Caribbean,,
+HND,Honduras,Lower middle income,0,0,Latin America and the Caribbean,,2025.0
+HKG,"Hong Kong SAR, China",High income,0,0,East Asia and Pacific,,
+HUN,Hungary,High income,1,0,Europe and Central Asia,,2025.0
+ISL,Iceland,High income,1,0,Europe and Central Asia,,
+IND,India,Lower middle income,0,0,South Asia,,2025.0
+IDN,Indonesia,Upper middle income,0,1,East Asia and Pacific,2018.0,2025.0
+IRN,"Iran, Islamic Rep.",Upper middle income,0,0,Middle East and North Africa,,
+IRQ,Iraq,Upper middle income,0,0,Middle East and North Africa,2017.0,2023.0
+IRL,Ireland,High income,1,0,Europe and Central Asia,,
+ISR,Israel,High income,1,0,Middle East and North Africa,,
+ITA,Italy,High income,1,0,Europe and Central Asia,,2023.0
+JAM,Jamaica,Upper middle income,0,0,Latin America and the Caribbean,2024.0,2025.0
+JPN,Japan,High income,1,0,East Asia and Pacific,,2023.0
+JOR,Jordan,Upper middle income,0,0,Middle East and North Africa,2022.0,2025.0
+KAZ,Kazakhstan,Upper middle income,0,0,Europe and Central Asia,2025.0,2023.0
+KEN,Kenya,Lower middle income,0,0,Sub-Saharan Africa,2023.0,2025.0
+KIR,Kiribati,Lower middle income,0,0,East Asia and Pacific,,
+KOR,"Korea, Rep.",High income,1,0,East Asia and Pacific,,2023.0
+KWT,Kuwait,High income,0,0,Middle East and North Africa,,
+KGZ,Kyrgyz Republic,Lower middle income,0,0,Europe and Central Asia,2021.0,2025.0
+LAO,Lao PDR,Lower middle income,0,0,East Asia and Pacific,2025.0,
+LVA,Latvia,High income,1,0,Europe and Central Asia,,
+LBN,Lebanon,Lower middle income,0,0,Middle East and North Africa,,2025.0
+LSO,Lesotho,Lower middle income,0,0,Sub-Saharan Africa,2025.0,2025.0
+LBR,Liberia,Low income,0,0,Sub-Saharan Africa,2021.0,2023.0
+LBY,Libya,Upper middle income,0,0,Middle East and North Africa,,2025.0
+LIE,Liechtenstein,High income,0,0,Europe and Central Asia,,
+LTU,Lithuania,High income,1,0,Europe and Central Asia,,
+LUX,Luxembourg,High income,1,0,Europe and Central Asia,,
+MAC,"Macao SAR, China",High income,0,0,East Asia and Pacific,,
+MDG,Madagascar,Low income,0,0,Sub-Saharan Africa,2026.0,2025.0
+MWI,Malawi,Low income,0,0,Sub-Saharan Africa,2018.0,2025.0
+MYS,Malaysia,Upper middle income,0,1,East Asia and Pacific,,2025.0
+MDV,Maldives,Upper middle income,0,0,South Asia,2021.0,
+MLI,Mali,Low income,0,0,Sub-Saharan Africa,2021.0,2025.0
+MLT,Malta,High income,0,0,Middle East and North Africa,,
+MHL,Marshall Islands,Upper middle income,0,0,East Asia and Pacific,,
+MRT,Mauritania,Lower middle income,0,0,Sub-Saharan Africa,2025.0,2025.0
+MUS,Mauritius,Upper middle income,0,0,Sub-Saharan Africa,,
+MEX,Mexico,Upper middle income,1,0,Latin America and the Caribbean,,2023.0
+FSM,"Micronesia, Fed. States",Upper middle income,0,0,East Asia and Pacific,,
+MDA,Moldova,Upper middle income,0,0,Europe and Central Asia,2022.0,2023.0
+MNG,Mongolia,Upper middle income,0,0,East Asia and Pacific,2021.0,2025.0
+MNE,Montenegro,Upper middle income,0,0,Europe and Central Asia,2019.0,2025.0
+MAR,Morocco,Lower middle income,0,0,Middle East and North Africa,2024.0,2025.0
+MOZ,Mozambique,Low income,0,0,Sub-Saharan Africa,2021.0,2025.0
+MMR,Myanmar,Lower middle income,0,0,East Asia and Pacific,2020.0,2023.0
+NAM,Namibia,Lower middle income,0,0,Sub-Saharan Africa,,2025.0
+NRU,Nauru,High income,0,0,East Asia and Pacific,2022.0,
+NPL,Nepal,Lower middle income,0,0,South Asia,2024.0,2025.0
+NLD,Netherlands,High income,1,0,Europe and Central Asia,,
+NZL,New Zealand,High income,1,0,East Asia and Pacific,,2023.0
+NIC,Nicaragua,Lower middle income,0,0,Latin America and the Caribbean,,2025.0
+NER,Niger,Low income,0,0,Sub-Saharan Africa,2023.0,2025.0
+NGA,Nigeria,Lower middle income,0,0,Sub-Saharan Africa,2019.0,2025.0
+MKD,North Macedonia,Upper middle income,0,0,Europe and Central Asia,2022.0,2025.0
+NOR,Norway,High income,1,0,Europe and Central Asia,,2025.0
+OMN,Oman,High income,0,0,Middle East and North Africa,,
+PAK,Pakistan,Lower middle income,0,0,South Asia,,2025.0
+PLW,Palau,High income,0,0,East Asia and Pacific,2023.0,
+PAN,Panama,High income,0,0,Latin America and the Caribbean,,
+PNG,Papua New Guinea,Lower middle income,0,0,East Asia and Pacific,,2025.0
+PRY,Paraguay,Upper middle income,0,0,Latin America and the Caribbean,2023.0,2023.0
+PER,Peru,Upper middle income,0,0,Latin America and the Caribbean,,2025.0
+PHL,Philippines,Upper middle income,0,1,East Asia and Pacific,2025.0,2025.0
+POL,Poland,High income,1,0,Europe and Central Asia,,2023.0
+PRT,Portugal,High income,1,0,Europe and Central Asia,,2023.0
+PRI,Puerto Rico,High income,0,0,Latin America and the Caribbean,,
+QAT,Qatar,High income,0,0,Middle East and North Africa,,2023.0
+ROU,Romania,High income,0,0,Europe and Central Asia,,2025.0
+RUS,Russian Federation,High income,0,0,Europe and Central Asia,,2023.0
+RWA,Rwanda,Low income,0,0,Sub-Saharan Africa,2022.0,2025.0
+WSM,Samoa,Upper middle income,0,0,East Asia and Pacific,,
+SMR,San Marino,High income,0,0,Europe and Central Asia,,
+STP,Sao Tome & Principe,Lower middle income,0,0,Sub-Saharan Africa,2019.0,2023.0
+SAU,Saudi Arabia,High income,0,0,Middle East and North Africa,,2023.0
+SEN,Senegal,Lower middle income,0,0,Sub-Saharan Africa,2020.0,2025.0
+SRB,Serbia,Upper middle income,0,0,Europe and Central Asia,2026.0,2025.0
+SYC,Seychelles,High income,0,0,Sub-Saharan Africa,2025.0,
+SLE,Sierra Leone,Low income,0,0,Sub-Saharan Africa,2022.0,2025.0
+SGP,Singapore,High income,0,1,East Asia and Pacific,,
+SVK,Slovak Republic,High income,1,0,Europe and Central Asia,,2023.0
+SVN,Slovenia,High income,1,0,Europe and Central Asia,,2023.0
+SLB,Solomon Islands,Lower middle income,0,0,East Asia and Pacific,,
+SOM,Somalia,Low income,0,0,Sub-Saharan Africa,,2025.0
+ZAF,South Africa,Upper middle income,0,0,Sub-Saharan Africa,,2025.0
+SSD,South Sudan,Low income,0,0,Sub-Saharan Africa,,2023.0
+ESP,Spain,High income,1,0,Europe and Central Asia,,2023.0
+LKA,Sri Lanka,Upper middle income,0,0,South Asia,,2025.0
+KNA,St. Kitts & Nevis,High income,0,0,Latin America and the Caribbean,,
+LCA,St. Lucia,Upper middle income,0,0,Latin America and the Caribbean,,
+VCT,St. Vincent & the Grenadines,Upper middle income,0,0,Latin America and the Caribbean,,
+SDN,Sudan,Low income,0,0,Sub-Saharan Africa,,2023.0
+SUR,Suriname,Upper middle income,0,0,Latin America and the Caribbean,,
+SWE,Sweden,High income,1,0,Europe and Central Asia,,2023.0
+CHE,Switzerland,High income,1,0,Europe and Central Asia,,
+SYR,Syrian Arab Republic,Low income,0,0,Middle East and North Africa,,
+TJK,Tajikistan,Lower middle income,0,0,Europe and Central Asia,2022.0,2025.0
+TZA,Tanzania,Lower middle income,0,0,Sub-Saharan Africa,2022.0,2025.0
+THA,Thailand,Upper middle income,0,1,East Asia and Pacific,,2025.0
+TLS,Timor-Leste,Lower middle income,0,0,East Asia and Pacific,2020.0,2023.0
+TGO,Togo,Lower middle income,0,0,Sub-Saharan Africa,2023.0,2025.0
+TON,Tonga,Upper middle income,0,0,East Asia and Pacific,2020.0,
+TTO,Trinidad & Tobago,High income,0,0,Latin America and the Caribbean,,2023.0
+TUN,Tunisia,Lower middle income,0,0,Middle East and North Africa,2023.0,2025.0
+TUR,Turkiye,Upper middle income,1,0,Europe and Central Asia,,2025.0
+TKM,Turkmenistan,Upper middle income,0,0,Europe and Central Asia,,
+TUV,Tuvalu,Upper middle income,0,0,East Asia and Pacific,2025.0,
+UGA,Uganda,Low income,0,0,Sub-Saharan Africa,2024.0,2025.0
+UKR,Ukraine,Upper middle income,0,0,Europe and Central Asia,2019.0,2025.0
+ARE,United Arab Emirates,High income,0,0,Middle East and North Africa,,
+GBR,United Kingdom,High income,1,0,Europe and Central Asia,,2023.0
+USA,United States,High income,1,0,North America,,2023.0
+URY,Uruguay,High income,0,0,Latin America and the Caribbean,,
+UZB,Uzbekistan,Lower middle income,0,0,Europe and Central Asia,2024.0,
+VUT,Vanuatu,Lower middle income,0,0,East Asia and Pacific,2025.0,
+VEN,"Venezuela, RB",Lower middle income,0,0,Latin America and the Caribbean,,2023.0
+VNM,Viet Nam,Upper middle income,0,0,East Asia and Pacific,2023.0,2025.0
+YEM,"Yemen, Rep.",Low income,0,0,Middle East and North Africa,,2023.0
+ZMB,Zambia,Lower middle income,0,0,Sub-Saharan Africa,2025.0,2025.0
+ZWE,Zimbabwe,Lower middle income,0,0,Sub-Saharan Africa,2018.0,2025.0
